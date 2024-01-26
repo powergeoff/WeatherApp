@@ -36,7 +36,6 @@ Import
 Publish
 *lock.json
 wwwroot
-*.sln
 
 appsettings.Development.json
 appsettings.local.json
