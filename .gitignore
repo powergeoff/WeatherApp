@@ -38,5 +38,6 @@ Publish
 wwwroot
 *.sln
 
+appsettings.Development.json
 appsettings.local.json
 *.sln

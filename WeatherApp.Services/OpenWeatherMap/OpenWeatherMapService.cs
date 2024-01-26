@@ -19,10 +19,12 @@ public interface IOpenWeatherMapService
 public class OpenWeatherMapService : IOpenWeatherMapService
 {
     private HttpClient _httpClient;
+    private IConfigService _config;
 
-    public OpenWeatherMapService(HttpClient httpClient)
+    public OpenWeatherMapService(HttpClient httpClient, IConfigService config)
     {
         _httpClient = httpClient;
+        _config = config;
     }
 
     public Task<WeatherModel> GetWeather()
@@ -35,7 +37,8 @@ public class OpenWeatherMapService : IOpenWeatherMapService
         var ret = new WeatherModel();
         try
         {
-            var response = await _httpClient.GetAsync($"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid=f2d3145194b8c69aa1f5c239ca1b687a&units=imperial");
+            var apiKey = _config.APIKey;
+            var response = await _httpClient.GetAsync($"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={apiKey}&units=imperial");
 
             response.EnsureSuccessStatusCode();
             var result = await response.Content.ReadAsStringAsync();
