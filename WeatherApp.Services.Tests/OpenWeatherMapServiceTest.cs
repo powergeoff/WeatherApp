@@ -11,10 +11,10 @@ public class OpenWeatherMapServiceTest
     {
         _httpClient = new HttpClient();
         var configManager = new ConfigurationManager();
-        configManager.AddInMemoryCollection(new List<KeyValuePair<string, string>>
-        {
-            new KeyValuePair<string, string>("APIKey", "f2d3145194b8c69aa1f5c239ca1b687a"),
-        }).Build();
+        configManager.AddInMemoryCollection(
+        [
+            new KeyValuePair<string, string?>("APIKey", "f2d3145194b8c69aa1f5c239ca1b687a"),
+        ]).Build();
         _config = new ConfigService(configManager);
     }
 
