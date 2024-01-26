@@ -1,4 +1,5 @@
 using WeatherApp.Services.OpenWeatherMap;
+using Microsoft.Extensions.Configuration;
 
 namespace WeatherApp.Services.Tests;
 
@@ -8,16 +9,18 @@ public class OpenWeatherMapServiceTest
     private IConfigService _config;
     public OpenWeatherMapServiceTest()
     {
-        var builder = Microsoft.AspNetCore.Builder.WebApplication.CreateBuilder([]);
         _httpClient = new HttpClient();
-        _config = new ConfigService(builder);
+        var configManager = new ConfigurationManager();
+        configManager.AddInMemoryCollection(new List<KeyValuePair<string, string>>
+        {
+            new KeyValuePair<string, string>("APIKey", "f2d3145194b8c69aa1f5c239ca1b687a"),
+        }).Build();
+        _config = new ConfigService(configManager);
     }
-    //http://localhost:5000/swagger/index.html
 
     [Fact]
     public async void GetWeather_ShouldReturnBoston()
     {
-
         var weatherService = new OpenWeatherMapService(_httpClient, _config);
         var result = await weatherService.GetWeather();
 

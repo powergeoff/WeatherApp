@@ -16,7 +16,7 @@
       "options": {
         "cwd": "${workspaceRoot}/WeatherApp.API",
         "env": {
-          "ASPNETCORE_ENVIRONMENT": "local",
+          "ASPNETCORE_ENVIRONMENT": "Development",
           "DOTNET_WATCH_SUPPRESS_STATIC_FILE_HANDLING": "true"
         }
       },

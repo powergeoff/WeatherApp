@@ -37,7 +37,7 @@
       "stopAtEntry": false,
       "console": "internalConsole",
       "env": {
-        "ASPNETCORE_ENVIRONMENT": "local"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
   ]
