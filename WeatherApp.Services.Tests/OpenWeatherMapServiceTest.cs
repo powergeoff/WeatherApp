@@ -3,19 +3,22 @@ using Microsoft.Extensions.Configuration;
 
 namespace WeatherApp.Services.Tests;
 
+
 public class OpenWeatherMapServiceTest
 {
     private HttpClient _httpClient;
     private IConfigService _config;
     public OpenWeatherMapServiceTest()
     {
-        _httpClient = new HttpClient();
         var configManager = new ConfigurationManager();
-        configManager.AddInMemoryCollection(
-        [
-            new KeyValuePair<string, string?>("APIKey", "f2d3145194b8c69aa1f5c239ca1b687a"),
-        ]).Build();
+
+        configManager.AddInMemoryCollection([
+                new KeyValuePair<string, string?>("APIKey", "f2d3145194b8c69aa1f5c239ca1b687a"),
+            ])
+            .Build();
+
         _config = new ConfigService(configManager);
+        _httpClient = new HttpClient();
     }
 
     [Fact]
