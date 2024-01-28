@@ -1,9 +1,10 @@
 
 using Microsoft.Extensions.Configuration;
+
 public interface IConfigService
 {
     string AppVersion { get; }
-    string ConnectionString { get; }
+    //string ConnectionString { get; }
     string APIKey { get; }
 }
 
@@ -19,5 +20,5 @@ public class ConfigService : IConfigService
 
     public string APIKey => _config.GetValue<string>("APIKey");
 
-    public string ConnectionString => _config.GetSection("Connections").GetValue<string>("Default");
+    //public string ConnectionString => _config.GetSection("Connections").GetValue<string>("Default");
 }

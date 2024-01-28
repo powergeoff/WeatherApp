@@ -1,5 +1,7 @@
 using WeatherApp.Services.OpenWeatherMap;
 using Microsoft.Extensions.Configuration;
+using System.Text.Json;
+using WeatherApp.Services.Tests.Models;
 
 namespace WeatherApp.Services.Tests;
 
@@ -10,10 +12,13 @@ public class OpenWeatherMapServiceTest
     private IConfigService _config;
     public OpenWeatherMapServiceTest()
     {
+        var file = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "appsettings.Development.json"));
+        var config = JsonSerializer.Deserialize<Config>(file)!;
+
         var configManager = new ConfigurationManager();
 
         configManager.AddInMemoryCollection([
-                new KeyValuePair<string, string?>("APIKey", "f2d3145194b8c69aa1f5c239ca1b687a"),
+                new KeyValuePair<string, string?>("APIKey", config.APIKey),
             ])
             .Build();
 
