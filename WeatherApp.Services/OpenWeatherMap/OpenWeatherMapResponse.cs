@@ -1,5 +1,5 @@
-// Root myDeserializedClass = JsonConvert.DeserializeObject<Root>(myJsonResponse);
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace WeatherApp.Services.OpenWeatherMap
 {
@@ -34,12 +34,26 @@ namespace WeatherApp.Services.OpenWeatherMap
         public int visibility { get; set; }
         public Wind wind { get; set; }
         public Clouds clouds { get; set; }
+        public Snow snow { get; set; }
+        public Rain rain { get; set; }
         public int dt { get; set; }
         public Sys sys { get; set; }
         public int timezone { get; set; }
         public int id { get; set; }
         public string name { get; set; }
         public int cod { get; set; }
+    }
+
+    public class Snow
+    {
+        [JsonPropertyName("1h")]
+        public double nextHourTotal { get; set; }
+    }
+
+    public class Rain
+    {
+        [JsonPropertyName("1h")]
+        public double nextHourTotal { get; set; }
     }
 
     public class Sys

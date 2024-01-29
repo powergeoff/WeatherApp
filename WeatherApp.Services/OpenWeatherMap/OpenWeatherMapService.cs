@@ -38,8 +38,9 @@ public class OpenWeatherMapService : IOpenWeatherMapService
         try
         {
             var apiKey = _config.APIKey;
-            var response = await _httpClient.GetAsync($"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={apiKey}&units=imperial");
+            var uri = $"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={apiKey}&units=imperial";
 
+            var response = await _httpClient.GetAsync(uri);
             response.EnsureSuccessStatusCode();
             var result = await response.Content.ReadAsStringAsync();
             var poco = JsonSerializer.Deserialize<OpenWeatherMapResonse>(result);
