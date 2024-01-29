@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Xml.Serialization;
@@ -50,7 +51,7 @@ public class OpenWeatherMapService : IOpenWeatherMapService
             ret.Description = poco.weather[0].description;
             ret.Humidity = poco.main.humidity;
             ret.Temperature = poco.main.temp;
-
+            ret.FeelsLikeTemp = poco.main.feels_like;
         }
         catch (Exception e)
         {

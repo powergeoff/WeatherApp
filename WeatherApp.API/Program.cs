@@ -1,3 +1,4 @@
+using WeatherApp.API.Middleware;
 using WeatherApp.Services.Models;
 using WeatherApp.Services.OpenWeatherMap;
 
@@ -14,6 +15,12 @@ try
     // Add services to the container.
 
     builder.Services.AddControllers();
+    builder.Services.AddResponseCompression(options =>
+    {
+        options.EnableForHttps = true;
+    });
+
+    //custom services
     builder.Services.AddScoped<IOpenWeatherMapService, OpenWeatherMapService>();
 
     builder.Services.AddHttpClient();
@@ -22,12 +29,17 @@ try
 
     var app = builder.Build();
 
+    //configure pipeline
+    app.UseResponseCompression();
+    app.UseExceptionConverter();
+
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
     {
         app.UseSwagger();
         app.UseSwaggerUI();
     }
+    //app.UseAppVersion(); not implemented - probably not necessary
 
     app.UseHttpsRedirection();
 

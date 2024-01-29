@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using WeatherApp.Services.Models;
 using WeatherApp.Services.OpenWeatherMap;
 
-namespace API.Controllers;
+namespace WeatherApp.API.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]/[action]")]
@@ -23,6 +23,7 @@ public class WeatherController : ControllerBase
     public Task<WeatherModel> Get()
     {
         //default boston
+        _logger.LogInformation("Hello from Get!");
         return _openWeatherMapService.GetWeather();
     }
 

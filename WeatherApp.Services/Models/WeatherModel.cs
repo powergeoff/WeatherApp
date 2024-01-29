@@ -5,6 +5,7 @@ public class WeatherModel
   public string Overall { get; set; }
   public string Description { get; set; }
   public double Temperature { get; set; }
+  public double FeelsLikeTemp { get; set; }
   public decimal Humidity { get; set; }
 }
 
