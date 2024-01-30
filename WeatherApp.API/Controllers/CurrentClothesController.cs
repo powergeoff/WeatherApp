@@ -16,7 +16,7 @@ public class CurrentClothesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<Clothes> GetClothesByCoords(double latitude, double longitude)
+    public async Task<Clothes> GetByCoords(double latitude, double longitude)
     {
         return await _clothesService.GetClothesByCoords(latitude, longitude);
     }
