@@ -10,7 +10,6 @@ namespace WeatherApp.Services.OpenWeatherMap;
 
 public interface IOpenWeatherMapService
 {
-    Task<WeatherModel> GetWeather();
     Task<WeatherModel> GetWeather(double latitude, double longitude);
     Task<WeatherModel> GetWeather(string city, string state);
     Task<WeatherModel> GetWeather(string zipcode);
@@ -26,12 +25,6 @@ public class OpenWeatherMapService : IOpenWeatherMapService
     {
         _httpClient = httpClient;
         _config = config;
-    }
-
-    public Task<WeatherModel> GetWeather()
-    {
-        //Jamaica Plain, MA
-        return GetWeather(42.360081, -71.058884);
     }
     public async Task<WeatherModel> GetWeather(double latitude, double longitude)
     {
@@ -52,6 +45,10 @@ public class OpenWeatherMapService : IOpenWeatherMapService
             ret.Humidity = poco.main.humidity;
             ret.Temperature = poco.main.temp;
             ret.FeelsLikeTemp = poco.main.feels_like;
+            ret.IsRaining = poco.rain?.nextHourTotal > 0;
+            ret.IsSnowing = poco.snow?.nextHourTotal > 0;
+            ret.WindSpeed = poco.wind.speed;
+            ret.WindDirection = WeatherModel.ConvertWindDirection(poco.wind.deg);
         }
         catch (Exception e)
         {
@@ -75,4 +72,6 @@ public class OpenWeatherMapService : IOpenWeatherMapService
         //call get weather with lat & long
         throw new NotImplementedException();
     }
+
+
 }

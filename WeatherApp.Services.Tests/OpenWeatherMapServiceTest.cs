@@ -30,7 +30,7 @@ public class OpenWeatherMapServiceTest
     public async void GetWeather_ShouldReturnBoston()
     {
         var weatherService = new OpenWeatherMapService(_httpClient, _config);
-        var result = await weatherService.GetWeather();
+        var result = await weatherService.GetWeather(TestConstants.BostonLatitude, TestConstants.BostonLongitude);
 
         Assert.True(result.City.Equals("Boston"));
     }

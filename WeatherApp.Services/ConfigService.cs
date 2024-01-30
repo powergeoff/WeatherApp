@@ -2,6 +2,8 @@
 using System.Text.Json;
 using Microsoft.Extensions.Configuration;
 
+namespace WeatherApp.Services;
+
 public interface IConfigService
 {
     JsonSerializerOptions JsonSettings { get; }

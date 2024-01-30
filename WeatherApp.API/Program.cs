@@ -1,4 +1,5 @@
 using WeatherApp.API.Middleware;
+using WeatherApp.Services;
 using WeatherApp.Services.Models;
 using WeatherApp.Services.OpenWeatherMap;
 
