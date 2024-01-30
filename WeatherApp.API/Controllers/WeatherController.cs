@@ -20,14 +20,6 @@ public class WeatherController : ControllerBase
     }
 
     [HttpGet]
-    public Task<WeatherModel> Get()
-    {
-        //default boston
-        _logger.LogInformation("Hello from Get!");
-        return _openWeatherMapService.GetWeather();
-    }
-
-    [HttpGet]
     public Task<WeatherModel> GetByCoords(double latitude, double longitude)
     {
         return _openWeatherMapService.GetWeather(latitude, longitude);

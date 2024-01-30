@@ -2,6 +2,7 @@ using System.Text;
 using Microsoft.AspNetCore.Http;
 using System.Text.Json;
 using WeatherApp.API.Models;
+using WeatherApp.Services;
 
 namespace WeatherApp.API.Middleware
 {

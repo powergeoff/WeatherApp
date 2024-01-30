@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
 using WeatherApp.API.Models;
+using WeatherApp.Services;
 
 namespace WeatherApp.API.Middleware
 {
