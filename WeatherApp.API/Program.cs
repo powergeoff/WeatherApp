@@ -23,6 +23,7 @@ try
 
     //custom services
     builder.Services.AddScoped<IOpenWeatherMapService, OpenWeatherMapService>();
+    builder.Services.AddScoped<IClothesService, ClothesService>();
 
     builder.Services.AddHttpClient();
     builder.Services.AddEndpointsApiExplorer();
