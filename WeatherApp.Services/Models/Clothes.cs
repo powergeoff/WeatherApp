@@ -1,4 +1,5 @@
 using System;
+using System.Text.Json.Serialization;
 
 namespace WeatherApp.Services.Models;
 
@@ -31,6 +32,7 @@ public class Clothes
 
     public bool Gloves => GetGloves();
     public bool RainLayer => _weather.IsRaining;
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public Pants Pants => GetPants();
     public Tops Top => GetTop();
     public Hats? Hat => GetHat();
@@ -38,7 +40,7 @@ public class Clothes
 
     private string GetInformation()
     {
-        return $"Feels like: {_weather.FeelsLikeTemp}, Actual Temp: {_weather.Temperature}";
+        return $"{_weather.City} Feels like: {_weather.FeelsLikeTemp}, Actual Temp: {_weather.Temperature}";
     }
 
     public Clothes(WeatherModel weather)

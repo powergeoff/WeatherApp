@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using WeatherApp.API.Middleware;
 using WeatherApp.Services;
 using WeatherApp.Services.Models;
@@ -15,7 +16,10 @@ try
 
     // Add services to the container.
 
-    builder.Services.AddControllers();
+    //builder.Services.AddControllers();
+    builder.Services.AddControllers().AddJsonOptions(options =>
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())
+    );
     builder.Services.AddResponseCompression(options =>
     {
         options.EnableForHttps = true;
