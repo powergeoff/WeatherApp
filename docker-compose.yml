@@ -12,11 +12,10 @@ services:
     build: ./WeatherApp.UI
     ports:
       - 3000:3000
-    #below for live loading - but it doesn't work on Windows
-    #volumes:
-    #- ./WeatherApp.UI/src:/app/src
-    #stdin_open: true
-    #tty: true
+    volumes:
+      - ./WeatherApp.UI/src:/app/src
+    stdin_open: true
+    tty: true
 #docker-compose up -d
 #deletes all containers and networks but not volumes
 #docker-compose down
