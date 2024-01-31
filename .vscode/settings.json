@@ -3,7 +3,7 @@
   "[csharp]": {
     "editor.tabSize": 4
   },
-  "typescript.tsdk": "./Front/node_modules/typescript/lib",
+  "typescript.tsdk": "./WeatherApp.UI/node_modules/typescript/lib",
   "files.associations": {
     "*.json": "jsonc"
   },
@@ -14,7 +14,7 @@
   },
   "eslint.workingDirectories": [
     {
-      "directory": "front",
+      "directory": "WeatherApp.UI",
       "changeProcessCWD": true
     }
   ],
