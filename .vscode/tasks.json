@@ -24,6 +24,18 @@
       "presentation": {
         "group": "dev"
       }
+    },
+    {
+      "label": "frontend dev",
+      "type": "shell",
+      "command": "npm run start",
+      "options": {
+        "cwd": "${workspaceRoot}/WeatherApp.UI"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "group": "dev"
+      }
     }
   ]
 }
