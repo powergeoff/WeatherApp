@@ -33,6 +33,7 @@ RUN dotnet publish -o /app
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 COPY --from=build /app .
+EXPOSE 8080
 ENTRYPOINT ["dotnet","./WeatherApp.API.dll"]
 #https://stackoverflow.com/questions/64557885/how-to-include-class-library-reference-into-docker-file/77592431#77592431
 #PS C:\Users\gao0\core\WeatherApp> docker build -f API.Dockerfile . -t powergeoff/weatherapp-api
