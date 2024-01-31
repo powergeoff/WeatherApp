@@ -39,3 +39,6 @@ wwwroot
 
 appsettings.Development.json
 appsettings.local.json
+
+#AWS KVP for ec2
+*.pem

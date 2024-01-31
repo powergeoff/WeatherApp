@@ -33,3 +33,5 @@ docker-compose.yml
 # Exclude version control system files (e.g., .git, .svn)
 .git/
 .svn/
+
+*.pem
