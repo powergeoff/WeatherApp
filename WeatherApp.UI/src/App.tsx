@@ -1,8 +1,39 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  
+
+  useEffect(function () {
+    async function fetchData() {
+      //setIsLoading(true);
+
+      try {
+        const response = await fetch('http://localhost:5000/api/v1/CurrentClothes/GetByCoords?latitude=42.36&longitude=-71.058884');
+
+        const resData = await response.json();
+
+        if (!response.ok) {
+          throw new Error(resData.message || 'Fetching the goals failed.');
+        }
+
+        //setLoadedClothes(resData);
+        console.log(resData);
+      } catch (err: any) {
+        console.error(err);
+        /*setError(
+          err.message ||
+            'Fetching goals failed - the server responsed with an error.'
+        );*/
+      }
+      //setIsLoading(false);
+    }
+
+    fetchData();
+  }, []);
+
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +49,7 @@ function App() {
         >
           Learn React!
         </a>
+        
       </header>
     </div>
   );

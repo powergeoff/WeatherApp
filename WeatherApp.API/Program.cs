@@ -9,7 +9,20 @@ using WeatherApp.Services.OpenWeatherMap;
 try
 {
     Console.WriteLine("App Start");
+    var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
     var builder = WebApplication.CreateBuilder(args);
+
+    builder.Services.AddCors(options =>
+        {
+            options.AddPolicy(MyAllowSpecificOrigins,
+                            policy =>
+                            {
+                                policy.WithOrigins("http://localhost:3000",
+                                                    "https://localhost:3000")
+                                                    .AllowAnyHeader()
+                                                    .AllowAnyMethod();
+                            });
+        });
 
     var config = new ConfigService(builder.Configuration);
     builder.Services.AddSingleton<IConfigService>(config);
@@ -48,6 +61,8 @@ try
     //app.UseAppVersion(); not implemented - probably not necessary
 
     app.UseHttpsRedirection();
+
+    app.UseCors(MyAllowSpecificOrigins);
 
     app.UseAuthorization();
 
