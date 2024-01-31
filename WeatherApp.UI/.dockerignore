@@ -1,0 +1,35 @@
+# Ignore files and directories commonly excluded in Docker images
+
+# Exclude all files and directories that start with a dot
+.*
+!.dockerignore
+
+# Exclude node_modules directory (common for Node.js applications)
+node_modules
+
+# Exclude any log files
+*.log
+
+# Exclude development and test-related files
+*.md
+*.test.js
+*.spec.js
+
+# Exclude build artifacts
+build/
+dist/
+*.zip
+*.tar.gz
+
+# Exclude editor-specific files and directories
+.config/
+.vscode/
+.idea/
+
+# Exclude Docker-specific files (e.g., Dockerfile)
+Dockerfile
+docker-compose.yml
+
+# Exclude version control system files (e.g., .git, .svn)
+.git/
+.svn/

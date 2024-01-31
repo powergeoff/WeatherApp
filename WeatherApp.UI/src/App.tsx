@@ -10,6 +10,7 @@ function App() {
       //setIsLoading(true);
 
       try {
+        //localhost:5000
         const response = await fetch('http://localhost:5000/api/v1/CurrentClothes/GetByCoords?latitude=42.36&longitude=-71.058884');
 
         const resData = await response.json();
@@ -47,7 +48,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React!
+          Learn React!!
         </a>
         
       </header>
