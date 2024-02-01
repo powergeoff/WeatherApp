@@ -9,7 +9,7 @@
 /coverage
 
 # production
-/build
+WeatherApp.UI/build
 
 # misc
 .DS_Store
@@ -42,3 +42,4 @@ appsettings.local.json
 
 #AWS KVP for ec2
 *.pem
+.env*

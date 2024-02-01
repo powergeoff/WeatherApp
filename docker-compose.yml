@@ -12,6 +12,8 @@ services:
     build: ./WeatherApp.UI
     ports:
       - 3000:3000
+    env_file:
+      - ./WeatherApp.UI/.env
     volumes:
       - ./WeatherApp.UI/src:/app/src
     stdin_open: true

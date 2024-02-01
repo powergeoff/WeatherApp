@@ -32,9 +32,8 @@ public class Clothes
 
     public bool Gloves => GetGloves();
     public bool RainLayer => _weather.IsRaining;
-    [JsonConverter(typeof(JsonStringEnumConverter))]
-    public Pants Pants => GetPants();
-    public Tops Top => GetTop();
+    public Pants Pants => GetPants(); //should be a collection
+    public Tops Top => GetTop(); //should be a collection of Tops
     public Hats? Hat => GetHat();
     public string Information => GetInformation();
 

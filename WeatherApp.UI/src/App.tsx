@@ -11,7 +11,7 @@ function App() {
 
       try {
         //localhost:5000
-        const response = await fetch('http://localhost:5000/api/v1/CurrentClothes/GetByCoords?latitude=42.36&longitude=-71.058884');
+        const response = await fetch(`${process.env.REACT_APP_API_HOST}/api/v1/CurrentClothes/GetByCoords?latitude=42.36&longitude=-71.058884`);
 
         const resData = await response.json();
 
@@ -50,6 +50,8 @@ function App() {
         >
           Learn React!!
         </a>
+        <p>Env: {process.env.NODE_ENV}</p>
+        <p>API Host: {process.env.REACT_APP_API_HOST}</p>
         
       </header>
     </div>
