@@ -1,13 +1,22 @@
-import React, { useEffect } from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 
+interface Clothes {
+  gloves: boolean;
+  hat: string;
+  information: string;
+  pants: string;
+  rainLayer: boolean;
+  top: string;
+}
+
 function App() {
-  
+  const [isLoading, setIsLoading] = useState(true);
+  const [clothes, setClothes] = useState<Clothes>();
 
   useEffect(function () {
     async function fetchData() {
-      //setIsLoading(true);
+      setIsLoading(true);
 
       try {
         //localhost:5000
@@ -18,17 +27,11 @@ function App() {
         if (!response.ok) {
           throw new Error(resData.message || 'Fetching the goals failed.');
         }
-
-        //setLoadedClothes(resData);
-        console.log(resData);
+        setClothes(resData);
       } catch (err: any) {
         console.error(err);
-        /*setError(
-          err.message ||
-            'Fetching goals failed - the server responsed with an error.'
-        );*/
       }
-      //setIsLoading(false);
+      setIsLoading(false);
     }
 
     fetchData();
@@ -38,20 +41,19 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React!!
-        </a>
-        <p>Env: {process.env.NODE_ENV}</p>
-        <p>API Host: {process.env.REACT_APP_API_HOST}</p>
+        {isLoading ? <p>Loading...</p>: <>
+          <h3>{clothes?.information}</h3>
+          
+          <div>Rain: {clothes?.rainLayer ? 'yes' : 'no'}</div>
+          <div>Hat: {clothes?.hat}</div>
+          <div>Top: {clothes?.top}</div>
+          <div>Gloves: {clothes?.gloves ? 'yes' : 'no'}</div>
+          <div>Pants: {clothes?.pants}</div>
+          
+          <div>Env: {process.env.NODE_ENV}</div>
+          <div>API Host: {process.env.REACT_APP_API_HOST}</div>
+        </>
+        }
         
       </header>
     </div>
