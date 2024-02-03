@@ -58,7 +58,7 @@ public class Clothes
         {
             top = Tops.Jacket;
         }
-        else if (_weather.FeelsLikeTemp < Constants.SweaterShirtMaxTemp)
+        else if (_weather.FeelsLikeTemp < Constants.SweatShirtMaxTemp)
         {
             top = Tops.SweatShirt;
         }
