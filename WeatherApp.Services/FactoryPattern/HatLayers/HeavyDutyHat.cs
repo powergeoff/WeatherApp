@@ -4,7 +4,8 @@ namespace WeatherApp.Services.FactoryPattern.HatLayers;
 
 public class HeavyDutyHat : Layer
 {
-    public HeavyDutyHat(int offset) : base(LayerConstants.HeavyDutytMaxTemp + offset)
+    public HeavyDutyHat(LayerCustomizations layerCustomizations) : base(layerCustomizations)
     {
+        SetThreshHold(LayerConstants.HeavyDutytMaxTemp);
     }
 }

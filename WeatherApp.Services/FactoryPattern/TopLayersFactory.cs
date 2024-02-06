@@ -6,19 +6,33 @@ namespace WeatherApp.Services.FactoryPattern;
 
 public class TopLayersFactory : LayersFactory, IGetLayers
 {
-    private WeatherModel _weather;
-    private int _temperatureOffset;
-    public TopLayersFactory(WeatherModel weather, int temperatureOffset = 0)
+
+    private LayerCustomizations _layerCustomizations;
+    public TopLayersFactory(LayerCustomizations customizations)
     {
-        _weather = weather;
-        _temperatureOffset = temperatureOffset;
+        _layerCustomizations = customizations;
         //register all available layers
-        Register(new TShirt(_temperatureOffset));
-        Register(new LongSleeveTShirt(_temperatureOffset));
-        Register(new SweatShirt(_temperatureOffset));
-        Register(new Jacket(_temperatureOffset));
-        Register(new HeavyCoat(_temperatureOffset));
-        Register(new RainCoat());
+        Register(new TShirt(_layerCustomizations));
+        Register(new LongSleeveTShirt(_layerCustomizations));
+        Register(new SweatShirt(_layerCustomizations));
+        Register(new Jacket(_layerCustomizations));
+        Register(new HeavyCoat(_layerCustomizations));
+        Register(new RainCoat(_layerCustomizations));
+    }
+
+    //unused possible Observer Notify entry point
+    public void UpdateCustomizations(LayerCustomizations customizations)
+    {
+        _layerCustomizations = customizations;
+        //Notify()
+    }
+
+    private void Notify()
+    {
+        foreach (var layer in Layers)
+        {
+            //layer.update()
+        }
     }
 
     public List<Layer> GetLayers()
@@ -27,7 +41,7 @@ public class TopLayersFactory : LayersFactory, IGetLayers
         //delegate whether the layers should be added to child class
         foreach (var layer in Layers)
         {
-            if (layer.AddLayer(_weather))
+            if (layer.AddLayer())
                 topLayers.Add(layer);
         }
         return topLayers;

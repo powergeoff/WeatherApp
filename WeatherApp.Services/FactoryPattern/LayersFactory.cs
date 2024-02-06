@@ -5,7 +5,6 @@ namespace WeatherApp.Services.FactoryPattern;
 public abstract class LayersFactory
 {
     //registers a List of layers
-    //protected static List<Layer> Layers { get; set; }
     protected List<Layer> Layers { get; set; }
 
     public LayersFactory()
@@ -17,7 +16,7 @@ public abstract class LayersFactory
         Layers.Add(layer);
     }
 
-    protected void Remove(Layer layer)//unused but here for flexibility
+    protected void UnRegister(Layer layer)//unused but here for flexibility
     {
         Layers.Remove(layer);
     }

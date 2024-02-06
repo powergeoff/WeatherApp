@@ -1,4 +1,3 @@
-using Microsoft.VisualBasic;
 using WeatherApp.Services.FactoryPattern;
 using WeatherApp.Services.Models;
 
@@ -6,6 +5,8 @@ namespace WeatherApp.Services.Tests;
 
 public class TopLayersFactoryTests
 {
+
+    private LayerCustomizations _customizations = new LayerCustomizations();
 
     [Fact]
     public void GetLayers_ShouldReturnEmpty()
@@ -15,7 +16,11 @@ public class TopLayersFactoryTests
         {
             FeelsLikeTemp = LayerConstants.TShirtMaxTemp
         };
-        TopLayersFactory _topLayersFactory = new TopLayersFactory(weather);
+        _customizations.Weather = weather;
+        _customizations.ActivityLevel = 1;
+        _customizations.BodyTempLevel = -1;
+
+        TopLayersFactory _topLayersFactory = new TopLayersFactory(_customizations);
 
         //act
         var layers = _topLayersFactory.GetLayers();
@@ -32,7 +37,9 @@ public class TopLayersFactoryTests
         {
             FeelsLikeTemp = LayerConstants.TShirtMaxTemp - 1
         };
-        TopLayersFactory _topLayersFactory = new TopLayersFactory(weather);
+        _customizations.Weather = weather;
+
+        TopLayersFactory _topLayersFactory = new TopLayersFactory(_customizations);
 
         //act
         var layers = _topLayersFactory.GetLayers();
@@ -49,7 +56,8 @@ public class TopLayersFactoryTests
         {
             FeelsLikeTemp = LayerConstants.SweatShirtMaxTemp - 1
         };
-        TopLayersFactory _topLayersFactory = new TopLayersFactory(weather);
+        _customizations.Weather = weather;
+        TopLayersFactory _topLayersFactory = new TopLayersFactory(_customizations);
 
         //act
         var layers = _topLayersFactory.GetLayers();
@@ -66,7 +74,8 @@ public class TopLayersFactoryTests
             FeelsLikeTemp = 100,
             IsRaining = true
         };
-        TopLayersFactory _topLayersFactory = new TopLayersFactory(weather);
+        _customizations.Weather = weather;
+        TopLayersFactory _topLayersFactory = new TopLayersFactory(_customizations);
 
         var layers = _topLayersFactory.GetLayers();
 
@@ -84,7 +93,8 @@ public class TopLayersFactoryTests
             FeelsLikeTemp = -100,
             IsRaining = true
         };
-        TopLayersFactory _topLayersFactory = new TopLayersFactory(weather);
+        _customizations.Weather = weather;
+        TopLayersFactory _topLayersFactory = new TopLayersFactory(_customizations);
 
         var layers = _topLayersFactory.GetLayers();
 

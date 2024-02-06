@@ -4,7 +4,8 @@ namespace WeatherApp.Services.FactoryPattern.TopLayers;
 
 public class LongSleeveTShirt : Layer
 {
-    public LongSleeveTShirt(int offset) : base(LayerConstants.LongSleeveTShirtMaxTemp + offset)
+    public LongSleeveTShirt(LayerCustomizations layerCustomizations) : base(layerCustomizations)
     {
+        SetThreshHold(LayerConstants.LongSleeveTShirtMaxTemp);
     }
 }

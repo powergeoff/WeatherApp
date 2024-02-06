@@ -4,17 +4,20 @@ namespace WeatherApp.Services.FactoryPattern;
 
 public abstract class Layer
 {
-    protected int? _threshhold { get; set; }
+    protected int ThreshHold { get; set; }
+    protected LayerCustomizations Customizations { get; set; }
 
-    public Layer()
-    { }
-
-    public Layer(int threshhold)
+    public Layer(LayerCustomizations customizations)
     {
-        _threshhold = threshhold;
+        Customizations = customizations;
+    }
+
+    protected void SetThreshHold(int threshhold)
+    {
+        ThreshHold = threshhold + Customizations.ActivityLevel + Customizations.BodyTempLevel;
     }
     //should pass a weather data model to use more than current temp
-    //public virtual bool AddLayer(int currentTemp) => currentTemp < _threshhold; //allow child classes to overwrite this
-    public virtual bool AddLayer(WeatherModel weather) => weather.FeelsLikeTemp < _threshhold; //allow child classes to overwrite this
-    public virtual bool RemoveLayer(WeatherModel weather) => weather.FeelsLikeTemp > _threshhold;
+    //pass the customizations instead of weather
+    public virtual bool AddLayer() => Customizations.Weather.FeelsLikeTemp < ThreshHold; //allow child classes to overwrite this
+    public virtual bool RemoveLayer() => Customizations.Weather.FeelsLikeTemp > ThreshHold;
 }

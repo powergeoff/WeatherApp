@@ -4,7 +4,8 @@ namespace WeatherApp.Services.FactoryPattern.TopLayers;
 
 public class SweatShirt : Layer
 {
-    public SweatShirt(int offset) : base(LayerConstants.SweatShirtMaxTemp + offset)
+    public SweatShirt(LayerCustomizations layerCustomizations) : base(layerCustomizations)
     {
+        SetThreshHold(LayerConstants.SweatShirtMaxTemp);
     }
 }
