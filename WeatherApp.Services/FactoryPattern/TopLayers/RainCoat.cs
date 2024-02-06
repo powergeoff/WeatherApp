@@ -8,8 +8,7 @@ public class RainCoat : Layer
     {
     }
 
-    public override bool AddLayer(WeatherModel weather)
-    {
-        return weather.IsRaining;
-    }
+    public override bool AddLayer(WeatherModel weather) => weather.IsRaining;
+
+    public override bool RemoveLayer(WeatherModel weather) => !weather.IsRaining;
 }
