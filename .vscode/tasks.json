@@ -36,6 +36,22 @@
       "presentation": {
         "group": "dev"
       }
+    },
+    {
+      "label": "backend test",
+      "type": "shell",
+      "command": "dotnet test",
+      "options": {
+        "cwd": "${workspaceRoot}/WeatherApp.Services.Tests",
+        "env": {
+          "ASPNETCORE_ENVIRONMENT": "Development",
+          "DOTNET_WATCH_SUPPRESS_STATIC_FILE_HANDLING": "true"
+        }
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "group": "dev"
+      }
     }
   ]
 }

@@ -50,19 +50,19 @@ public class Clothes
     private Tops GetTop()
     {
         var top = Tops.TShirt;
-        if (_weather.FeelsLikeTemp < Constants.HeavyDutytMaxTemp)
+        if (_weather.FeelsLikeTemp < LayerConstants.HeavyDutytMaxTemp)
         {
             top = Tops.HeavyCoat;
         }
-        else if (_weather.FeelsLikeTemp < Constants.JacketMaxTemp)
+        else if (_weather.FeelsLikeTemp < LayerConstants.JacketMaxTemp)
         {
             top = Tops.Jacket;
         }
-        else if (_weather.FeelsLikeTemp < Constants.SweatShirtMaxTemp)
+        else if (_weather.FeelsLikeTemp < LayerConstants.SweatShirtMaxTemp)
         {
             top = Tops.SweatShirt;
         }
-        else if (_weather.FeelsLikeTemp < Constants.LongSleeveTShirtMaxTemp)
+        else if (_weather.FeelsLikeTemp < LayerConstants.LongSleeveTShirtMaxTemp)
         {
             top = Tops.LongSleeveTShirt;
         }
@@ -71,11 +71,11 @@ public class Clothes
     private Hats GetHat()
     {
         var hat = Hats.BaseballHat;
-        if (_weather.FeelsLikeTemp < Constants.HeavyDutytMaxTemp)
+        if (_weather.FeelsLikeTemp < LayerConstants.HeavyDutytMaxTemp)
         {
             hat = Hats.HeavyDutyHat;
         }
-        else if (_weather.FeelsLikeTemp < Constants.WinterHatMaxTemp)
+        else if (_weather.FeelsLikeTemp < LayerConstants.WinterHatMaxTemp)
         {
             hat = Hats.WinterHat;
         }
@@ -84,11 +84,11 @@ public class Clothes
 
     private bool GetGloves()
     {
-        return _weather.FeelsLikeTemp < Constants.GlovesMaxTemp;
+        return _weather.FeelsLikeTemp < LayerConstants.GlovesMaxTemp;
     }
 
     private Pants GetPants()
     {
-        return _weather.FeelsLikeTemp < Constants.ShortsMaxTemp ? Pants.Pants : Pants.Shorts;
+        return _weather.FeelsLikeTemp < LayerConstants.ShortsMaxTemp ? Pants.Pants : Pants.Shorts;
     }
 }
