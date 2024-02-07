@@ -6,6 +6,6 @@ public class LongSleeveTShirt : Layer
 {
     public LongSleeveTShirt(LayerCustomizations layerCustomizations) : base(layerCustomizations)
     {
-        ThreshHold = LayerConstants.LongSleeveTShirtMaxTemp;
+        TemperatureRange = new Range<int>(-100, LayerConstants.LongSleeveTShirtMaxTemp);
     }
 }

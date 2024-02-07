@@ -9,7 +9,7 @@ public class TopLayersFactoryTests
     private LayerCustomizations _customizations = new LayerCustomizations();
 
     [Fact]
-    public void GetLayers_ShouldReturnEmpty()
+    public void GetLayers_ShouldReturnEmptyThenUpdateShouldReturnOne()
     {
         //arrange
         WeatherModel weather = new WeatherModel
@@ -17,8 +17,7 @@ public class TopLayersFactoryTests
             FeelsLikeTemp = LayerConstants.TShirtMaxTemp
         };
         _customizations.Weather = weather;
-        _customizations.ActivityLevel = 1;
-        _customizations.BodyTempLevel = -1;
+        _customizations.ActivityLevel = 5;
 
         TopLayersFactory _topLayersFactory = new TopLayersFactory(_customizations);
 
@@ -79,7 +78,7 @@ public class TopLayersFactoryTests
         //act
         var layers = _topLayersFactory.GetLayers();
 
-        Assert.True(layers.Count == 3);
+        Assert.True(layers.Count == 2);
     }
 
     [Fact]
@@ -102,7 +101,7 @@ public class TopLayersFactoryTests
     }
 
     [Fact]
-    public void GetLayers_ShouldReturnAllLayers()
+    public void GetLayers_ShouldReturnSuperColdLayers()
     {
         //arrange
         WeatherModel weather = new WeatherModel
@@ -116,6 +115,6 @@ public class TopLayersFactoryTests
         var layers = _topLayersFactory.GetLayers();
 
         //act
-        Assert.True(layers.Count == 6);
+        Assert.True(layers.Count == 4);
     }
 }

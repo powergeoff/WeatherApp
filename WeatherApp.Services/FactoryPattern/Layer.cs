@@ -4,7 +4,7 @@ namespace WeatherApp.Services.FactoryPattern;
 
 public abstract class Layer : IObserver
 {
-    protected int ThreshHold { get; set; }
+    protected Range<int> TemperatureRange { get; set; }
     protected LayerCustomizations Customizations { get; set; }
 
     public Layer(LayerCustomizations customizations)
@@ -15,12 +15,12 @@ public abstract class Layer : IObserver
     public virtual bool AddLayer()
     {
         int temperatureWithCustomizations = (int)Customizations.Weather.FeelsLikeTemp + Customizations.ActivityLevel + Customizations.BodyTempLevel;
-        return temperatureWithCustomizations < ThreshHold;
+        return TemperatureRange.ContainsValue(temperatureWithCustomizations);
     }
     public virtual bool RemoveLayer()
     {
         int temperatureWithCustomizations = (int)Customizations.Weather.FeelsLikeTemp + Customizations.ActivityLevel + Customizations.BodyTempLevel;
-        return temperatureWithCustomizations > ThreshHold;
+        return !TemperatureRange.ContainsValue(temperatureWithCustomizations);
     }
     public void Update(LayerCustomizations layerCustomizations) => Customizations = layerCustomizations;
 }

@@ -15,6 +15,7 @@ public class HatLayerFactoryTests
         {
             FeelsLikeTemp = LayerConstants.WinterHatMaxTemp
         };
+        _customizations.ActivityLevel = 5;
         _customizations.Weather = weather;
 
         HatLayerFactory _hatLayersFactory = new HatLayerFactory(_customizations);

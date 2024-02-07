@@ -6,6 +6,6 @@ public class SweatShirt : Layer
 {
     public SweatShirt(LayerCustomizations layerCustomizations) : base(layerCustomizations)
     {
-        ThreshHold = LayerConstants.SweatShirtMaxTemp;
+        TemperatureRange = new Range<int>(-100, LayerConstants.SweatShirtMaxTemp);
     }
 }

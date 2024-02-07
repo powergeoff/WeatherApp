@@ -6,6 +6,6 @@ public class Jacket : Layer
 {
     public Jacket(LayerCustomizations layerCustomizations) : base(layerCustomizations)
     {
-        ThreshHold = LayerConstants.JacketMaxTemp;
+        TemperatureRange = new Range<int>(LayerConstants.HeavyDutytMaxTemp + 1, LayerConstants.JacketMaxTemp);
     }
 }

@@ -6,12 +6,12 @@ public class WinterHat : Layer
 {
     public WinterHat(LayerCustomizations layerCustomizations) : base(layerCustomizations)
     {
-        ThreshHold = LayerConstants.WinterHatMaxTemp;
+        TemperatureRange = new Range<int>(LayerConstants.HeavyDutytMaxTemp + 1, LayerConstants.WinterHatMaxTemp);
     }
 
     public override bool AddLayer()
     {
         int temperatureWithCustomizations = (int)Customizations.Weather.FeelsLikeTemp + Customizations.ActivityLevel + Customizations.BodyTempLevel;
-        return temperatureWithCustomizations > LayerConstants.HeavyDutytMaxTemp && temperatureWithCustomizations < ThreshHold;
+        return TemperatureRange.ContainsValue(temperatureWithCustomizations);
     }
 }
