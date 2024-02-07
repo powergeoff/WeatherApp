@@ -6,6 +6,6 @@ public class HeavyCoat : Layer
 {
     public HeavyCoat(LayerCustomizations layerCustomizations) : base(layerCustomizations)
     {
-        SetThreshHold(LayerConstants.HeavyDutytMaxTemp);
+        ThreshHold = LayerConstants.HeavyDutytMaxTemp;
     }
 }

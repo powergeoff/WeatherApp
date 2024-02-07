@@ -6,6 +6,6 @@ public class TShirt : Layer
 {
     public TShirt(LayerCustomizations layerCustomizations) : base(layerCustomizations)
     {
-        SetThreshHold(LayerConstants.TShirtMaxTemp);
+        ThreshHold = LayerConstants.TShirtMaxTemp;
     }
 }

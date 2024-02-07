@@ -29,8 +29,10 @@ public class TopLayersFactory : LayersFactory, IGetLayers
     //entry point to update all registered layers
     public void UpdateCustomizations(LayerCustomizations customizations)
     {
-        UnRegisterAll();
-        Initialize(customizations);
+        foreach (var layer in Layers)
+        {
+            layer.Update(customizations);
+        }
     }
 
     public List<Layer> GetLayers()
