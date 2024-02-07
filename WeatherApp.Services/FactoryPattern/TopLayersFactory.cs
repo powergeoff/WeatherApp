@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using WeatherApp.Services.FactoryPattern.TopLayers;
 using WeatherApp.Services.Models;
@@ -10,8 +11,13 @@ public class TopLayersFactory : LayersFactory, IGetLayers
     private LayerCustomizations _layerCustomizations;
     public TopLayersFactory(LayerCustomizations customizations)
     {
+        Initialize(customizations);
+    }
+
+    private void Initialize(LayerCustomizations customizations)
+    {
         _layerCustomizations = customizations;
-        //register all available layers
+        //register all available layers with base factory
         Register(new TShirt(_layerCustomizations));
         Register(new LongSleeveTShirt(_layerCustomizations));
         Register(new SweatShirt(_layerCustomizations));
@@ -20,19 +26,11 @@ public class TopLayersFactory : LayersFactory, IGetLayers
         Register(new RainCoat(_layerCustomizations));
     }
 
-    //unused possible Observer Notify entry point
+    //entry point to update all registered layers
     public void UpdateCustomizations(LayerCustomizations customizations)
     {
-        _layerCustomizations = customizations;
-        //Notify()
-    }
-
-    private void Notify()
-    {
-        foreach (var layer in Layers)
-        {
-            //layer.update()
-        }
+        UnRegisterAll();
+        Initialize(customizations);
     }
 
     public List<Layer> GetLayers()

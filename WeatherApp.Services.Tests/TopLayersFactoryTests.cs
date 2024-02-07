@@ -27,6 +27,23 @@ public class TopLayersFactoryTests
 
         //assert
         Assert.Empty(layers);
+
+
+        //rearrange
+        LayerCustomizations newCustomizations = new LayerCustomizations
+        {
+            ActivityLevel = 1,
+            BodyTempLevel = 1,
+            Weather = weather
+        };
+        //unregister all and reregister new ones....
+        _topLayersFactory.UpdateCustomizations(newCustomizations);
+
+        //act
+        layers = _topLayersFactory.GetLayers();
+
+        //assert
+        Assert.Single(layers);
     }
 
     [Fact]

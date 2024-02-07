@@ -16,10 +16,9 @@ public abstract class LayersFactory
         Layers.Add(layer);
     }
 
-    protected void UnRegister(Layer layer)//unused but here for flexibility
+    protected void UnRegisterAll()
     {
-        Layers.Remove(layer);
+        Layers = new List<Layer>();
     }
 
-    //public abstract List<Layer> GetLayers(int currentTemp); ISP - hats are single layer
 }
