@@ -5,7 +5,7 @@ using WeatherApp.Services.Models;
 
 namespace WeatherApp.Services.FactoryPattern;
 
-public class TopLayersFactory : LayersFactory, IGetLayers
+public class TopLayersFactory : LayersFactory, IGetLayers, IUpdateCustomizations
 {
 
     private LayerCustomizations _layerCustomizations;

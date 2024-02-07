@@ -5,16 +5,24 @@ using WeatherApp.Services.Models;
 
 namespace WeatherApp.Services.FactoryPattern;
 
-public class HatLayerFactory : LayersFactory, IGetLayer
+public class HatLayerFactory : LayersFactory, IGetLayer, IUpdateCustomizations
 {
     private LayerCustomizations _layerCustomizations;
     public HatLayerFactory(LayerCustomizations customizations)
     {
         _layerCustomizations = customizations;
         //register all available layers
+        Register(new BaseballHat(_layerCustomizations));
         Register(new WinterHat(_layerCustomizations));
         Register(new HeavyDutyHat(_layerCustomizations));
-        //Register(new BaseballHat());
+    }
+
+    public void UpdateCustomizations(LayerCustomizations customizations)
+    {
+        foreach (var layer in Layers)
+        {
+            layer.Update(customizations);
+        }
     }
 
     public Layer GetLayer()
@@ -23,7 +31,7 @@ public class HatLayerFactory : LayersFactory, IGetLayer
         foreach (var layer in Layers)
         {
             if (layer.AddLayer())
-                hat = layer;
+                return layer;
         }
 
         return hat;
