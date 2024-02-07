@@ -5,8 +5,9 @@ namespace WeatherApp.Services.Tests;
 
 public class HatLayerFactoryTests
 {
+    private LayerCustomizations _customizations = new LayerCustomizations();
 
-    /*[Fact]
+    [Fact]
     public void GetLayer_ShouldReturnEmpty()
     {
         //arrange
@@ -14,7 +15,9 @@ public class HatLayerFactoryTests
         {
             FeelsLikeTemp = LayerConstants.WinterHatMaxTemp
         };
-        HatLayerFactory _hatLayersFactory = new HatLayerFactory(weather);
+        _customizations.Weather = weather;
+
+        HatLayerFactory _hatLayersFactory = new HatLayerFactory(_customizations);
 
         //act
         var layer = _hatLayersFactory.GetLayer();
@@ -29,9 +32,12 @@ public class HatLayerFactoryTests
         //arrange
         WeatherModel weather = new WeatherModel
         {
-            FeelsLikeTemp = LayerConstants.WinterHatMaxTemp - 1
+            FeelsLikeTemp = LayerConstants.WinterHatMaxTemp
         };
-        HatLayerFactory _hatLayersFactory = new HatLayerFactory(weather);
+        _customizations.ActivityLevel = -2;
+        _customizations.Weather = weather;
+
+        HatLayerFactory _hatLayersFactory = new HatLayerFactory(_customizations);
 
         //act
         var layer = _hatLayersFactory.GetLayer();
@@ -40,7 +46,7 @@ public class HatLayerFactoryTests
         Assert.True(layer.GetType() == typeof(FactoryPattern.HatLayers.WinterHat));
     }
 
-    [Fact]
+    /*[Fact]
     public void GetLayer_ShouldReturnHeavyDutyHat()
     {
         //arrange

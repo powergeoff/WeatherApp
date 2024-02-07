@@ -9,5 +9,9 @@ public class WinterHat : Layer
         ThreshHold = LayerConstants.WinterHatMaxTemp;
     }
 
-    public override bool AddLayer() => Customizations.Weather.FeelsLikeTemp > LayerConstants.HeavyDutytMaxTemp && Customizations.Weather.FeelsLikeTemp < ThreshHold;
+    public override bool AddLayer()
+    {
+        int temperatureWithCustomizations = (int)Customizations.Weather.FeelsLikeTemp + Customizations.ActivityLevel + Customizations.BodyTempLevel;
+        return temperatureWithCustomizations > LayerConstants.HeavyDutytMaxTemp && temperatureWithCustomizations < ThreshHold;
+    }
 }

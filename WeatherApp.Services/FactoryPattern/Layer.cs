@@ -12,17 +12,15 @@ public abstract class Layer : IObserver
         Customizations = customizations;
     }
 
-    //should pass a weather data model to use more than current temp
-    //pass the customizations instead of weather
     public virtual bool AddLayer()
     {
-        int threshHoldWithCustomizations = ThreshHold + Customizations.ActivityLevel + Customizations.BodyTempLevel;
-        return Customizations.Weather.FeelsLikeTemp < threshHoldWithCustomizations;
+        int temperatureWithCustomizations = (int)Customizations.Weather.FeelsLikeTemp + Customizations.ActivityLevel + Customizations.BodyTempLevel;
+        return temperatureWithCustomizations < ThreshHold;
     }
     public virtual bool RemoveLayer()
     {
-        int threshHoldWithCustomizations = ThreshHold + Customizations.ActivityLevel + Customizations.BodyTempLevel;
-        return Customizations.Weather.FeelsLikeTemp > threshHoldWithCustomizations;
+        int temperatureWithCustomizations = (int)Customizations.Weather.FeelsLikeTemp + Customizations.ActivityLevel + Customizations.BodyTempLevel;
+        return temperatureWithCustomizations > ThreshHold;
     }
     public void Update(LayerCustomizations layerCustomizations) => Customizations = layerCustomizations;
 }

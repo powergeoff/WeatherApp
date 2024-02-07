@@ -32,8 +32,8 @@ public class TopLayersFactoryTests
         //rearrange
         LayerCustomizations newCustomizations = new LayerCustomizations
         {
-            ActivityLevel = 1,
-            BodyTempLevel = 1,
+            ActivityLevel = -1,
+            BodyTempLevel = -1,
             Weather = weather
         };
         //unregister all and reregister new ones....
