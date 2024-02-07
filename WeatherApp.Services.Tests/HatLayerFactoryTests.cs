@@ -1,6 +1,7 @@
 using WeatherApp.Services.Factories;
 using WeatherApp.Services.Models;
-using WeatherApp.Services.Models.HatLayers;
+using WeatherApp.Services.Models.Layers;
+using WeatherApp.Services.Models.Layers.HatLayers;
 
 namespace WeatherApp.Services.Tests;
 

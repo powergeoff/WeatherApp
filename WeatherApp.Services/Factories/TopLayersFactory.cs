@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using WeatherApp.Services.Models.TopLayers;
-using WeatherApp.Services.Models;
+using WeatherApp.Services.Models.Layers.TopLayers;
+using WeatherApp.Services.Models.Layers;
 
 namespace WeatherApp.Services.Factories;
 

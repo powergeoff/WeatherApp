@@ -1,6 +1,6 @@
 
 
-namespace WeatherApp.Services.Models.TopLayers;
+namespace WeatherApp.Services.Models.Layers.TopLayers;
 
 public class TShirt : Layer
 {

@@ -1,6 +1,7 @@
 using WeatherApp.Services.Factories;
 using WeatherApp.Services.Models;
-using WeatherApp.Services.Models.TopLayers;
+using WeatherApp.Services.Models.Layers;
+using WeatherApp.Services.Models.Layers.TopLayers;
 
 namespace WeatherApp.Services.Tests;
 

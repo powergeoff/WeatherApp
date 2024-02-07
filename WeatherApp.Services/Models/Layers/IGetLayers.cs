@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace WeatherApp.Services.Models;
+namespace WeatherApp.Services.Models.Layers;
 
 public interface IGetLayers
 {

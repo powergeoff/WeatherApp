@@ -1,4 +1,6 @@
-namespace WeatherApp.Services.Models;
+using   WeatherApp.Services.Models;
+
+namespace WeatherApp.Services.Models.Layers;
 
 public abstract class Layer : IObserver
 {

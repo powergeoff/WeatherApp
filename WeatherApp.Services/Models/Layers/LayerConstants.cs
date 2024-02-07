@@ -1,4 +1,4 @@
-namespace WeatherApp.Services.Models;
+namespace WeatherApp.Services.Models.Layers;
 
 public class LayerConstants
 {

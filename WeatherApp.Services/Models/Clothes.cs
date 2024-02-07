@@ -1,5 +1,6 @@
 using System;
 using System.Text.Json.Serialization;
+using WeatherApp.Services.Models.Layers;
 
 namespace WeatherApp.Services.Models;
 

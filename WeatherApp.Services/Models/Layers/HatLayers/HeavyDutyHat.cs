@@ -1,6 +1,6 @@
 
 
-namespace WeatherApp.Services.Models.HatLayers;
+namespace WeatherApp.Services.Models.Layers.HatLayers;
 
 public class HeavyDutyHat : Layer
 {
