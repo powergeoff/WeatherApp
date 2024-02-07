@@ -16,6 +16,11 @@ public abstract class LayersFactory
         Layers.Add(layer);
     }
 
+    protected void UnRegister(Layer layer)
+    {
+        Layers.Remove(layer);
+    }
+
     protected void UnRegisterAll()
     {
         Layers = new List<Layer>();
