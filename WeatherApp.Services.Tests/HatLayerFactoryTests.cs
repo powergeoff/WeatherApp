@@ -1,5 +1,6 @@
-using WeatherApp.Services.FactoryPattern;
+using WeatherApp.Services.Factories;
 using WeatherApp.Services.Models;
+using WeatherApp.Services.Models.HatLayers;
 
 namespace WeatherApp.Services.Tests;
 
@@ -44,10 +45,10 @@ public class HatLayerFactoryTests
         var layer = _hatLayersFactory.GetLayer();
 
         //assert
-        Assert.True(layer.GetType() == typeof(FactoryPattern.HatLayers.WinterHat));
+        Assert.True(layer.GetType() == typeof(WinterHat));
     }
 
-    /*[Fact]
+    [Fact]
     public void GetLayer_ShouldReturnHeavyDutyHat()
     {
         //arrange
@@ -55,12 +56,13 @@ public class HatLayerFactoryTests
         {
             FeelsLikeTemp = -100
         };
-        HatLayerFactory _hatLayersFactory = new HatLayerFactory(weather);
+        _customizations.Weather = weather;
+        HatLayerFactory _hatLayersFactory = new HatLayerFactory(_customizations);
 
         //act
         var layer = _hatLayersFactory.GetLayer();
 
         //assert
-        Assert.True(layer.GetType() == typeof(FactoryPattern.HatLayers.HeavyDutyHat));
-    }*/
+        Assert.True(layer.GetType() == typeof(HeavyDutyHat));
+    }
 }

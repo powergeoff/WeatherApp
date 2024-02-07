@@ -1,9 +1,8 @@
 using System.Collections.Generic;
-using WeatherApp.Services.FactoryPattern.HatLayers;
-using WeatherApp.Services.FactoryPattern.TopLayers;
+using WeatherApp.Services.Models.HatLayers;
 using WeatherApp.Services.Models;
 
-namespace WeatherApp.Services.FactoryPattern;
+namespace WeatherApp.Services.Factories;
 
 public class HatLayerFactory : LayersFactory, IGetLayer, IUpdateCustomizations
 {

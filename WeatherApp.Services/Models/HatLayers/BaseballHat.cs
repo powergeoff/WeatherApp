@@ -1,6 +1,6 @@
-using WeatherApp.Services.Models;
 
-namespace WeatherApp.Services.FactoryPattern.HatLayers;
+
+namespace WeatherApp.Services.Models.HatLayers;
 
 public class BaseballHat : Layer
 {

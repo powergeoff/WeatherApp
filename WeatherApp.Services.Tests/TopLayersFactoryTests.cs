@@ -1,5 +1,6 @@
-using WeatherApp.Services.FactoryPattern;
+using WeatherApp.Services.Factories;
 using WeatherApp.Services.Models;
+using WeatherApp.Services.Models.TopLayers;
 
 namespace WeatherApp.Services.Tests;
 
@@ -61,7 +62,7 @@ public class TopLayersFactoryTests
         var layers = _topLayersFactory.GetLayers();
 
         Assert.True(layers.Count == 1);
-        Assert.True(layers[0].GetType() == typeof(FactoryPattern.TopLayers.TShirt));
+        Assert.True(layers[0].GetType() == typeof(TShirt));
     }
 
     [Fact]
@@ -97,7 +98,7 @@ public class TopLayersFactoryTests
 
         //act
         Assert.True(layers.Count == 1);
-        Assert.True(layers[0].GetType() == typeof(FactoryPattern.TopLayers.RainCoat));
+        Assert.True(layers[0].GetType() == typeof(RainCoat));
     }
 
     [Fact]

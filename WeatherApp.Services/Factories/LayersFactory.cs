@@ -1,6 +1,7 @@
 using System.Collections.Generic;
+using WeatherApp.Services.Models;
 
-namespace WeatherApp.Services.FactoryPattern;
+namespace WeatherApp.Services.Factories;
 
 public abstract class LayersFactory
 {

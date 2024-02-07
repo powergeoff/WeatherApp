@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using WeatherApp.Services.FactoryPattern.TopLayers;
+using WeatherApp.Services.Models.TopLayers;
 using WeatherApp.Services.Models;
 
-namespace WeatherApp.Services.FactoryPattern;
+namespace WeatherApp.Services.Factories;
 
 public class TopLayersFactory : LayersFactory, IGetLayers, IUpdateCustomizations
 {

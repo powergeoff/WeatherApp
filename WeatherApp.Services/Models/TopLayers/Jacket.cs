@@ -1,6 +1,4 @@
-using WeatherApp.Services.Models;
-
-namespace WeatherApp.Services.FactoryPattern.TopLayers;
+namespace WeatherApp.Services.Models.TopLayers;
 
 public class Jacket : Layer
 {

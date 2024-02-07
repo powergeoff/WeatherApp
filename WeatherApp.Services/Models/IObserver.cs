@@ -1,4 +1,4 @@
-namespace WeatherApp.Services.FactoryPattern;
+namespace WeatherApp.Services.Models;
 
 public interface IObserver
 {
