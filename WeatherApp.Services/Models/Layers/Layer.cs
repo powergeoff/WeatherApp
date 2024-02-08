@@ -1,13 +1,13 @@
-using   WeatherApp.Services.Models;
+using WeatherApp.Services.Models;
 
 namespace WeatherApp.Services.Models.Layers;
 
-public abstract class Layer : IObserver
+public abstract class Layer : IObserver //each layer is an observer. they get updated by the factory when Customizations change
 {
     protected Range<int> TemperatureRange { get; set; }
-    protected LayerCustomizations Customizations { get; set; }
+    protected ILayerCustomizations Customizations { get; set; }
 
-    public Layer(LayerCustomizations customizations)
+    public Layer(ILayerCustomizations customizations)
     {
         Customizations = customizations;
     }

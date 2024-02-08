@@ -8,13 +8,18 @@ namespace WeatherApp.Services.Factories;
 public class TopLayersFactory : LayersFactory, IGetLayers, IUpdateCustomizations
 {
 
-    private LayerCustomizations _layerCustomizations;
-    public TopLayersFactory(LayerCustomizations customizations)
+    private ILayerCustomizations _layerCustomizations;
+
+    public TopLayersFactory()
     {
-        Initialize(customizations);
+    }
+    public override void RegisterAllLayers(ILayerCustomizations layerCustomizations)
+    {
+        Initialize(layerCustomizations);
     }
 
-    private void Initialize(LayerCustomizations customizations)
+
+    private void Initialize(ILayerCustomizations customizations)
     {
         _layerCustomizations = customizations;
         //register all available layers with base factory
@@ -46,4 +51,5 @@ public class TopLayersFactory : LayersFactory, IGetLayers, IUpdateCustomizations
         }
         return topLayers;
     }
+
 }

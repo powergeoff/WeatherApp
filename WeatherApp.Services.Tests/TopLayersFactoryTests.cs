@@ -9,6 +9,7 @@ public class TopLayersFactoryTests
 {
 
     private LayerCustomizations _customizations = new LayerCustomizations();
+    TopLayersFactory _topLayersFactory = new TopLayersFactory();
 
     [Fact]
     public void GetLayers_ShouldReturnEmptyThenUpdateShouldReturnOne()
@@ -21,7 +22,7 @@ public class TopLayersFactoryTests
         _customizations.Weather = weather;
         _customizations.ActivityLevel = 5;
 
-        TopLayersFactory _topLayersFactory = new TopLayersFactory(_customizations);
+        _topLayersFactory.RegisterAllLayers(_customizations);
 
         //act
         var layers = _topLayersFactory.GetLayers();
@@ -57,7 +58,7 @@ public class TopLayersFactoryTests
         };
         _customizations.Weather = weather;
 
-        TopLayersFactory _topLayersFactory = new TopLayersFactory(_customizations);
+        _topLayersFactory.RegisterAllLayers(_customizations);
 
         //act
         var layers = _topLayersFactory.GetLayers();
@@ -75,7 +76,7 @@ public class TopLayersFactoryTests
             FeelsLikeTemp = LayerConstants.SweatShirtMaxTemp - 1
         };
         _customizations.Weather = weather;
-        TopLayersFactory _topLayersFactory = new TopLayersFactory(_customizations);
+        _topLayersFactory.RegisterAllLayers(_customizations);
 
         //act
         var layers = _topLayersFactory.GetLayers();
@@ -93,7 +94,7 @@ public class TopLayersFactoryTests
             IsRaining = true
         };
         _customizations.Weather = weather;
-        TopLayersFactory _topLayersFactory = new TopLayersFactory(_customizations);
+        _topLayersFactory.RegisterAllLayers(_customizations);
 
         var layers = _topLayersFactory.GetLayers();
 
@@ -112,7 +113,7 @@ public class TopLayersFactoryTests
             IsRaining = true
         };
         _customizations.Weather = weather;
-        TopLayersFactory _topLayersFactory = new TopLayersFactory(_customizations);
+        _topLayersFactory.RegisterAllLayers(_customizations);
 
         var layers = _topLayersFactory.GetLayers();
 

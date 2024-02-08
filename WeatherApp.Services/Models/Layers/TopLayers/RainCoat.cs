@@ -2,7 +2,7 @@ namespace WeatherApp.Services.Models.Layers.TopLayers;
 
 public class RainCoat : Layer
 {
-    public RainCoat(LayerCustomizations layerCustomizations) : base(layerCustomizations)
+    public RainCoat(ILayerCustomizations layerCustomizations) : base(layerCustomizations)
     {
     }
 

@@ -8,6 +8,7 @@ namespace WeatherApp.Services.Tests;
 public class HatLayerFactoryTests
 {
     private LayerCustomizations _customizations = new LayerCustomizations();
+    private HatLayerFactory _hatLayersFactory = new HatLayerFactory();
 
     [Fact]
     public void GetLayer_ShouldReturnEmpty()
@@ -20,7 +21,7 @@ public class HatLayerFactoryTests
         _customizations.ActivityLevel = 5;
         _customizations.Weather = weather;
 
-        HatLayerFactory _hatLayersFactory = new HatLayerFactory(_customizations);
+        _hatLayersFactory.RegisterAllLayers(_customizations);
 
         //act
         var layer = _hatLayersFactory.GetLayer();
@@ -40,7 +41,7 @@ public class HatLayerFactoryTests
         _customizations.ActivityLevel = -2;
         _customizations.Weather = weather;
 
-        HatLayerFactory _hatLayersFactory = new HatLayerFactory(_customizations);
+        _hatLayersFactory.RegisterAllLayers(_customizations);
 
         //act
         var layer = _hatLayersFactory.GetLayer();
@@ -58,7 +59,7 @@ public class HatLayerFactoryTests
             FeelsLikeTemp = -100
         };
         _customizations.Weather = weather;
-        HatLayerFactory _hatLayersFactory = new HatLayerFactory(_customizations);
+        _hatLayersFactory.RegisterAllLayers(_customizations);
 
         //act
         var layer = _hatLayersFactory.GetLayer();

@@ -12,6 +12,9 @@ public abstract class LayersFactory
     {
         Layers = new List<Layer>();
     }
+
+    public abstract void RegisterAllLayers(ILayerCustomizations layerCustomizations);
+
     protected void Register(Layer layer)
     {
         Layers.Add(layer);

@@ -7,16 +7,16 @@ namespace WeatherApp.API.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]/[action]")]
-public class CurrentClothesController : ControllerBase
+public class SimpleClothesController : ControllerBase
 {
-    private IClothesService _clothesService;
-    public CurrentClothesController(IClothesService clothesService)
+    private ISimpleClothesService _clothesService;
+    public SimpleClothesController(ISimpleClothesService clothesService)
     {
         _clothesService = clothesService;
     }
 
     [HttpGet]
-    public async Task<Clothes> GetByCoords(double latitude, double longitude)
+    public async Task<ClothesStart> GetByCoords(double latitude, double longitude)
     {
         return await _clothesService.GetClothesByCoords(latitude, longitude);
     }

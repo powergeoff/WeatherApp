@@ -11,7 +11,7 @@ public class ClothesServiceTest
 {
 
     private IOpenWeatherMapService _openWeatherMapService;
-    private IClothesService _clothesService;
+    private ISimpleClothesService _clothesService;
     public ClothesServiceTest()
     {
         var file = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "appsettings.Development.json"));
@@ -25,7 +25,7 @@ public class ClothesServiceTest
             .Build();
 
         _openWeatherMapService = new OpenWeatherMapService(new HttpClient(), new ConfigService(configManager));
-        _clothesService = new ClothesService(_openWeatherMapService);
+        _clothesService = new SimpleClothesService(_openWeatherMapService);
     }
 
     [Fact]

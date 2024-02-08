@@ -4,7 +4,7 @@ namespace WeatherApp.Services.Models.Layers.HatLayers;
 
 public class BaseballHat : Layer
 {
-    public BaseballHat(LayerCustomizations layerCustomizations) : base(layerCustomizations)
+    public BaseballHat(ILayerCustomizations layerCustomizations) : base(layerCustomizations)
     {
         TemperatureRange = new Range<int>(LayerConstants.WinterHatMaxTemp + 1, 200);
     }
@@ -13,4 +13,6 @@ public class BaseballHat : Layer
         int temperatureWithCustomizations = (int)Customizations.Weather.FeelsLikeTemp + Customizations.ActivityLevel + Customizations.BodyTempLevel;
         return TemperatureRange.ContainsValue(temperatureWithCustomizations) && Customizations.ActivityLevel > 7;
     }
+
+    public override string ToString() => "Baseball Hat";
 }

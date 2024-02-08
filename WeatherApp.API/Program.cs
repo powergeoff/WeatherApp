@@ -1,7 +1,9 @@
 using System.Text.Json.Serialization;
 using WeatherApp.API.Middleware;
 using WeatherApp.Services;
+using WeatherApp.Services.Factories;
 using WeatherApp.Services.Models;
+using WeatherApp.Services.Models.Layers;
 using WeatherApp.Services.OpenWeatherMap;
 
 //var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
@@ -38,8 +40,11 @@ try
         options.EnableForHttps = true;
     });
 
-    //custom services
+    //custom services or Application Services not Framework services
+    builder.Services.AddScoped<ILayerCustomizations, LayerCustomizations>();
+    builder.Services.AddScoped<IHatLayerFactory, HatLayerFactory>();
     builder.Services.AddScoped<IOpenWeatherMapService, OpenWeatherMapService>();
+    builder.Services.AddScoped<ISimpleClothesService, SimpleClothesService>();
     builder.Services.AddScoped<IClothesService, ClothesService>();
 
     builder.Services.AddHttpClient();
