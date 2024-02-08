@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using WeatherApp.Services;
+using WeatherApp.Services.Builders;
 using WeatherApp.Services.Models;
 using WeatherApp.Services.OpenWeatherMap;
 
@@ -9,15 +10,16 @@ namespace WeatherApp.API.Controllers;
 [Route("api/v1/[controller]/[action]")]
 public class ClothesController : ControllerBase
 {
-    private IClothesService _clothesService;
-    public ClothesController(IClothesService clothesService)
+    private IClothesDirector _clothesDirector;
+    public ClothesController(IClothesDirector clothesDirector)
     {
-        _clothesService = clothesService;
+        _clothesDirector = clothesDirector;
     }
 
     [HttpGet]
     public async Task<Clothes> GetByCoords(double latitude, double longitude)
     {
-        return await _clothesService.GetClothesByCoords(latitude, longitude);
+        await _clothesDirector.ConstructClothes(latitude, longitude);
+        return _clothesDirector.GetClothes();
     }
 }

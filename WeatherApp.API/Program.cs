@@ -1,6 +1,7 @@
 using System.Text.Json.Serialization;
 using WeatherApp.API.Middleware;
 using WeatherApp.Services;
+using WeatherApp.Services.Builders;
 using WeatherApp.Services.Factories;
 using WeatherApp.Services.Models;
 using WeatherApp.Services.Models.Layers;
@@ -45,7 +46,9 @@ try
     builder.Services.AddScoped<IHatLayerFactory, HatLayerFactory>();
     builder.Services.AddScoped<IOpenWeatherMapService, OpenWeatherMapService>();
     builder.Services.AddScoped<ISimpleClothesService, SimpleClothesService>();
-    builder.Services.AddScoped<IClothesService, ClothesService>();
+    builder.Services.AddScoped<IClothesBuilder, RinkClothesBuilder>(); //how to register multiple classes that implement same interface
+    builder.Services.AddScoped<IClothesBuilder, ClothesBuilder>(); //how to register multiple classes that implement same interface
+    builder.Services.AddScoped<IClothesDirector, ClothesDirector>(); //so how does this guy know which one to get?
 
     builder.Services.AddHttpClient();
     builder.Services.AddEndpointsApiExplorer();

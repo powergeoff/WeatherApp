@@ -7,12 +7,12 @@ using WeatherApp.Services.Models;
 namespace WeatherApp.Services.Tests;
 
 
-public class ClothesServiceTest
+public class SimpleClothesServiceTest
 {
 
     private IOpenWeatherMapService _openWeatherMapService;
     private ISimpleClothesService _clothesService;
-    public ClothesServiceTest()
+    public SimpleClothesServiceTest()
     {
         var file = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "appsettings.Development.json"));
         var config = JsonSerializer.Deserialize<Config>(file)!;

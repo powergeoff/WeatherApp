@@ -6,8 +6,10 @@ namespace WeatherApp.Services.Models;
 
 public class Clothes
 {
-
-    public string[] Tops { get; set; }
+    public bool Gloves { get; set; }
     public string Hat { get; set; }
+    public string[] TopLayers { get; set; }
+    public string BottomLayer { get; set; }
+    public string Overview { get; set; }
 
 }
