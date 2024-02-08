@@ -5,6 +5,7 @@ public class RainCoat : Layer
     public RainCoat(ILayerCustomizations layerCustomizations) : base(layerCustomizations)
     {
     }
+    public override string ToString() => "Rain Coat";
 
     public override bool AddLayer() => Customizations.Weather.IsRaining;
 

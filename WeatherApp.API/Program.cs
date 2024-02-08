@@ -44,6 +44,9 @@ try
     //custom services or Application Services not Framework services
     builder.Services.AddScoped<ILayerCustomizations, LayerCustomizations>();
     builder.Services.AddScoped<IHatLayerFactory, HatLayerFactory>();
+    builder.Services.AddScoped<ITopLayersFactory, TopLayersFactory>();
+    builder.Services.AddScoped<IHandsLayerFactory, HandsLayerFactory>();
+    builder.Services.AddScoped<IBottomLayerFactory, BottomLayerFactory>();
     builder.Services.AddScoped<IOpenWeatherMapService, OpenWeatherMapService>();
     builder.Services.AddScoped<ISimpleClothesService, SimpleClothesService>();
     builder.Services.AddScoped<IClothesBuilder, RinkClothesBuilder>(); //how to register multiple classes that implement same interface

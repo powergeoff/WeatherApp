@@ -20,10 +20,10 @@ public class ClothesDirector : IClothesDirector
     public async Task ConstructClothes(double latitude, double longitude)
     {
         await _clothesBuilder.Initialize(latitude, longitude);
-        //_clothesBuilder.BuildGloves();
+        _clothesBuilder.BuildGloves();
         _clothesBuilder.BuildHat();
-        //_clothesBuilder.BuildTopLayers();
-        //_clothesBuilder.BuildBottomLayer();
+        _clothesBuilder.BuildTopLayers();
+        _clothesBuilder.BuildBottomLayer();
         _clothesBuilder.BuildOverview();
     }
 

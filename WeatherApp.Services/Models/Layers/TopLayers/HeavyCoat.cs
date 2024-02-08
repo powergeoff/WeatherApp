@@ -6,4 +6,5 @@ public class HeavyCoat : Layer
     {
         TemperatureRange = new Range<int>(-100, LayerConstants.HeavyDutytMaxTemp);
     }
+    public override string ToString() => "Heavy Coat";
 }

@@ -6,4 +6,5 @@ public class LongSleeveTShirt : Layer
     {
         TemperatureRange = new Range<int>(-100, LayerConstants.LongSleeveTShirtMaxTemp);
     }
+    public override string ToString() => "Long Sleeve T-Shirt";
 }

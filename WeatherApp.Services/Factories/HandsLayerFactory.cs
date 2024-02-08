@@ -1,28 +1,26 @@
-using System.Collections.Generic;
-using WeatherApp.Services.Models.Layers.HatLayers;
 using WeatherApp.Services.Models.Layers;
+using WeatherApp.Services.Models.Layers.HandsLayers;
 
 namespace WeatherApp.Services.Factories;
 
-public interface IHatLayerFactory : IGetLayer, IUpdateCustomizations
+public interface IHandsLayerFactory : IGetLayer, IUpdateCustomizations
 {
     void RegisterAllLayers(ILayerCustomizations layerCustomizations);
 }
 
-public class HatLayerFactory : LayersFactory, IHatLayerFactory
+public class HandsLayerFactory : LayersFactory, IHandsLayerFactory
 {
     private ILayerCustomizations _layerCustomizations;
 
-    public HatLayerFactory()
+    public HandsLayerFactory()
     {//allow IOC container to grab an instance BUT only iterate register new Layers later when you actually have customizations
     }
 
     public override void RegisterAllLayers(ILayerCustomizations layerCustomizations)
     {
         _layerCustomizations = layerCustomizations;
-        Register(new BaseballHat(_layerCustomizations));
-        Register(new WinterHat(_layerCustomizations));
-        Register(new HeavyDutyHat(_layerCustomizations));
+        Register(new WinterGloves(_layerCustomizations));
+        Register(new Mittens(_layerCustomizations));
     }
     public void UpdateCustomizations(LayerCustomizations customizations)
     {

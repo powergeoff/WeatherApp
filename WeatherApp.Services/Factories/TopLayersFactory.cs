@@ -5,7 +5,12 @@ using WeatherApp.Services.Models.Layers;
 
 namespace WeatherApp.Services.Factories;
 
-public class TopLayersFactory : LayersFactory, IGetLayers, IUpdateCustomizations
+public interface ITopLayersFactory : IGetLayers, IUpdateCustomizations
+{
+    void RegisterAllLayers(ILayerCustomizations layerCustomizations);
+}
+
+public class TopLayersFactory : LayersFactory, ITopLayersFactory
 {
 
     private ILayerCustomizations _layerCustomizations;
@@ -51,5 +56,4 @@ public class TopLayersFactory : LayersFactory, IGetLayers, IUpdateCustomizations
         }
         return topLayers;
     }
-
 }

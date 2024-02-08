@@ -6,4 +6,5 @@ public class Jacket : Layer
     {
         TemperatureRange = new Range<int>(LayerConstants.HeavyDutytMaxTemp + 1, LayerConstants.JacketMaxTemp);
     }
+    public override string ToString() => "Jacket";
 }

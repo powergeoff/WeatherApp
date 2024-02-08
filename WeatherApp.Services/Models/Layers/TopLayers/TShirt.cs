@@ -8,4 +8,5 @@ public class TShirt : Layer
     {
         TemperatureRange = new Range<int>(LayerConstants.LongSleeveTShirtMaxTemp + 1, LayerConstants.TShirtMaxTemp);
     }
+    public override string ToString() => "T-Shirt";
 }

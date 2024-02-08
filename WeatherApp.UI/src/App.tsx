@@ -2,12 +2,11 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 
 interface Clothes {
-  gloves: boolean;
+  gloves: string;
   hat: string;
-  information: string;
-  pants: string;
-  rainLayer: boolean;
-  top: string;
+  overview: string;
+  bottomLayer: string;
+  topLayers: string[];
 }
 
 function App() {
@@ -20,7 +19,7 @@ function App() {
 
       try {
         //localhost:5000
-        const response = await fetch(`${process.env.REACT_APP_API_HOST}/api/v1/SimpleClothes/GetByCoords?latitude=42.36&longitude=-71.058884`);
+        const response = await fetch(`${process.env.REACT_APP_API_HOST}/api/v1/Clothes/GetByCoords?latitude=42.36&longitude=-71.058884`);
 
         const resData = await response.json();
 
@@ -42,13 +41,12 @@ function App() {
     <div className="App">
       <header className="App-header">
         {isLoading ? <p>Loading...</p>: <>
-          <h3>{clothes?.information}</h3>
+          <h3>{clothes?.overview}</h3>
           
-          <div>Rain: {clothes?.rainLayer ? 'yes' : 'no'}</div>
           <div>Hat: {clothes?.hat}</div>
-          <div>Top: {clothes?.top}</div>
-          <div>Gloves: {clothes?.gloves ? 'yes' : 'no'}</div>
-          <div>Pants: {clothes?.pants}</div>
+          <div>Top: {clothes?.topLayers.map(t => <>{t},</>)}</div>
+          <div>Gloves: {clothes?.gloves}</div>
+          <div>Pants: {clothes?.bottomLayer}</div>
           
           <div>Env: {process.env.NODE_ENV}</div>
           <div>API Host: {process.env.REACT_APP_API_HOST}</div>
