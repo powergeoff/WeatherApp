@@ -4,6 +4,7 @@ using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
 using System.Xml.Serialization;
+using WeatherApp.Services.Configuration;
 using WeatherApp.Services.Models;
 
 namespace WeatherApp.Services.OpenWeatherMap;

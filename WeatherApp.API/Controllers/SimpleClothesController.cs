@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using WeatherApp.Services;
 using WeatherApp.Services.Models;
 using WeatherApp.Services.OpenWeatherMap;
+using WeatherApp.Services.SimpleClothes;
 
 namespace WeatherApp.API.Controllers;
 

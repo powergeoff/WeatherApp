@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using System.Text.Json;
 using WeatherApp.API.Models;
 using WeatherApp.Services;
+using WeatherApp.Services.Configuration;
 
 namespace WeatherApp.API.Middleware
 {

@@ -2,6 +2,7 @@ using WeatherApp.Services.OpenWeatherMap;
 using Microsoft.Extensions.Configuration;
 using System.Text.Json;
 using WeatherApp.Services.Tests.Models;
+using WeatherApp.Services.Configuration;
 
 namespace WeatherApp.Services.Tests;
 

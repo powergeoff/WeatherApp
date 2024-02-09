@@ -2,7 +2,7 @@
 using System.Text.Json;
 using Microsoft.Extensions.Configuration;
 
-namespace WeatherApp.Services;
+namespace WeatherApp.Services.Configuration;
 
 public interface IConfigService
 {

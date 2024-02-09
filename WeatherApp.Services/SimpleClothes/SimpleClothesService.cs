@@ -1,7 +1,7 @@
 using WeatherApp.Services.Models;
 using WeatherApp.Services.OpenWeatherMap;
 
-namespace WeatherApp.Services;
+namespace WeatherApp.Services.SimpleClothes;
 
 public interface ISimpleClothesService
 {

@@ -5,7 +5,7 @@ namespace WeatherApp.Services.Factories;
 
 public abstract class LayersFactory
 {
-    //registers a List of layers
+    //contains a List of all child layers
     protected List<Layer> Layers { get; set; }
 
     public LayersFactory()

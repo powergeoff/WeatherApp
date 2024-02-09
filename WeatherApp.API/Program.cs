@@ -2,10 +2,12 @@ using System.Text.Json.Serialization;
 using WeatherApp.API.Middleware;
 using WeatherApp.Services;
 using WeatherApp.Services.Builders;
+using WeatherApp.Services.Configuration;
 using WeatherApp.Services.Factories;
 using WeatherApp.Services.Models;
 using WeatherApp.Services.Models.Layers;
 using WeatherApp.Services.OpenWeatherMap;
+using WeatherApp.Services.SimpleClothes;
 
 //var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 
@@ -43,12 +45,15 @@ try
 
     //custom services or Application Services not Framework services
     builder.Services.AddScoped<ILayerCustomizations, LayerCustomizations>();
+    //register factories
     builder.Services.AddScoped<IHatLayerFactory, HatLayerFactory>();
     builder.Services.AddScoped<ITopLayersFactory, TopLayersFactory>();
     builder.Services.AddScoped<IHandsLayerFactory, HandsLayerFactory>();
     builder.Services.AddScoped<IBottomLayerFactory, BottomLayerFactory>();
+    //register services
     builder.Services.AddScoped<IOpenWeatherMapService, OpenWeatherMapService>();
     builder.Services.AddScoped<ISimpleClothesService, SimpleClothesService>();
+    //register builder/ directors
     builder.Services.AddScoped<IClothesBuilder, RinkClothesBuilder>(); //how to register multiple classes that implement same interface
     builder.Services.AddScoped<IClothesBuilder, ClothesBuilder>(); //how to register multiple classes that implement same interface
     builder.Services.AddScoped<IClothesDirector, ClothesDirector>(); //so how does this guy know which one to get?
