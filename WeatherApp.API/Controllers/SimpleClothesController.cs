@@ -1,11 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WeatherApp.Services;
 using WeatherApp.Services.Models;
-using WeatherApp.Services.OpenWeatherMap;
 using WeatherApp.Services.SimpleClothes;
 
 namespace WeatherApp.API.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/v1/[controller]/[action]")]
 public class SimpleClothesController : ControllerBase

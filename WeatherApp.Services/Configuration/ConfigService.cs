@@ -10,6 +10,7 @@ public interface IConfigService
     string AppVersion { get; }
     //string ConnectionString { get; }
     string APIKey { get; }
+    AuthConfigModel AuthConfig { get; }
 }
 
 public class ConfigService : IConfigService
@@ -30,6 +31,8 @@ public class ConfigService : IConfigService
     public string AppVersion => _config.GetValue<string>("AppVersion");
 
     public string APIKey => _config.GetValue<string>("APIKey");
+
+    public AuthConfigModel AuthConfig => _config.GetSection("Auth").Get<AuthConfigModel>();
 
     //public string ConnectionString => _config.GetSection("Connections").GetValue<string>("Default");
 }

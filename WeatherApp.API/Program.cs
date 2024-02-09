@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using System.Text.Json.Serialization;
 using WeatherApp.API.Middleware;
 using WeatherApp.Services;
@@ -31,6 +34,24 @@ try
 
     var config = new ConfigService(builder.Configuration);
     builder.Services.AddSingleton<IConfigService>(config);
+
+    var authConfig = config.AuthConfig;
+    builder.Services
+        .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        .AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                ValidIssuer = authConfig.Issuer,
+                ValidAudience = authConfig.Issuer,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authConfig.Key)),
+            };
+        });
+    //Jwt configuration ends here
 
     // Add services to the container.
 
@@ -80,6 +101,7 @@ try
 
     app.UseCors(MyAllowSpecificOrigins);
 
+    app.UseAuthentication();
     app.UseAuthorization();
 
     app.MapControllers();
