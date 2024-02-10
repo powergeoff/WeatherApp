@@ -52,6 +52,42 @@
       "presentation": {
         "group": "dev"
       }
+    },
+    {
+      "label": "docker up",
+      "type": "shell",
+      "command": "docker-compose up",
+      "options": {
+        "cwd": "${workspaceRoot}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "group": "dev"
+      }
+    },
+    {
+      "label": "docker down",
+      "type": "shell",
+      "command": "docker-compose down",
+      "options": {
+        "cwd": "${workspaceRoot}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "group": "dev"
+      }
+    },
+    {
+      "label": "docker complete rebuild and up",
+      "type": "shell",
+      "command": "docker-compose up --build --remove-orphans --force-recreate",
+      "options": {
+        "cwd": "${workspaceRoot}"
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "group": "dev"
+      }
     }
   ]
 }

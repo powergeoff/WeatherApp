@@ -19,7 +19,8 @@ public class SimpleClothesService : ISimpleClothesService
 
     public async Task<ClothesStart> GetClothesByCoords(double latitude, double longitude)
     {
-        var weather = await _openWeatherMapService.GetWeather(latitude, longitude);
+        _openWeatherMapService.SetCoordinates(latitude, longitude);
+        var weather = await _openWeatherMapService.GetWeather();
         var clothes = new ClothesStart(weather);
 
         return clothes;

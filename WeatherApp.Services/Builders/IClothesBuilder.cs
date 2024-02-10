@@ -6,7 +6,7 @@ namespace WeatherApp.Services.Builders;
 
 public interface IClothesBuilder
 {
-    Task Initialize(double latitude, double longitude);
+    Task Initialize();
     void BuildGloves();
     void BuildHat();
     void BuildTopLayers();

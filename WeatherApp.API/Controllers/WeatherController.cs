@@ -20,20 +20,25 @@ public class WeatherController : ControllerBase
     [HttpGet]
     public Task<WeatherModel> GetByCoords(double latitude, double longitude)
     {
-        return _openWeatherMapService.GetWeather(latitude, longitude);
+        _openWeatherMapService.SetCoordinates(latitude, longitude);
+        return _openWeatherMapService.GetWeather();
     }
 
     [HttpGet]
     public Task<WeatherModel> GetByCityAndState(string city, string state)
     {
-        //coordsFromCityNameService()
-        return _openWeatherMapService.GetWeather(city, state);
+        //convert city & state to coordinates
+        //set coordinates
+        //call service
+        return _openWeatherMapService.GetWeather();
     }
 
     [HttpGet]
     public Task<WeatherModel> GetByZipCode(string zip)
     {
-        //coordsFromCityNameService()
-        return _openWeatherMapService.GetWeather(zip);
+        //convert zip to coordinates
+        //set coordinates
+        //call service
+        return _openWeatherMapService.GetWeather();
     }
 }

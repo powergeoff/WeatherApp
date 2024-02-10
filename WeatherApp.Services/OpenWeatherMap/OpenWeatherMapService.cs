@@ -9,16 +9,16 @@ using WeatherApp.Services.Models;
 
 namespace WeatherApp.Services.OpenWeatherMap;
 
-public interface IOpenWeatherMapService
+public interface IOpenWeatherMapService : IGetWeather
 {
-    Task<WeatherModel> GetWeather(double latitude, double longitude);
-    Task<WeatherModel> GetWeather(string city, string state);
-    Task<WeatherModel> GetWeather(string zipcode);
+    void SetCoordinates(double latitude, double longitude);
 }
 
 //https://openweathermap.org/current
 public class OpenWeatherMapService : IOpenWeatherMapService
 {
+    private double _latitude;
+    private double _longitude;
     private HttpClient _httpClient;
     private IConfigService _config;
 
@@ -27,13 +27,19 @@ public class OpenWeatherMapService : IOpenWeatherMapService
         _httpClient = httpClient;
         _config = config;
     }
-    public async Task<WeatherModel> GetWeather(double latitude, double longitude)
+
+    public void SetCoordinates(double latitude, double longitude)
+    {
+        _latitude = latitude;
+        _longitude = longitude;
+    }
+    public async Task<WeatherModel> GetWeather()
     {
         var ret = new WeatherModel();
         try
         {
             var apiKey = _config.APIKey;
-            var uri = $"https://api.openweathermap.org/data/2.5/weather?lat={latitude}&lon={longitude}&appid={apiKey}&units=imperial";
+            var uri = $"https://api.openweathermap.org/data/2.5/weather?lat={_latitude}&lon={_longitude}&appid={apiKey}&units=imperial";
 
             var response = await _httpClient.GetAsync(uri);
             response.EnsureSuccessStatusCode();

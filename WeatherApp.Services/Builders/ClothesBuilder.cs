@@ -30,9 +30,11 @@ public class ClothesBuilder : IClothesBuilder
         _bottomLayerFactory = bottomLayerFactory;
     }
 
-    public async Task Initialize(double latitude, double longitude)
+    public async Task Initialize()
     {
-        _weather = await _openWeatherMapService.GetWeather(latitude, longitude);
+        _weather = await _openWeatherMapService.GetWeather();
+        //next cache service call by coordinates for 15 minutes or so...
+        //maybe log the time it was fetched for testing
         _layerCustomizations.Weather = _weather;
 
         _hatLayerFactory.RegisterAllLayers(_layerCustomizations);

@@ -11,5 +11,5 @@ public class RinkClothesBuilder : IClothesBuilder
     public void BuildOverview() => throw new System.NotImplementedException();
     public void BuildTopLayers() => throw new System.NotImplementedException();
     public Clothes GetClothes() => throw new System.NotImplementedException();
-    public Task Initialize(double latitude, double longitude) => throw new System.NotImplementedException();
+    public Task Initialize() => throw new System.NotImplementedException();
 }

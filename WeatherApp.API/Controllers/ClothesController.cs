@@ -11,15 +11,18 @@ namespace WeatherApp.API.Controllers;
 public class ClothesController : ControllerBase
 {
     private IClothesDirector _clothesDirector;
-    public ClothesController(IClothesDirector clothesDirector)
+    private IOpenWeatherMapService _openWeatherMapService;
+    public ClothesController(IClothesDirector clothesDirector, IOpenWeatherMapService openWeatherMapService)
     {
         _clothesDirector = clothesDirector;
+        _openWeatherMapService = openWeatherMapService;
     }
 
     [HttpGet]
     public async Task<Clothes> GetByCoords(double latitude, double longitude)
     {
-        await _clothesDirector.ConstructClothes(latitude, longitude);
+        _openWeatherMapService.SetCoordinates(latitude, longitude);
+        await _clothesDirector.ConstructClothes();
         return _clothesDirector.GetClothes();
     }
 }

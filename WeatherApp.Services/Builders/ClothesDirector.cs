@@ -4,7 +4,7 @@ namespace WeatherApp.Services.Builders;
 
 public interface IClothesDirector
 {
-    Task ConstructClothes(double latitude, double longitude);
+    Task ConstructClothes();
     Clothes GetClothes();
 }
 
@@ -17,9 +17,9 @@ public class ClothesDirector : IClothesDirector
         _clothesBuilder = clothesBuilder;
     }
 
-    public async Task ConstructClothes(double latitude, double longitude)
+    public async Task ConstructClothes()
     {
-        await _clothesBuilder.Initialize(latitude, longitude);
+        await _clothesBuilder.Initialize();
         _clothesBuilder.BuildGloves();
         _clothesBuilder.BuildHat();
         _clothesBuilder.BuildTopLayers();
