@@ -2,7 +2,10 @@ using WeatherApp.Services.Models;
 
 namespace WeatherApp.Services.Builders;
 
-public class RinkClothesBuilder : IClothesBuilder
+public interface IRinkClothesBuilder : IClothesBuilder
+{ }
+
+public class RinkClothesBuilder : IRinkClothesBuilder
 {
     private Clothes clothes = new Clothes();
     public void BuildBottomLayer() => throw new System.NotImplementedException();

@@ -75,9 +75,9 @@ try
     builder.Services.AddScoped<IOpenWeatherMapService, OpenWeatherMapService>();
     builder.Services.AddScoped<ISimpleClothesService, SimpleClothesService>();
     //register builder/ directors
-    builder.Services.AddScoped<IClothesBuilder, RinkClothesBuilder>(); //how to register multiple classes that implement same interface
+    builder.Services.AddScoped<IRinkClothesBuilder, RinkClothesBuilder>(); //unique pass through interface that implements common interface
     builder.Services.AddScoped<IClothesBuilder, ClothesBuilder>(); //how to register multiple classes that implement same interface
-    builder.Services.AddScoped<IClothesDirector, ClothesDirector>(); //so how does this guy know which one to get?
+    builder.Services.AddScoped<IClothesDirector, ClothesDirector>();
 
     builder.Services.AddHttpClient();
     builder.Services.AddEndpointsApiExplorer();
