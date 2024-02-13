@@ -12,7 +12,7 @@ public class SimpleClothesService : ISimpleClothesService
 {
     private IOpenWeatherMapService _openWeatherMapService;
 
-    public SimpleClothesService(IOpenWeatherMapService openWeatherMapService) //relies directly on openWeatherMap
+    public SimpleClothesService(IOpenWeatherMapService openWeatherMapService)
     {
         _openWeatherMapService = openWeatherMapService;
     }
