@@ -1,8 +1,11 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Data.SqlClient;
 using Microsoft.IdentityModel.Tokens;
+using System.Data;
 using System.Text;
 using System.Text.Json.Serialization;
 using WeatherApp.API.Middleware;
+using WeatherApp.Db;
 using WeatherApp.Services;
 using WeatherApp.Services.Builders;
 using WeatherApp.Services.Configuration;
@@ -34,6 +37,11 @@ try
 
     var config = new ConfigService(builder.Configuration);
     builder.Services.AddSingleton<IConfigService>(config);
+
+    builder.Services.AddTransient<IDbConnection, SqlConnection>(
+        sp => new SqlConnection(config.ConnectionString)
+    );
+    builder.Services.AddScoped<IDatabase, Database>(); //implement disposable?
 
     var authConfig = config.AuthConfig;
     builder.Services
