@@ -1,8 +1,13 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using System.Data;
 using System.Text;
 using System.Text.Json.Serialization;
 using WeatherApp.API.Middleware;
+using WeatherApp.Db;
+using WeatherApp.Db.Repositories;
 using WeatherApp.Services;
 using WeatherApp.Services.Builders;
 using WeatherApp.Services.Configuration;
@@ -34,6 +39,11 @@ try
 
     var config = new ConfigService(builder.Configuration);
     builder.Services.AddSingleton<IConfigService>(config);
+
+
+    builder.Services.AddDbContext<WeatherAppDbContext>(options =>
+        options.UseMongoDB(config.ConnectionString ?? "", config.DbName ?? "")
+    );
 
     var authConfig = config.AuthConfig;
     builder.Services
@@ -78,6 +88,8 @@ try
     builder.Services.AddScoped<IRinkClothesBuilder, RinkClothesBuilder>(); //unique pass through interface that implements common interface
     builder.Services.AddScoped<IClothesBuilder, ClothesBuilder>(); //how to register multiple classes that implement same interface
     builder.Services.AddScoped<IClothesDirector, ClothesDirector>();
+    //db services
+    builder.Services.AddScoped<IUserRepository, UserRepository>();
 
     builder.Services.AddHttpClient();
     builder.Services.AddEndpointsApiExplorer();

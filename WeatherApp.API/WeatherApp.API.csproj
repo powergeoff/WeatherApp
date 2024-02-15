@@ -9,12 +9,14 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.1" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.5" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.3.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\WeatherApp.Services\WeatherApp.Services.csproj" />
+    <ProjectReference Include="..\WeatherApp.Db\WeatherApp.Db.csproj" />
   </ItemGroup>
 
 </Project>
