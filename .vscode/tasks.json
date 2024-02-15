@@ -38,7 +38,7 @@
       }
     },
     {
-      "label": "backend test",
+      "label": "services unit tests",
       "type": "shell",
       "command": "dotnet test",
       "options": {

@@ -35,6 +35,7 @@ public class UserRepository : IUserRepository, IDisposable
         //if the user already exists by user name - don't insert
         if (GetUserByName(user.UserName) != null)
             return false;
+        //encrypt password
         _context.Users.Add(user);
         return true;
     }

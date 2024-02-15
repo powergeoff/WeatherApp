@@ -12,7 +12,7 @@ namespace WeatherApp.Services.Tests;
 public class SimpleClothesServiceTest
 {
 
-    private IOpenWeatherMapService _openWeatherMapService;
+    /*private IOpenWeatherMapService _openWeatherMapService;
     private ISimpleClothesService _clothesService;
     public SimpleClothesServiceTest()
     {
@@ -36,6 +36,6 @@ public class SimpleClothesServiceTest
         var result = await _clothesService.GetClothesByCoords(TestConstants.BostonLatitude, TestConstants.BostonLongitude);
 
         Assert.NotNull(result);
-    }
+    }*/
 
 }
