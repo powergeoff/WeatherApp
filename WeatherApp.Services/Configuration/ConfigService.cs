@@ -9,6 +9,7 @@ public interface IConfigService
     JsonSerializerOptions JsonSettings { get; }
     string AppVersion { get; }
     string ConnectionString { get; }
+    string DbName { get; }
     string APIKey { get; }
     AuthConfigModel AuthConfig { get; }
 }
@@ -35,4 +36,6 @@ public class ConfigService : IConfigService
     public AuthConfigModel AuthConfig => _config.GetSection("Auth").Get<AuthConfigModel>();
 
     public string ConnectionString => _config.GetSection("Connections").GetValue<string>("Default");
+
+    public string DbName => _config.GetSection("Connections").GetValue<string>("DbName");
 }

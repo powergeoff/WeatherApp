@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using WeatherApp.Db.Repositories;
 using WeatherApp.Services.Configuration;
 using WeatherApp.Services.Models;
 
@@ -15,9 +16,13 @@ namespace WeatherApp.API.Controllers;
 public class LoginController : ControllerBase
 {
     private IConfigService _config;
-    public LoginController(IConfigService config)
+    private IUserRepository _userRepository;
+    private ILogger<LoginController> _logger;
+    public LoginController(IConfigService config, ILogger<LoginController> logger, IUserRepository userRepository)
     {
         _config = config;
+        _userRepository = userRepository;
+        _logger = logger;
     }
 
     [HttpPost]
@@ -25,20 +30,29 @@ public class LoginController : ControllerBase
     {
         //your logic for login process
         //If login usrename and password are correct then proceed to generate token
+        var user = _userRepository.GetUserByName(loginRequest.UserName);
+        if (user != null && user.Password == loginRequest.Password)
+        {
+            var authConfig = _config.AuthConfig;
 
-        var authConfig = _config.AuthConfig;
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authConfig.Key));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authConfig.Key));
-        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            var Sectoken = new JwtSecurityToken(authConfig.Issuer,
+              authConfig.Issuer,
+              null,
+              expires: DateTime.Now.AddMinutes(120),
+              signingCredentials: credentials);
 
-        var Sectoken = new JwtSecurityToken(authConfig.Issuer,
-          authConfig.Issuer,
-          null,
-          expires: DateTime.Now.AddMinutes(120),
-          signingCredentials: credentials);
+            var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
 
-        var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
+            return Ok(token);
 
-        return Ok(token);
+        }
+        else
+        {
+            return BadRequest();
+        }
+
     }
 }
