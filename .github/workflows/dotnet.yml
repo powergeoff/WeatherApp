@@ -28,6 +28,15 @@ jobs:
         run: dotnet build --no-restore
 
       - name: Test
-        run: dotnet test ./WeatherApp.Services.Tests/WeatherApp.Services.Tests.csproj  --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx" || true
+        run: dotnet test ./WeatherApp.Services.Tests/WeatherApp.Services.Tests.csproj --logger "trx;LogFileName=test-results.trx" || true
+
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: DotNET Tests
+          path: "**/test-results.trx"
+          reporter: dotnet-trx
+          fail-on-error: true
 
         #run: dotnet test ./WeatherApp.Services.Tests --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx" || true
