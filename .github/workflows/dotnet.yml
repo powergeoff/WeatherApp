@@ -1,5 +1,6 @@
 # This workflow will build a .NET project
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
+# report from https://github.com/marketplace/actions/test-reporter
 
 name: Service Layer Unit Tests
 
@@ -44,5 +45,3 @@ jobs:
           path: "**/test-results.trx"
           reporter: dotnet-trx
           fail-on-error: true
-
-        #run: dotnet test ./WeatherApp.Services.Tests --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx" || true
