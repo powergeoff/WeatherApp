@@ -67,4 +67,22 @@ public class HatLayerFactoryTests
         //assert
         Assert.True(layer.GetType() == typeof(HeavyDutyHat));
     }
+
+    [Fact]
+    public void Mock_Failed_Test()
+    {
+        //arrange
+        WeatherModel weather = new WeatherModel
+        {
+            FeelsLikeTemp = -100
+        };
+        _customizations.Weather = weather;
+        _hatLayersFactory.RegisterAllLayers(_customizations);
+
+        //act
+        var layer = _hatLayersFactory.GetLayer();
+
+        //assert
+        Assert.True(layer == null);
+    }
 }
