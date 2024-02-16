@@ -28,7 +28,9 @@ jobs:
         run: dotnet build --no-restore
 
       - name: Test
-        run: dotnet test ./WeatherApp.Services.Tests --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx" || true
+        run: dotnet test --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx" || true
+
+        #run: dotnet test ./WeatherApp.Services.Tests --no-build --verbosity normal --logger "trx;LogFileName=test-results.trx" || true
 
       - name: Test Report #https://ourcloudschool.medium.com/unit-testing-report-with-github-actions-7216f340044e
         uses: dorny/test-reporter@v1
