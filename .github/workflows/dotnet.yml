@@ -34,7 +34,7 @@ jobs:
         run: dotnet build --no-restore
 
       - name: Test
-        run: dotnet test ./WeatherApp.Services.Tests/WeatherApp.Services.Tests.csproj --logger "trx;LogFileName=test-results.trx" || true
+        run: dotnet test --logger "trx;LogFileName=test-results.trx" || true
 
       - name: Test Report
         uses: dorny/test-reporter@v1
