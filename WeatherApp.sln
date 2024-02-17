@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.Services.Tests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.Db", "WeatherApp.Db\WeatherApp.Db.csproj", "{1F79A31D-9AD9-4883-AC55-7D519CDF2427}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.Db.Tests", "WeatherApp.Db.Tests\WeatherApp.Db.Tests.csproj", "{38341EF9-3536-4C6E-AE1E-1A945407B893}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +38,9 @@ Global
 		{1F79A31D-9AD9-4883-AC55-7D519CDF2427}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F79A31D-9AD9-4883-AC55-7D519CDF2427}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F79A31D-9AD9-4883-AC55-7D519CDF2427}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38341EF9-3536-4C6E-AE1E-1A945407B893}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38341EF9-3536-4C6E-AE1E-1A945407B893}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38341EF9-3536-4C6E-AE1E-1A945407B893}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38341EF9-3536-4C6E-AE1E-1A945407B893}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
