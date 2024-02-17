@@ -4,6 +4,7 @@ using System.Linq;
 using System.Data;
 using WeatherApp.Db.Models;
 using MongoDB.Bson;
+using Microsoft.EntityFrameworkCore;
 
 namespace WeatherApp.Db.Repositories;
 
@@ -15,8 +16,8 @@ public interface IUserRepository : IDisposable
     User? GetUserById(ObjectId id);
     User? GetUserByName(string name);
     bool InsertUser(User user);
-    void DeleteUser(); //again by ObjectId
-    void UpdateUser(); //ObjectId
+    void DeleteUser(ObjectId id); //again by ObjectId
+    void UpdateUser(User user); //ObjectId
     void Save();
 }
 public class UserRepository : IUserRepository, IDisposable
@@ -40,8 +41,17 @@ public class UserRepository : IUserRepository, IDisposable
         return true;
     }
     public void Save() => _context.SaveChanges();
-    public void DeleteUser() => throw new NotImplementedException();
-    public void UpdateUser() => throw new NotImplementedException();
+
+    public void DeleteUser(ObjectId id)
+    {
+        User? user = _context.Users.Find(id);
+        if (user != null)
+            _context.Users.Remove(user);
+    }
+    public void UpdateUser(User user)
+    {
+        _context.Entry(user).State = EntityState.Modified;
+    }
     protected virtual void Dispose(bool disposing)
     {
         if (!this._disposed)
