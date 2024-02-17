@@ -38,11 +38,11 @@
       }
     },
     {
-      "label": "services unit tests",
+      "label": "All .Net Tests",
       "type": "shell",
       "command": "dotnet test",
       "options": {
-        "cwd": "${workspaceRoot}/WeatherApp.Services.Tests",
+        "cwd": "${workspaceRoot}",
         "env": {
           "ASPNETCORE_ENVIRONMENT": "Development",
           "DOTNET_WATCH_SUPPRESS_STATIC_FILE_HANDLING": "true"
