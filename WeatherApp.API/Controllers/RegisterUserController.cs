@@ -29,7 +29,7 @@ public class RegisterUserController : ControllerBase
             if (newUser)
             {
                 await _userRepository.Save();
-                return Ok($"User ${user.UserName} successfully created");
+                return Ok($"User {user.UserName} successfully created");
             }
             else
                 return BadRequest("User already exists");
