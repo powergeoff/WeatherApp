@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using WeatherApp.Db.Models;
 using WeatherApp.Db.Repositories;
 using WeatherApp.Services.Models;
-using WeatherApp.Services.SimpleClothes;
 
 namespace WeatherApp.API.Controllers;
 
