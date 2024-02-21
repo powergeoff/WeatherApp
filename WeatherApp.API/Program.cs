@@ -15,7 +15,6 @@ using WeatherApp.Services.Factories;
 using WeatherApp.Services.Models;
 using WeatherApp.Services.Models.Layers;
 using WeatherApp.Services.OpenWeatherMap;
-using WeatherApp.Services.SimpleClothes;
 
 //var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 
@@ -83,7 +82,6 @@ try
     builder.Services.AddScoped<IBottomLayerFactory, BottomLayerFactory>();
     //register services
     builder.Services.AddScoped<IOpenWeatherMapService, OpenWeatherMapService>();
-    builder.Services.AddScoped<ISimpleClothesService, SimpleClothesService>();
     //register builder/ directors
     builder.Services.AddScoped<IRinkClothesBuilder, RinkClothesBuilder>(); //unique pass through interface that implements common interface
     builder.Services.AddScoped<IClothesBuilder, ClothesBuilder>(); //how to register multiple classes that implement same interface

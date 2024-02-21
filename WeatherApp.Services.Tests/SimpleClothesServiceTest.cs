@@ -3,7 +3,7 @@ using Microsoft.Extensions.Configuration;
 using System.Text.Json;
 using WeatherApp.Services.Tests.Models;
 using WeatherApp.Services.Models;
-using WeatherApp.Services.SimpleClothes;
+//using WeatherApp.Services.SimpleClothes;
 using WeatherApp.Services.Configuration;
 
 namespace WeatherApp.Services.Tests;
