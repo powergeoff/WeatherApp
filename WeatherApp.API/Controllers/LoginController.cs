@@ -26,11 +26,11 @@ public class LoginController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Post([FromBody] LoginRequest loginRequest)
+    public async Task<IActionResult> Post([FromBody] LoginRequest loginRequest)
     {
         //your logic for login process
         //If login usrename and password are correct then proceed to generate token
-        var user = _userRepository.GetUserByName(loginRequest.UserName);
+        var user = await _userRepository.GetUserByName(loginRequest.UserName);
         if (user != null && user.Password == loginRequest.Password)
         {
             var authConfig = _config.AuthConfig;

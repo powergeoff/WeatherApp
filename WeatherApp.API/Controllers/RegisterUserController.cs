@@ -21,13 +21,14 @@ public class RegisterUserController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Post([FromBody] User user)
+    public async Task<IActionResult> Post([FromBody] User user)
     {
         try
         {
-            if (_userRepository.InsertUser(user))
+            var newUser = await _userRepository.InsertUser(user);
+            if (newUser)
             {
-                _userRepository.Save();
+                await _userRepository.Save();
                 return Ok($"User ${user.UserName} successfully created");
             }
             else
