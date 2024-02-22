@@ -9,17 +9,17 @@ namespace WeatherApp.Services.Tests;
 
 public class OpenWeatherMapServiceTest
 {
-    /*private HttpClient _httpClient;
+    private HttpClient _httpClient;
     private IConfigService _config;
 
     private IOpenWeatherMapService _openWeatherMapService;
     public OpenWeatherMapServiceTest()
     {
 
-        _config = new ConfigService
-        {
-            //read from secrets in ci pipeline
-        };
+        var builder = WebApplication.CreateBuilder();
+        //nothing will be here unless set explicitly in environment variables for dotnet test
+        _config = new ConfigService(builder.Configuration);
+
         _httpClient = new HttpClient();
 
         _openWeatherMapService = new OpenWeatherMapService(_httpClient, _config);
@@ -44,5 +44,5 @@ public class OpenWeatherMapServiceTest
         var result = await _openWeatherMapService.GetWeather();
 
         Assert.True(result.City.Equals("Denver"));
-    }*/
+    }
 }
