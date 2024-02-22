@@ -31,14 +31,10 @@ jobs:
         run: dotnet restore
 
       - name: Build
-        env:
-          OpenWeatherMap:ApiKey: ${{ secrets.OPENWEATHERMAPAPIKEY }}
         run: dotnet build --no-restore
 
       - name: Test
-        env:
-          OpenWeatherMap:ApiKey: ${{ secrets.OPENWEATHERMAPAPIKEY }}
-        run: dotnet test --logger "trx;LogFileName=test-results.trx" || true
+        run: dotnet test -e OpenWeatherMap:ApiKey=${{ secrets.OPENWEATHERMAPAPIKEY }} --logger "trx;LogFileName=test-results.trx" || true
 
       - name: Test Report
         uses: dorny/test-reporter@v1
