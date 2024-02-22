@@ -6,36 +6,48 @@ namespace WeatherApp.Services.Configuration;
 
 public interface IConfigService
 {
-    JsonSerializerOptions JsonSettings { get; }
-    string AppVersion { get; }
-    string ConnectionString { get; }
-    string DbName { get; }
-    string APIKey { get; }
-    AuthConfigModel AuthConfig { get; }
+    JsonSerializerOptions JsonSettings { get; set; }
+    string AppVersion { get; set; }
+    string ConnectionString { get; set; }
+    string DbName { get; set; }
+    string APIKey { get; set; }
+    AuthConfigModel AuthConfig { get; set; }
 }
 
 public class ConfigService : IConfigService
 {
-    public JsonSerializerOptions JsonSettings { get; } =
-        new JsonSerializerOptions
+    private readonly IConfiguration _config;
+
+    public ConfigService()
+    {
+    }
+
+    public ConfigService(IConfiguration config)
+    {
+        _config = config;
+
+        JsonSettings = new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true,
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             DictionaryKeyPolicy = JsonNamingPolicy.CamelCase
         };
-    private readonly IConfiguration _config;
-
-    public ConfigService(IConfiguration config)
-    {
-        _config = config;
+        APIKey = _config.GetValue<string>("APIKey");
+        AppVersion = _config.GetValue<string>("AppVersion");
+        AuthConfig = _config.GetSection("Auth").Get<AuthConfigModel>();
+        ConnectionString = _config.GetSection("Connections").GetValue<string>("Default");
+        DbName = _config.GetSection("Connections").GetValue<string>("DbName");
     }
-    public string AppVersion => _config.GetValue<string>("AppVersion");
 
-    public string APIKey => _config.GetValue<string>("APIKey");
+    public JsonSerializerOptions JsonSettings { get; set; }
+    public string AppVersion { get; set; }
 
-    public AuthConfigModel AuthConfig => _config.GetSection("Auth").Get<AuthConfigModel>();
+    public string APIKey { get; set; }
 
-    public string ConnectionString => _config.GetSection("Connections").GetValue<string>("Default");
+    public AuthConfigModel AuthConfig { get; set; }
 
-    public string DbName => _config.GetSection("Connections").GetValue<string>("DbName");
+    public string ConnectionString { get; set; }
+
+    public string DbName { get; set; }
+
 }

@@ -15,17 +15,11 @@ public class OpenWeatherMapServiceTest
     private IOpenWeatherMapService _openWeatherMapService;
     public OpenWeatherMapServiceTest()
     {
-        var file = File.ReadAllText(Path.Combine(Directory.GetCurrentDirectory(), "appsettings.Development.json"));
-        var config = JsonSerializer.Deserialize<Config>(file)!;
 
-        var configManager = new ConfigurationManager();
-
-        configManager.AddInMemoryCollection([
-                new KeyValuePair<string, string?>("APIKey", config.APIKey),
-            ])
-            .Build();
-
-        _config = new ConfigService(configManager);
+        _config = new ConfigService
+        {
+            //read from secrets in ci pipeline
+        };
         _httpClient = new HttpClient();
 
         _openWeatherMapService = new OpenWeatherMapService(_httpClient, _config);
