@@ -31,6 +31,8 @@ jobs:
         run: dotnet restore
 
       - name: Build
+        env:
+          OpenWeatherMap:ApiKey: ${{ secrets.OPENWEATHERMAPAPIKEY }}
         run: dotnet build --no-restore
 
       - name: Test
