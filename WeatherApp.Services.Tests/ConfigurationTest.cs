@@ -15,15 +15,14 @@ public class ConfigurationTest
     public ConfigurationTest()
     {
         var builder = WebApplication.CreateBuilder();
-        builder.Configuration.AddJsonFile("appsettings.test.json");
+        //nothing will be here unless set explicitly in environment variables for dotnet test
         _config = new ConfigService(builder.Configuration);
     }
 
     [Fact]
     public void APIKey_ShouldBePopulated()
     {
-
-        Assert.NotEmpty(_config.APIKey);
+        Assert.True(_config.APIKey.Equals("f2d3145194b8c69aa1f5c239ca1b687a"));
     }
 
 }

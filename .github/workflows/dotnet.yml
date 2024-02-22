@@ -34,7 +34,7 @@ jobs:
         run: dotnet build --no-restore
 
       - name: Test
-        run: dotnet test --logger "trx;LogFileName=test-results.trx" || true
+        run: dotnet test -e APIKey=${{ secrets.OPENWEATHERMAPAPIKEY }} --logger "trx;LogFileName=test-results.trx" || true
 
       - name: Test Report
         uses: dorny/test-reporter@v1
