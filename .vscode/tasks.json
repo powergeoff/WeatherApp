@@ -44,6 +44,7 @@
       "options": {
         "cwd": "${workspaceRoot}",
         "env": {
+          "AppSettings__APIKey": "f2d3145194b8c69aa1f5c239ca1b687a",
           "ASPNETCORE_ENVIRONMENT": "Development",
           "DOTNET_WATCH_SUPPRESS_STATIC_FILE_HANDLING": "true"
         }
