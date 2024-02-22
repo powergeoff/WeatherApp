@@ -15,7 +15,6 @@ public class ConfigurationTest
     public ConfigurationTest()
     {
         var builder = WebApplication.CreateBuilder();
-        builder.Configuration.AddJsonFile("appsettings.Development.json");
 
         _config = new ConfigService(builder.Configuration);
     }
