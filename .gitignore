@@ -38,7 +38,7 @@ Publish
 wwwroot
 
 appsettings.Development.json
-appsettings.local.json
+appsettings.test.json
 
 #AWS KVP for ec2
 *.pem
