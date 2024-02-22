@@ -17,7 +17,8 @@ public class OpenWeatherMapServiceTest
     {
 
         var builder = WebApplication.CreateBuilder();
-        //nothing will be here unless set explicitly in environment variables for dotnet test
+        builder.Configuration.AddJsonFile("appsettings.Development.json");
+
         _config = new ConfigService(builder.Configuration);
 
         _httpClient = new HttpClient();
