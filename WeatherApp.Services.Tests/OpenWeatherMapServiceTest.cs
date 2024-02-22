@@ -16,7 +16,7 @@ public class OpenWeatherMapServiceTest
     public OpenWeatherMapServiceTest()
     {
         IConfigurationRoot config = new ConfigurationBuilder()
-            .AddUserSecrets<OpenWeatherMapServiceTest>(true)
+            .AddUserSecrets<OpenWeatherMapServiceTest>()
             .Build();
 
         _config = new ConfigService(config);
