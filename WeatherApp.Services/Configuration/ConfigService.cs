@@ -32,7 +32,7 @@ public class ConfigService : IConfigService
             PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             DictionaryKeyPolicy = JsonNamingPolicy.CamelCase
         };
-        APIKey = _config.GetValue<string>("APIKey");
+        APIKey = _config["OpenWeatherMap:ApiKey"];
         AppVersion = _config.GetValue<string>("AppVersion");
         AuthConfig = _config.GetSection("Auth").Get<AuthConfigModel>();
         ConnectionString = _config.GetSection("Connections").GetValue<string>("Default");
