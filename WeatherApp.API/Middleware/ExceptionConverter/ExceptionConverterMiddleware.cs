@@ -31,8 +31,7 @@ namespace WeatherApp.API.Middleware
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Unhandled exception");
-                if (!context.Response.HasStarted) //not sure about this - why might the request have already started??
+                if (!context.Response.HasStarted) //not sure about this - why might the request have already started??spaindex middleware??
                 {
 
                     context.Response.StatusCode = e switch
