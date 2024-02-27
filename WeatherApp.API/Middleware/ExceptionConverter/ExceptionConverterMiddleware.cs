@@ -5,6 +5,7 @@ using System.Text.Json;
 using WeatherApp.API.Models;
 using WeatherApp.Services;
 using WeatherApp.Services.Configuration;
+using WeatherApp.Domain.Exceptions;
 
 namespace WeatherApp.API.Middleware
 {
@@ -31,9 +32,16 @@ namespace WeatherApp.API.Middleware
             catch (Exception e)
             {
                 _logger.LogError(e, "Unhandled exception");
-                if (!context.Response.HasStarted)
+                if (!context.Response.HasStarted) //not sure about this - why might the request have already started??
                 {
-                    context.Response.StatusCode = 500;
+
+                    context.Response.StatusCode = e switch
+                    {
+                        BadRequestException => StatusCodes.Status400BadRequest,
+                        NotFoundException => StatusCodes.Status404NotFound,
+                        _ => StatusCodes.Status500InternalServerError
+                    };
+
                     context.Response.ContentType = "application/json";
                     var jsonString = JsonSerializer.Serialize(new CommonResponse
                     {

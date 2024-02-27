@@ -42,6 +42,11 @@ internal sealed class UserLoginService : IUserLoginService
 
     public async Task<UserLoginDTO> CreateUser(UserLoginForCreationDTO userLoginForCreationDTO, CancellationToken cancellationToken = default)
     {
+        var existingUser = await _repositoryManager.UserLoginRepository.GetByUserNameAsync(userLoginForCreationDTO.UserName, cancellationToken);
+        if (existingUser is not null)
+        {
+            throw new UserLoginAlreadyExistsException(existingUser.UserName);
+        }
         var user = userLoginForCreationDTO.Adapt<UserLogin>();
         user.CreatedDate = DateTime.Now;
         //user.Id = new Guid(); //not necessary

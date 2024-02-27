@@ -88,10 +88,6 @@ try
       options.UseMongoDB(config.ConnectionString ?? "", config.DbName ?? "")
     );
 
-    //builder.Services.AddDbContextPool<RepositoryDbContext>(options =>
-    //  options.UseMongoDB(config.ConnectionString ?? "", config.DbName ?? "")
-    //);
-
     //custom services or Application Services not Framework services
     /*builder.Services.AddScoped<ILayerCustomizations, LayerCustomizations>();
     //register factories
