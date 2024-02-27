@@ -4,7 +4,7 @@ using WeatherApp.Services.OpenWeatherMap;
 
 namespace WeatherApp.API.Controllers;
 
-[ApiController]
+/*[ApiController]
 [Route("api/v1/[controller]/[action]")]
 public class WeatherController : ControllerBase
 {
@@ -41,4 +41,4 @@ public class WeatherController : ControllerBase
         //call service
         return _openWeatherMapService.GetWeather();
     }
-}
+}*/

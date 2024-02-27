@@ -7,7 +7,7 @@ using WeatherApp.Services.Models;
 
 namespace WeatherApp.API.Controllers;
 
-[ApiController]
+/*[ApiController]
 [Route("api/v1/[controller]")]
 public class RegisterUserController : ControllerBase
 {
@@ -39,4 +39,4 @@ public class RegisterUserController : ControllerBase
             return BadRequest();
         }
     }
-}
+}*/

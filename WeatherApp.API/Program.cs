@@ -8,7 +8,11 @@ using System.Text.Json.Serialization;
 using WeatherApp.API.Middleware;
 using WeatherApp.Db;
 using WeatherApp.Db.Repositories;
+using WeatherApp.Domain.Repositories;
+using WeatherApp.Persistence;
+using WeatherApp.Persistence.Repositories;
 using WeatherApp.Services;
+using WeatherApp.Services.Abstractions;
 using WeatherApp.Services.Builders;
 using WeatherApp.Services.Configuration;
 using WeatherApp.Services.Factories;
@@ -40,9 +44,9 @@ try
     builder.Services.AddSingleton<IConfigService>(config);
 
 
-    builder.Services.AddDbContext<WeatherAppDbContext>(options =>
-        options.UseMongoDB(config.ConnectionString ?? "", config.DbName ?? "")
-    );
+    //builder.Services.AddDbContext<WeatherAppDbContext>(options =>
+    //  options.UseMongoDB(config.ConnectionString ?? "", config.DbName ?? "")
+    //);
 
     var authConfig = config.AuthConfig;
     builder.Services
@@ -65,16 +69,31 @@ try
     // Add services to the container.
 
     //builder.Services.AddControllers();
-    builder.Services.AddControllers().AddJsonOptions(options =>
-        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())
-    );
+    builder.Services.AddControllers()
+        .AddApplicationPart(typeof(WeatherApp.Presentation.AssemblyReference).Assembly)
+        .AddJsonOptions(options =>
+            options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())
+        );
+
     builder.Services.AddResponseCompression(options =>
     {
         options.EnableForHttps = true;
     });
 
+    builder.Services.AddScoped<IServiceManager, ServiceManager>();
+
+    builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
+
+    builder.Services.AddDbContext<RepositoryDbContext>(options =>
+      options.UseMongoDB(config.ConnectionString ?? "", config.DbName ?? "")
+    );
+
+    //builder.Services.AddDbContextPool<RepositoryDbContext>(options =>
+    //  options.UseMongoDB(config.ConnectionString ?? "", config.DbName ?? "")
+    //);
+
     //custom services or Application Services not Framework services
-    builder.Services.AddScoped<ILayerCustomizations, LayerCustomizations>();
+    /*builder.Services.AddScoped<ILayerCustomizations, LayerCustomizations>();
     //register factories
     builder.Services.AddScoped<IHatLayerFactory, HatLayerFactory>();
     builder.Services.AddScoped<ITopLayersFactory, TopLayersFactory>();
@@ -87,7 +106,7 @@ try
     builder.Services.AddScoped<IClothesBuilder, ClothesBuilder>(); //how to register multiple classes that implement same interface
     builder.Services.AddScoped<IClothesDirector, ClothesDirector>();
     //db services
-    builder.Services.AddScoped<IUserRepository, UserRepository>();
+    builder.Services.AddScoped<IUserRepository, UserRepository>();*/
 
     builder.Services.AddHttpClient();
     builder.Services.AddEndpointsApiExplorer();

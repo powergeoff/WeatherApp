@@ -4,6 +4,8 @@ using WeatherApp.Services.Abstractions;
 
 namespace WeatherApp.Presentation.Controllers;
 
+[ApiController]
+[Route("api/v1/userlogin")]
 public class UserLoginController : ControllerBase
 {
     private readonly IServiceManager _serviceManager;
@@ -14,6 +16,7 @@ public class UserLoginController : ControllerBase
     public async Task<IActionResult> CreateUserLogin([FromBody] UserLoginForCreationDTO userLoginForCreationDTO)
     {
         var userLoginDTO = await _serviceManager.UserLoginService.CreateUser(userLoginForCreationDTO);
+        //return CreatedAtAction(nameof(CreateUserLogin), new { userId = userLoginDTO.Id }, userLoginDTO);
         return CreatedAtAction(nameof(GetUserLoginById), new { userId = userLoginDTO.Id }, userLoginDTO);
     }
     [HttpGet]
@@ -23,7 +26,7 @@ public class UserLoginController : ControllerBase
         return Ok(users);
     }
 
-    [HttpGet("{ownerId:guid}")]
+    [HttpGet("{userId:guid}")]
     public async Task<IActionResult> GetUserLoginById(Guid userId, CancellationToken cancellationToken)
     {
         var ownerDto = await _serviceManager.UserLoginService.GetUserById(userId, cancellationToken);
@@ -31,7 +34,7 @@ public class UserLoginController : ControllerBase
         return Ok(ownerDto);
     }
 
-    [HttpPut("{ownerId:guid}")]
+    [HttpPut("{userId:guid}")]
     public async Task<IActionResult> UpdateUserLogin(Guid userId, [FromBody] UserLoginForUpdateDTO userLoginForUpdateDTO, CancellationToken cancellationToken)
     {
         await _serviceManager.UserLoginService.UpdateUser(userId, userLoginForUpdateDTO, cancellationToken);

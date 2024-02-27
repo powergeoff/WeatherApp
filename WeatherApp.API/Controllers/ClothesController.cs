@@ -6,7 +6,7 @@ using WeatherApp.Services.OpenWeatherMap;
 
 namespace WeatherApp.API.Controllers;
 
-[ApiController]
+/*[ApiController]
 [Route("api/v1/[controller]/[action]")]
 public class ClothesController : ControllerBase
 {
@@ -25,4 +25,4 @@ public class ClothesController : ControllerBase
         await _clothesDirector.ConstructClothes();
         return _clothesDirector.GetClothes();
     }
-}
+}*/

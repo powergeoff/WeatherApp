@@ -11,7 +11,7 @@ namespace WeatherApp.API.Controllers;
 
 //https://medium.com/@vndpal/how-to-implement-jwt-token-authentication-in-net-core-6-ab7f48470f5c
 
-[Route("api/v1/[controller]")]
+/*[Route("api/v1/[controller]")]
 [ApiController]
 public class LoginController : ControllerBase
 {
@@ -55,4 +55,4 @@ public class LoginController : ControllerBase
         }
 
     }
-}
+}*/

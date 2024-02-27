@@ -43,6 +43,8 @@ internal sealed class UserLoginService : IUserLoginService
     public async Task<UserLoginDTO> CreateUser(UserLoginForCreationDTO userLoginForCreationDTO, CancellationToken cancellationToken = default)
     {
         var user = userLoginForCreationDTO.Adapt<UserLogin>();
+        user.CreatedDate = DateTime.Now;
+        //user.Id = new Guid(); //not necessary
         _repositoryManager.UserLoginRepository.Insert(user);
         await _repositoryManager.UnitOfWork.SaveChangesAsync(cancellationToken);
         return user.Adapt<UserLoginDTO>();
