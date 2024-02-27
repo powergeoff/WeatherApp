@@ -8,5 +8,10 @@ namespace WeatherApp.Domain.Exceptions
             : base($"The owner with the identifier {userLogin} was not found.")
         {
         }
+
+        public UserLoginNotFoundException(string name)
+            : base($"The owner with the identifier {name} was not found.")
+        {
+        }
     }
 }

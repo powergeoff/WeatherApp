@@ -1,0 +1,14 @@
+using WeatherApp.Domain.Entities;
+using WeatherApp.Domain.Repositories;
+
+namespace WeatherApp.Persistence.Repositories;
+
+internal sealed class UnitOfWork : IUnitOfWork
+{
+    private readonly RepositoryDbContext _dbContext;
+
+    public UnitOfWork(RepositoryDbContext dbContext) => _dbContext = dbContext;
+
+    public Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) =>
+        _dbContext.SaveChangesAsync(cancellationToken);
+}

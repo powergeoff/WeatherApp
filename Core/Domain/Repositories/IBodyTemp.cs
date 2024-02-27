@@ -10,7 +10,7 @@ namespace WeatherApp.Domain.Repositories
     {
         Task<IEnumerable<BodyTemp>> GetAllAsync(CancellationToken cancellationToken = default);
 
-        Task<BodyTemp> GetByIdAsync(Guid bodyTempId, CancellationToken cancellationToken = default);
+        Task<BodyTemp?> GetByIdAsync(Guid bodyTempId, CancellationToken cancellationToken = default);
 
         void Insert(BodyTemp bodyTemp);
 

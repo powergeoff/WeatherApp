@@ -2,9 +2,9 @@ namespace WeatherApp.Domain.Repositories
 {
     public interface IRepositoryManager
     {
-        IUserLoginRepository OwnerRepository { get; }
+        IUserLoginRepository UserLoginRepository { get; }
 
-        IBodyTempRepository AccountRepository { get; }
+        IBodyTempRepository BodyTempRepository { get; }
 
         IUnitOfWork UnitOfWork { get; }
     }
