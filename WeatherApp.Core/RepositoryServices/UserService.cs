@@ -1,5 +1,6 @@
 using Mapster;
 using WeatherApp.Core.Domain.Entities;
+using WeatherApp.Core.Domain.Exceptions;
 using WeatherApp.Core.Domain.Repositories;
 using WeatherApp.Core.Domain.ValueObjects;
 using WeatherApp.Core.DTO;
@@ -26,7 +27,7 @@ public class UserService : IUserService
         var existingUser = await _repositoryManager.UserRepository.GetByUserNameAsync(userDTO.UserName, cancellationToken);
         if (existingUser is not null)
         {
-            throw new Exception("User Name already exists");
+            throw new UserAlreadyExistsException(userDTO.UserName);
         }
         var user = userDTO.Adapt<User>();
         user.CreatedDate = DateTime.Now;
