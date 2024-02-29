@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using WeatherApp.Core.DTO;
 using WeatherApp.Core.RepositoryServices;
 using WeatherApp.Services.Configuration;
 using WeatherApp.Services.Models;
@@ -26,33 +27,24 @@ public class LoginController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] LoginRequest loginRequest)
+    public async Task<IActionResult> Post([FromBody] UserForUpdateDTO loginRequest)
     {
-        //your logic for login process
-        //If login usrename and password are correct then proceed to generate token
-        var user = await _serviceManager.UserService.GetUserBynUserName(loginRequest.UserName);
-        if (user != null && user.Password == loginRequest.Password)
-        {
-            var authConfig = _config.AuthConfig;
 
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authConfig.Key));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+        await _serviceManager.UserService.IsValidUser(loginRequest); //error handling happens here
+        var authConfig = _config.AuthConfig;
 
-            var Sectoken = new JwtSecurityToken(authConfig.Issuer,
-              authConfig.Issuer,
-              null,
-              expires: DateTime.Now.AddMinutes(120),
-              signingCredentials: credentials);
+        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authConfig.Key));
+        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
-            var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
+        var Sectoken = new JwtSecurityToken(authConfig.Issuer,
+          authConfig.Issuer,
+          null,
+          expires: DateTime.Now.AddMinutes(120),
+          signingCredentials: credentials);
 
-            return Ok(token);
+        var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
 
-        }
-        else
-        {
-            return BadRequest();
-        }
+        return Ok(token);
 
     }
 }
