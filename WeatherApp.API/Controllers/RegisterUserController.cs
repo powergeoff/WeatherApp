@@ -21,24 +21,24 @@ public class RegisterUserController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateLogin([FromBody] LogInForCreationDTO logInForCreationDTO)
+    public async Task<IActionResult> Create([FromBody] UserForCreationDTO userForCreationDTO)
     {
-        var logInDTO = await _serviceManager.LogInService.CreateLogIn(logInForCreationDTO);
-        return CreatedAtAction(nameof(GetLoginById), new { logInId = logInDTO.Id }, logInDTO);
+        var userDTO = await _serviceManager.UserService.CreateUser(userForCreationDTO);
+        return CreatedAtAction(nameof(GetUserById), new { userId = userDTO.Id }, userDTO);
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetAllLogins(CancellationToken cancellationToken)
+    [HttpGet]//testing only
+    public async Task<IActionResult> GetAllUsers(CancellationToken cancellationToken)
     {
-        var users = await _serviceManager.LogInService.GetAllLogIns(cancellationToken);
+        var users = await _serviceManager.UserService.GetAllUsers(cancellationToken);
         return Ok(users);
     }
 
-    [HttpGet("{logInId:guid}")]
-    public async Task<IActionResult> GetLoginById(Guid logInId, CancellationToken cancellationToken)
+    [HttpGet("{userId:guid}")]
+    public async Task<IActionResult> GetUserById(Guid userId, CancellationToken cancellationToken)
     {
-        var logInDto = await _serviceManager.LogInService.GetLogInById(logInId, cancellationToken);
+        var userDTO = await _serviceManager.UserService.GetUserById(userId, cancellationToken);
 
-        return Ok(logInDto);
+        return Ok(userDTO);
     }
 }

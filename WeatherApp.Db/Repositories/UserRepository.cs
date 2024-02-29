@@ -17,8 +17,8 @@ public class UserRepository : IUserRepository
         await _dbContext.Users.ToListAsync(cancellationToken);
     public async Task<User?> GetByIdAsync(Guid userId, CancellationToken cancellationToken = default) =>
         await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == userId, cancellationToken);
-    public async Task<User?> GetByLogInIdAsync(Guid logInId, CancellationToken cancellationToken = default) =>
-        await _dbContext.Users.FirstOrDefaultAsync(x => x.LogInId == logInId, cancellationToken);
-    public void Insert(User user) => throw new NotImplementedException();
-    public void Remove(User user) => throw new NotImplementedException();
+    public async Task<User?> GetByUserNameAsync(string userName, CancellationToken cancellationToken = default) =>
+        await _dbContext.Users.FirstOrDefaultAsync(x => x.UserName == userName, cancellationToken);
+    public void Insert(User user) => _dbContext.Users.Add(user);
+    public void Remove(User user) => _dbContext.Users.Remove(user);
 }

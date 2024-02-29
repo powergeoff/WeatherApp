@@ -7,7 +7,7 @@ namespace WeatherApp.Core.Domain.Repositories
         Task<IEnumerable<User>> GetAllAsync(CancellationToken cancellationToken = default);
 
         Task<User> GetByIdAsync(Guid userId, CancellationToken cancellationToken = default);
-        Task<User> GetByLogInIdAsync(Guid logInId, CancellationToken cancellationToken = default);
+        Task<User> GetByUserNameAsync(string userName, CancellationToken cancellationToken = default);
 
         void Insert(User user);
 

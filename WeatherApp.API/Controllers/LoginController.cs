@@ -30,7 +30,7 @@ public class LoginController : ControllerBase
     {
         //your logic for login process
         //If login usrename and password are correct then proceed to generate token
-        var user = await _serviceManager.LogInService.GetLogInByUserName(loginRequest.UserName);
+        var user = await _serviceManager.UserService.GetUserBynUserName(loginRequest.UserName);
         if (user != null && user.Password == loginRequest.Password)
         {
             var authConfig = _config.AuthConfig;
