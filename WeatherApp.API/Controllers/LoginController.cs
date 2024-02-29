@@ -15,7 +15,7 @@ namespace WeatherApp.API.Controllers;
 [ApiController]
 public class LoginController : ControllerBase
 {
-    private IConfigService _config;
+    /*private IConfigService _config;
     private IUserRepository _userRepository;
     private ILogger<LoginController> _logger;
     public LoginController(IConfigService config, ILogger<LoginController> logger, IUserRepository userRepository)
@@ -54,5 +54,5 @@ public class LoginController : ControllerBase
             return BadRequest();
         }
 
-    }
+    }*/
 }

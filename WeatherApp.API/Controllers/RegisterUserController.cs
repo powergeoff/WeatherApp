@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WeatherApp.Db.Models;
+using WeatherApp.Core.DTO;
+using WeatherApp.Core.RepositoryServices;
 using WeatherApp.Db.Repositories;
 using WeatherApp.Services.Models;
 
@@ -11,32 +12,33 @@ namespace WeatherApp.API.Controllers;
 [Route("api/v1/[controller]")]
 public class RegisterUserController : ControllerBase
 {
-    private IUserRepository _userRepository;
+    private readonly IServiceManager _serviceManager;
     private ILogger<RegisterUserController> _logger;
-    public RegisterUserController(ILogger<RegisterUserController> logger, IUserRepository userRepository)
+    public RegisterUserController(ILogger<RegisterUserController> logger, IServiceManager serviceManager)
     {
-        _userRepository = userRepository;
+        _serviceManager = serviceManager;
         _logger = logger;
     }
 
     [HttpPost]
-    public async Task<IActionResult> Post([FromBody] User user)
+    public async Task<IActionResult> CreateLogin([FromBody] LogInForCreationDTO logInForCreationDTO)
     {
-        try
-        {
-            var newUser = await _userRepository.InsertUser(user);
-            if (newUser)
-            {
-                await _userRepository.Save();
-                return Ok($"User {user.UserName} successfully created");
-            }
-            else
-                return BadRequest("User already exists");
-        }
-        catch (Exception e)
-        {
-            _logger.LogError(e.Message);
-            return BadRequest();
-        }
+        var logInDTO = await _serviceManager.LogInService.CreateLogIn(logInForCreationDTO);
+        return CreatedAtAction(nameof(GetLoginById), new { logInId = logInDTO.Id }, logInDTO);
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetAllLogins(CancellationToken cancellationToken)
+    {
+        var users = await _serviceManager.LogInService.GetAllLogIns(cancellationToken);
+        return Ok(users);
+    }
+
+    [HttpGet("{logInId:guid}")]
+    public async Task<IActionResult> GetLoginById(Guid logInId, CancellationToken cancellationToken)
+    {
+        var logInDto = await _serviceManager.LogInService.GetLogInById(logInId, cancellationToken);
+
+        return Ok(logInDto);
     }
 }

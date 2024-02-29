@@ -6,6 +6,8 @@ using System.Data;
 using System.Text;
 using System.Text.Json.Serialization;
 using WeatherApp.API.Middleware;
+using WeatherApp.Core.Domain.Repositories;
+using WeatherApp.Core.RepositoryServices;
 using WeatherApp.Db;
 using WeatherApp.Db.Repositories;
 using WeatherApp.Services;
@@ -73,6 +75,10 @@ try
         options.EnableForHttps = true;
     });
 
+    builder.Services.AddScoped<IServiceManager, ServiceManager>();
+
+    builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
+
     //custom services or Application Services not Framework services
     builder.Services.AddScoped<ILayerCustomizations, LayerCustomizations>();
     //register factories
@@ -87,7 +93,6 @@ try
     builder.Services.AddScoped<IClothesBuilder, ClothesBuilder>(); //how to register multiple classes that implement same interface
     builder.Services.AddScoped<IClothesDirector, ClothesDirector>();
     //db services
-    builder.Services.AddScoped<IUserRepository, UserRepository>();
 
     builder.Services.AddHttpClient();
     builder.Services.AddEndpointsApiExplorer();
