@@ -12,9 +12,9 @@ namespace WeatherApp.API.Controllers;
 [Route("api/v1/[controller]")]
 public class RegisterUserController : ControllerBase
 {
-    private readonly IServiceManager _serviceManager;
+    private readonly IRepositoryServiceManager _serviceManager;
     private ILogger<RegisterUserController> _logger;
-    public RegisterUserController(ILogger<RegisterUserController> logger, IServiceManager serviceManager)
+    public RegisterUserController(ILogger<RegisterUserController> logger, IRepositoryServiceManager serviceManager)
     {
         _serviceManager = serviceManager;
         _logger = logger;

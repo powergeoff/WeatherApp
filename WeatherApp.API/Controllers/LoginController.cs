@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
-using WeatherApp.Db.Repositories;
+using WeatherApp.Core.RepositoryServices;
 using WeatherApp.Services.Configuration;
 using WeatherApp.Services.Models;
 
@@ -15,13 +15,13 @@ namespace WeatherApp.API.Controllers;
 [ApiController]
 public class LoginController : ControllerBase
 {
-    /*private IConfigService _config;
-    private IUserRepository _userRepository;
+    private IConfigService _config;
+    private readonly IRepositoryServiceManager _serviceManager;
     private ILogger<LoginController> _logger;
-    public LoginController(IConfigService config, ILogger<LoginController> logger, IUserRepository userRepository)
+    public LoginController(IConfigService config, ILogger<LoginController> logger, IRepositoryServiceManager serviceManager)
     {
         _config = config;
-        _userRepository = userRepository;
+        _serviceManager = serviceManager;
         _logger = logger;
     }
 
@@ -30,7 +30,7 @@ public class LoginController : ControllerBase
     {
         //your logic for login process
         //If login usrename and password are correct then proceed to generate token
-        var user = await _userRepository.GetUserByName(loginRequest.UserName);
+        var user = await _serviceManager.LogInService.GetLogInByUserName(loginRequest.UserName);
         if (user != null && user.Password == loginRequest.Password)
         {
             var authConfig = _config.AuthConfig;
@@ -54,5 +54,5 @@ public class LoginController : ControllerBase
             return BadRequest();
         }
 
-    }*/
+    }
 }

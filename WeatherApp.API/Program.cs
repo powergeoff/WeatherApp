@@ -75,7 +75,7 @@ try
         options.EnableForHttps = true;
     });
 
-    builder.Services.AddScoped<IServiceManager, ServiceManager>();
+    builder.Services.AddScoped<IRepositoryServiceManager, RepositoryServiceManager>();
 
     builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 
