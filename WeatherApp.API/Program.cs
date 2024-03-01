@@ -10,13 +10,9 @@ using WeatherApp.Core.Domain.Repositories;
 using WeatherApp.Core.RepositoryServices;
 using WeatherApp.Db;
 using WeatherApp.Db.Repositories;
-using WeatherApp.Services;
-using WeatherApp.Services.Builders;
-using WeatherApp.Services.Configuration;
-using WeatherApp.Services.Factories;
-using WeatherApp.Services.Models;
-using WeatherApp.Services.Models.Layers;
-using WeatherApp.Services.OpenWeatherMap;
+using WeatherApp.Infrastructure.ApplicationServices.Configuration;
+using WeatherApp.Infrastructure.Builders;
+using WeatherApp.Infrastructure.ExternalServices.OpenWeatherMap;
 
 //var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 
@@ -64,35 +60,23 @@ try
         });
     //Jwt configuration ends here
 
-    // Add services to the container.
-
-    //builder.Services.AddControllers();
     builder.Services.AddControllers().AddJsonOptions(options =>
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())
     );
+
     builder.Services.AddResponseCompression(options =>
     {
         options.EnableForHttps = true;
     });
 
     builder.Services.AddScoped<IRepositoryServiceManager, RepositoryServiceManager>();
-
     builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 
-    //custom services or Application Services not Framework services
-    builder.Services.AddScoped<ILayerCustomizations, LayerCustomizations>();
-    //register factories
-    builder.Services.AddScoped<IHatLayerFactory, HatLayerFactory>();
-    builder.Services.AddScoped<ITopLayersFactory, TopLayersFactory>();
-    builder.Services.AddScoped<IHandsLayerFactory, HandsLayerFactory>();
-    builder.Services.AddScoped<IBottomLayerFactory, BottomLayerFactory>();
-    //register services
     builder.Services.AddScoped<IOpenWeatherMapService, OpenWeatherMapService>();
     //register builder/ directors
     builder.Services.AddScoped<IRinkClothesBuilder, RinkClothesBuilder>(); //unique pass through interface that implements common interface
     builder.Services.AddScoped<IClothesBuilder, ClothesBuilder>(); //how to register multiple classes that implement same interface
     builder.Services.AddScoped<IClothesDirector, ClothesDirector>();
-    //db services
 
     builder.Services.AddHttpClient();
     builder.Services.AddEndpointsApiExplorer();

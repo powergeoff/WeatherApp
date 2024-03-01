@@ -1,5 +1,3 @@
-using System.ComponentModel.DataAnnotations;
-using WeatherApp.Core.Domain.ValueObjects;
 
 namespace WeatherApp.Core.Domain.Entities;
 
