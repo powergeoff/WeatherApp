@@ -5,8 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using WeatherApp.Core.DTO;
 using WeatherApp.Core.RepositoryServices;
-using WeatherApp.Services.Configuration;
-using WeatherApp.Services.Models;
+using WeatherApp.Infrastructure.ApplicationServices.Configuration;
 
 namespace WeatherApp.API.Controllers;
 

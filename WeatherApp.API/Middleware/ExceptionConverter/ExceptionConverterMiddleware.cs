@@ -3,9 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
 using WeatherApp.API.Models;
-using WeatherApp.Services;
-using WeatherApp.Services.Configuration;
 using WeatherApp.Core.Domain.Exceptions;
+using WeatherApp.Infrastructure.ApplicationServices.Configuration;
 
 namespace WeatherApp.API.Middleware
 {

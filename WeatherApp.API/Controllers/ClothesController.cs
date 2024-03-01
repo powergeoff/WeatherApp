@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using WeatherApp.Services;
-using WeatherApp.Services.Builders;
-using WeatherApp.Services.Models;
-using WeatherApp.Services.OpenWeatherMap;
+using WeatherApp.Core.Domain.Entities;
+using WeatherApp.Infrastructure.Builders;
+using WeatherApp.Infrastructure.ExternalServices.OpenWeatherMap;
 
 namespace WeatherApp.API.Controllers;
 
