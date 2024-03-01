@@ -12,7 +12,7 @@ public interface IUserService
 {
     Task<IEnumerable<UserDTO>> GetAllUsers(CancellationToken cancellationToken = default);
     Task<UserDTO> GetUserById(Guid id, CancellationToken cancellationToken = default);
-    Task<UserDTO> CreateUser(UserForCreationDTO userDTO, CancellationToken cancellationToken = default);
+    Task<UserDTO> CreateUser(UserForRegistrationDTO userDTO, CancellationToken cancellationToken = default);
     Task<bool> IsValidUser(UserForUpdateDTO userDTO, CancellationToken cancellationToken = default);
     Task UpdateUserName(Guid id, UpdateUserNameDTO userDTO, CancellationToken cancellationToken = default);
     Task UpdatePassword(Guid id, UpdatePasswordDTO userDTO, CancellationToken cancellationToken = default);
@@ -27,7 +27,7 @@ public class UserService : IUserService
 
     public UserService(IRepositoryManager repositoryManager) => _repositoryManager = repositoryManager;
 
-    public async Task<UserDTO> CreateUser(UserForCreationDTO userDTO, CancellationToken cancellationToken = default)
+    public async Task<UserDTO> CreateUser(UserForRegistrationDTO userDTO, CancellationToken cancellationToken = default)
     {
         var existingUser = await _repositoryManager.UserRepository.GetByUserNameAsync(userDTO.UserName, cancellationToken);
         if (existingUser is not null)

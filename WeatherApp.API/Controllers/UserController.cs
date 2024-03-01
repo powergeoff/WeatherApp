@@ -20,7 +20,7 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> RegisterUser([FromBody] UserForCreationDTO userForCreationDTO)
+    public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDTO userForCreationDTO)
     {
         var userDTO = await _serviceManager.UserService.CreateUser(userForCreationDTO);
         return CreatedAtAction(nameof(GetUserById), new { userId = userDTO.Id }, userDTO);
