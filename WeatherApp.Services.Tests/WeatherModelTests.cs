@@ -1,4 +1,7 @@
-using WeatherApp.Services.Models;
+
+
+using WeatherApp.Core.Domain.Entities;
+using WeatherApp.Core.Domain.ValueObjects;
 
 namespace WeatherApp.Services.Tests;
 
