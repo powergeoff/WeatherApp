@@ -1,9 +1,5 @@
-using WeatherApp.Services.OpenWeatherMap;
-using Microsoft.Extensions.Configuration;
-using System.Text.Json;
-using WeatherApp.Services.Tests.Models;
-using WeatherApp.Services.Configuration;
-using Microsoft.AspNetCore.Builder;
+
+using WeatherApp.Infrastructure.ApplicationServices.Configuration;
 
 namespace WeatherApp.Services.Tests;
 

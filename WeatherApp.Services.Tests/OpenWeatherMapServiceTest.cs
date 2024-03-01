@@ -1,8 +1,7 @@
-using WeatherApp.Services.OpenWeatherMap;
-using Microsoft.Extensions.Configuration;
-using System.Text.Json;
+
+using WeatherApp.Infrastructure.ApplicationServices.Configuration;
+using WeatherApp.Infrastructure.ExternalServices.OpenWeatherMap;
 using WeatherApp.Services.Tests.Models;
-using WeatherApp.Services.Configuration;
 
 namespace WeatherApp.Services.Tests;
 

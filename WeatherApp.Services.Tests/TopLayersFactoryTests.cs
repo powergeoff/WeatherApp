@@ -1,7 +1,9 @@
-using WeatherApp.Services.Factories;
-using WeatherApp.Services.Models;
-using WeatherApp.Services.Models.Layers;
-using WeatherApp.Services.Models.Layers.TopLayers;
+
+
+using WeatherApp.Core.Domain.Entities;
+using WeatherApp.Core.Factories;
+using WeatherApp.Core.Factories.Layers;
+using WeatherApp.Core.Factories.Layers.TopLayers;
 
 namespace WeatherApp.Services.Tests;
 

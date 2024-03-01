@@ -5,11 +5,13 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.API", "WeatherApp.API\WeatherApp.API.csproj", "{913327CD-9EBC-4716-9EF9-8CB257E56FDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.Services", "WeatherApp.Services\WeatherApp.Services.csproj", "{0D89F80D-2A8A-49C1-90B0-B2C7BE04DA9A}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.Services.Tests", "WeatherApp.Services.Tests\WeatherApp.Services.Tests.csproj", "{6116CD34-BCB5-46AD-AAE0-82008274CE30}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.Db", "WeatherApp.Db\WeatherApp.Db.csproj", "{1F79A31D-9AD9-4883-AC55-7D519CDF2427}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.Core", "WeatherApp.Core\WeatherApp.Core.csproj", "{25C4845E-337B-4478-BDCD-01630B112E64}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.Infrastructure", "WeatherApp.Infrastructure\WeatherApp.Infrastructure.csproj", "{DEC3FE72-CB32-4703-8A96-F298ACC1261F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,5 +42,13 @@ Global
 		{38341EF9-3536-4C6E-AE1E-1A945407B893}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{38341EF9-3536-4C6E-AE1E-1A945407B893}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{38341EF9-3536-4C6E-AE1E-1A945407B893}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25C4845E-337B-4478-BDCD-01630B112E64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25C4845E-337B-4478-BDCD-01630B112E64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25C4845E-337B-4478-BDCD-01630B112E64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25C4845E-337B-4478-BDCD-01630B112E64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DEC3FE72-CB32-4703-8A96-F298ACC1261F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DEC3FE72-CB32-4703-8A96-F298ACC1261F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DEC3FE72-CB32-4703-8A96-F298ACC1261F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DEC3FE72-CB32-4703-8A96-F298ACC1261F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
