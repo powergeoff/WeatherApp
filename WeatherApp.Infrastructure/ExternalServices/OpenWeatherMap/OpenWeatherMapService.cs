@@ -1,21 +1,16 @@
 
+using Mapster;
 using System.Text.Json;
 using WeatherApp.Core.Domain.Entities;
-using WeatherApp.Core.Domain.Services;
+using WeatherApp.Core.Domain.ExternalServices;
+using WeatherApp.Core.DTO.Weather;
 using WeatherApp.Infrastructure.ApplicationServices.Configuration;
 
 namespace WeatherApp.Infrastructure.ExternalServices.OpenWeatherMap;
 
-public interface IOpenWeatherMapService : IGetWeather
-{
-    void SetCoordinates(double latitude, double longitude);
-}
-
 //https://openweathermap.org/current
-public class OpenWeatherMapService : IOpenWeatherMapService
+public class OpenWeatherMapService : IWeatherService
 {
-    private double _latitude;
-    private double _longitude;
     private HttpClient _httpClient;
     private IConfigService _config;
 
@@ -25,18 +20,14 @@ public class OpenWeatherMapService : IOpenWeatherMapService
         _config = config;
     }
 
-    public void SetCoordinates(double latitude, double longitude)
-    {
-        _latitude = latitude;
-        _longitude = longitude;
-    }
-    public async Task<WeatherModel> GetWeather()
+
+    public async Task<WeatherModel> GetWeather(WeatherForCreationDTO weatherForCreationDTO, CancellationToken cancellationToken)
     {
         var ret = new WeatherModel();
         try
         {
             var apiKey = _config.APIKey;
-            var uri = $"https://api.openweathermap.org/data/2.5/weather?lat={_latitude}&lon={_longitude}&appid={apiKey}&units=imperial";
+            var uri = $"https://api.openweathermap.org/data/2.5/weather?lat={weatherForCreationDTO.Latitude}&lon={weatherForCreationDTO.Longitude}&appid={apiKey}&units=imperial";
 
             var response = await _httpClient.GetAsync(uri);
             response.EnsureSuccessStatusCode();
@@ -60,22 +51,4 @@ public class OpenWeatherMapService : IOpenWeatherMapService
         }
         return ret;
     }
-
-
-
-    public Task<WeatherModel> GetWeather(string city, string state)
-    {
-        //get lat and long from city and state
-        //call get weather with lat & long
-        throw new NotImplementedException();
-    }
-
-    public Task<WeatherModel> GetWeather(string zipcode)
-    {
-        //get lat and long from zipcode
-        //call get weather with lat & long
-        throw new NotImplementedException();
-    }
-
-
 }

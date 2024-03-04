@@ -1,18 +1,19 @@
 using WeatherApp.Core.Domain.Entities;
+using WeatherApp.Core.DTO;
+using WeatherApp.Core.Factories.Layers;
+using WeatherApp.Infrastructure.ExternalServices.OpenWeatherMap;
 
 namespace WeatherApp.Infrastructure.Builders;
 
-public interface IRinkClothesBuilder : IClothesBuilder
-{ }
-
-public class RinkClothesBuilder : IRinkClothesBuilder
+public class RinkClothesBuilder : ClothesBuilderBase
 {
-    private Clothes clothes = new Clothes();
-    public void BuildBottomLayer() => throw new System.NotImplementedException();
-    public void BuildGloves() => throw new System.NotImplementedException();
-    public void BuildHat() => throw new System.NotImplementedException();
-    public void BuildOverview() => throw new System.NotImplementedException();
-    public void BuildTopLayers() => throw new System.NotImplementedException();
-    public Clothes GetClothes() => throw new System.NotImplementedException();
-    public Task Initialize() => throw new System.NotImplementedException();
+    public RinkClothesBuilder(ILayerCustomizations layerCustomizations) : base(layerCustomizations)
+    {
+
+    }
+
+    public override void BuildBottomLayer() => throw new NotImplementedException();
+    public override void BuildGloves() => throw new NotImplementedException();
+    public override void BuildHat() => throw new NotImplementedException();
+    public override void BuildTopLayers() => throw new NotImplementedException();
 }

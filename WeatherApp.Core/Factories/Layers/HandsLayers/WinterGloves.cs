@@ -1,7 +1,5 @@
 
 
-using WeatherApp.Core.Domain.Services;
-
 namespace WeatherApp.Core.Factories.Layers.HandsLayers;
 
 public class WinterGloves : Layer
