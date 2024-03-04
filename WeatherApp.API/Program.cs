@@ -8,7 +8,6 @@ using System.Text.Json.Serialization;
 using WeatherApp.API.Middleware;
 using WeatherApp.Core.Domain.ExternalServices;
 using WeatherApp.Core.Domain.Repositories;
-using WeatherApp.Core.ExternalServices;
 using WeatherApp.Core.RepositoryServices;
 using WeatherApp.Db;
 using WeatherApp.Db.Repositories;
@@ -76,7 +75,7 @@ try
     builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 
 
-    builder.Services.AddScoped<IOpenWeatherMapService, OpenWeatherMapService>();
+    builder.Services.AddScoped<IWeatherService, OpenWeatherMapService>();
     builder.Services.AddScoped<IExternalServicesManager, ExternalServicesManager>();
     //register builder/ directors
     builder.Services.AddScoped<IClothesDirector, ClothesDirector>();

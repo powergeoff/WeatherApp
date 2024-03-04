@@ -1,4 +1,5 @@
 using WeatherApp.Core.Domain.Entities;
+using WeatherApp.Core.Domain.ExternalServices;
 using WeatherApp.Core.DTO;
 using WeatherApp.Core.Factories;
 using WeatherApp.Core.Factories.Layers;
@@ -10,7 +11,7 @@ namespace WeatherApp.Infrastructure.Builders;
 
 public interface IClothesBuilder
 {
-    Task Initialize();
+    void Initialize();
     void BuildGloves();
     void BuildHat();
     void BuildTopLayers();
@@ -23,21 +24,15 @@ public interface IClothesBuilder
 public abstract class ClothesBuilderBase : IClothesBuilder
 {
     protected Clothes _clothes = new();
-    protected WeatherModel _weather;
-    private IOpenWeatherMapService _openWeatherMapService;
     protected ITopLayersFactory _topLayersFactory;
     protected IHatLayerFactory _hatLayerFactory;
     protected ILayerCustomizations _layerCustomizations;
     protected IHandsLayerFactory _handsLayerFactory;
     protected IBottomLayerFactory _bottomLayerFactory;
-    //protected IClothesBuilder _clothesBuilder;
-    private UserDTO _user;
-    public ClothesBuilderBase(UserDTO user, IOpenWeatherMapService openWeatherMapService)
+
+    public ClothesBuilderBase(ILayerCustomizations layerCustomizations)
     {
-        //_clothesBuilder = clothesBuilder;
-        _user = user;
-        _openWeatherMapService = openWeatherMapService;
-        _layerCustomizations = new LayerCustomizations();
+        _layerCustomizations = layerCustomizations;
 
         _topLayersFactory = new TopLayersFactory();
         _hatLayerFactory = new HatLayerFactory();
@@ -45,16 +40,8 @@ public abstract class ClothesBuilderBase : IClothesBuilder
         _bottomLayerFactory = new BottomLayerFactory();
     }
 
-    public async Task Initialize()
+    public void Initialize()
     {
-        _weather = await _openWeatherMapService.GetWeather();
-
-        //next cache service call by coordinates for 15 minutes or so...
-        //maybe log the time it was fetched for testing
-        _layerCustomizations.ActivityLevel = _user.ActivityLevel;
-        _layerCustomizations.BodyTempLevel = _user.BodyTemp;
-        _layerCustomizations.Weather = _weather;
-
         _hatLayerFactory.RegisterAllLayers(_layerCustomizations);
         _topLayersFactory.RegisterAllLayers(_layerCustomizations);
         _handsLayerFactory.RegisterAllLayers(_layerCustomizations);
@@ -65,6 +52,6 @@ public abstract class ClothesBuilderBase : IClothesBuilder
     public abstract void BuildHat();
     public abstract void BuildTopLayers();
     public abstract void BuildBottomLayer();
-    public void BuildOverview() => _clothes.Overview = $"{DateTime.Now}: {_weather.City} Feels like: {_weather.FeelsLikeTemp}, Actual Temp: {_weather.Temperature}";
+    public void BuildOverview() => _clothes.Overview = $"{DateTime.Now}: {_layerCustomizations.Weather.City} Feels like: {_layerCustomizations.Weather.FeelsLikeTemp}, Actual Temp: {_layerCustomizations.Weather.Temperature}";
     public Clothes GetClothes() => _clothes;
 }

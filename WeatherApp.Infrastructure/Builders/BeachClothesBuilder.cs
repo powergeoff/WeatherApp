@@ -2,13 +2,14 @@
 
 using WeatherApp.Core.Domain.Entities;
 using WeatherApp.Core.DTO;
+using WeatherApp.Core.Factories.Layers;
 using WeatherApp.Infrastructure.ExternalServices.OpenWeatherMap;
 
 namespace WeatherApp.Infrastructure.Builders;
 
 public class BeachClothesBuilder : ClothesBuilderBase
 {
-    public BeachClothesBuilder(UserDTO user, IOpenWeatherMapService openWeatherMapService) : base(user, openWeatherMapService)
+    public BeachClothesBuilder(ILayerCustomizations layerCustomizations) : base(layerCustomizations)
     {
 
     }

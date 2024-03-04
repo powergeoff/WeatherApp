@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using WeatherApp.Core.Domain.Entities;
+using WeatherApp.Core.Domain.ExternalServices;
 using WeatherApp.Core.DTO;
+using WeatherApp.Core.DTO.Weather;
 using WeatherApp.Core.RepositoryServices;
 using WeatherApp.Infrastructure.Builders;
 using WeatherApp.Infrastructure.ExternalServices.OpenWeatherMap;
@@ -12,22 +14,15 @@ namespace WeatherApp.API.Controllers;
 public class ClothesController : ControllerBase
 {
     private IClothesDirector _clothesDirector;
-    private IOpenWeatherMapService _openWeatherMapService;
-    private IRepositoryServiceManager _repositoryServiceManager;
-    public ClothesController(IClothesDirector clothesDirector, IOpenWeatherMapService openWeatherMapService, IRepositoryServiceManager repositoryServiceManager)
+    public ClothesController(IClothesDirector clothesDirector)
     {
         _clothesDirector = clothesDirector;
-        _openWeatherMapService = openWeatherMapService;
-        _repositoryServiceManager = repositoryServiceManager;
     }
 
     [HttpGet]
-    public async Task<Clothes> GetByCoords(Guid userId, double latitude, double longitude)
+    public async Task<Clothes> GetByCoords([FromQuery] ClothesForCreationDTO clothesForCreationDTO)
     {
-        var user = await _repositoryServiceManager.UserService.GetUserById(userId);
-        _openWeatherMapService.SetCoordinates(latitude, longitude);
-        _clothesDirector.SetClothesBuilder(new StandardClothesBuilder(user, _openWeatherMapService));
-        await _clothesDirector.ConstructClothes();
+        await _clothesDirector.ConstructClothes(clothesForCreationDTO);
         return _clothesDirector.GetClothes();
     }
 }

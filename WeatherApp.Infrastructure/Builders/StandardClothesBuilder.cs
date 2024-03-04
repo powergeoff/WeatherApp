@@ -1,4 +1,5 @@
 using WeatherApp.Core.Domain.Entities;
+using WeatherApp.Core.Domain.ExternalServices;
 using WeatherApp.Core.DTO;
 using WeatherApp.Core.Factories;
 using WeatherApp.Core.Factories.Layers;
@@ -11,7 +12,7 @@ namespace WeatherApp.Infrastructure.Builders;
 //we could have ActiveClothes, RinkClothes, BeachClothes
 public class StandardClothesBuilder : ClothesBuilderBase
 {
-    public StandardClothesBuilder(UserDTO user, IOpenWeatherMapService openWeatherMapService) : base(user, openWeatherMapService)
+    public StandardClothesBuilder(ILayerCustomizations layerCustomizations) : base(layerCustomizations)
     {
 
     }
