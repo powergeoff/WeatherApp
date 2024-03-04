@@ -19,7 +19,7 @@ function App() {
 
       try {
         //localhost:5000
-        const response = await fetch(`${process.env.REACT_APP_API_HOST}/api/v1/Clothes/GetByCoords?userId=23e1a8aa-455c-40be-8ebf-108d97073c7c&latitude=42.36&longitude=-71.058884`);
+        const response = await fetch(`${process.env.REACT_APP_API_HOST}/api/v1/Clothes/GetByCoords?latitude=42.36&longitude=-71.058884`);
 
         const resData = await response.json();
 
