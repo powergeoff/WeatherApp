@@ -4,6 +4,7 @@ namespace WeatherApp.Infrastructure.Builders;
 
 public interface IClothesDirector
 {
+    void SetClothesBuilder(IClothesBuilder clothesBuilder);
     Task ConstructClothes();
     Clothes GetClothes();
 }
@@ -12,10 +13,9 @@ public class ClothesDirector : IClothesDirector
 {
     private IClothesBuilder _clothesBuilder;
 
-    public ClothesDirector(IClothesBuilder clothesBuilder)
-    {
-        _clothesBuilder = clothesBuilder;
-    }
+    //(Guid userId, double latitude, double longitude)
+    public void SetClothesBuilder(IClothesBuilder clothesBuilder) => _clothesBuilder = clothesBuilder;
+
 
     public async Task ConstructClothes()
     {
@@ -28,5 +28,4 @@ public class ClothesDirector : IClothesDirector
     }
 
     public Clothes GetClothes() => _clothesBuilder.GetClothes();
-
 }

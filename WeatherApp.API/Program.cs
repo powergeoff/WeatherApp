@@ -6,12 +6,15 @@ using System.Data;
 using System.Text;
 using System.Text.Json.Serialization;
 using WeatherApp.API.Middleware;
+using WeatherApp.Core.Domain.ExternalServices;
 using WeatherApp.Core.Domain.Repositories;
+using WeatherApp.Core.ExternalServices;
 using WeatherApp.Core.RepositoryServices;
 using WeatherApp.Db;
 using WeatherApp.Db.Repositories;
 using WeatherApp.Infrastructure.ApplicationServices.Configuration;
 using WeatherApp.Infrastructure.Builders;
+using WeatherApp.Infrastructure.ExternalServices;
 using WeatherApp.Infrastructure.ExternalServices.OpenWeatherMap;
 
 //var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
@@ -72,10 +75,10 @@ try
     builder.Services.AddScoped<IRepositoryServiceManager, RepositoryServiceManager>();
     builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 
+
     builder.Services.AddScoped<IOpenWeatherMapService, OpenWeatherMapService>();
+    builder.Services.AddScoped<IExternalServicesManager, ExternalServicesManager>();
     //register builder/ directors
-    builder.Services.AddScoped<IRinkClothesBuilder, RinkClothesBuilder>(); //unique pass through interface that implements common interface
-    builder.Services.AddScoped<IClothesBuilder, ClothesBuilder>(); //how to register multiple classes that implement same interface
     builder.Services.AddScoped<IClothesDirector, ClothesDirector>();
 
     builder.Services.AddHttpClient();

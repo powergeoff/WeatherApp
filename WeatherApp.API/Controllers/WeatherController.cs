@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using WeatherApp.Core.Domain.Entities;
+using WeatherApp.Core.Domain.ExternalServices;
+using WeatherApp.Core.DTO.Weather;
 using WeatherApp.Infrastructure.ExternalServices.OpenWeatherMap;
 
 namespace WeatherApp.API.Controllers;
@@ -9,36 +11,18 @@ namespace WeatherApp.API.Controllers;
 public class WeatherController : ControllerBase
 {
     private readonly ILogger<WeatherController> _logger;
-    private readonly IOpenWeatherMapService _openWeatherMapService;
 
-    public WeatherController(ILogger<WeatherController> logger, IOpenWeatherMapService openWeatherMapService)
+    private readonly IExternalServicesManager _externalServicesManager;
+
+    public WeatherController(ILogger<WeatherController> logger, IExternalServicesManager externalServicesManager)
     {
         _logger = logger;
-        _openWeatherMapService = openWeatherMapService;
+        _externalServicesManager = externalServicesManager;
     }
 
     [HttpGet]
-    public Task<WeatherModel> GetByCoords(double latitude, double longitude)
+    public async Task<WeatherModel> GetByCoords([FromQuery] WeatherForCreationDTO weatherForCreationDTO)
     {
-        _openWeatherMapService.SetCoordinates(latitude, longitude);
-        return _openWeatherMapService.GetWeather();
-    }
-
-    [HttpGet]
-    public Task<WeatherModel> GetByCityAndState(string city, string state)
-    {
-        //convert city & state to coordinates
-        //set coordinates
-        //call service
-        return _openWeatherMapService.GetWeather();
-    }
-
-    [HttpGet]
-    public Task<WeatherModel> GetByZipCode(string zip)
-    {
-        //convert zip to coordinates
-        //set coordinates
-        //call service
-        return _openWeatherMapService.GetWeather();
+        return await _externalServicesManager.WeatherService.GetWeather(weatherForCreationDTO);
     }
 }

@@ -1,4 +1,4 @@
-namespace WeatherApp.Core.Domain.Services;
+namespace WeatherApp.Core.Factories.Layers;
 
 
 /// <summary>The Range class. from https://stackoverflow.com/questions/5343006/is-there-a-c-sharp-type-for-representing-an-integer-range</summary>
