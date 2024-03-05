@@ -74,8 +74,6 @@ try
     builder.Services.AddScoped<IRepositoryServiceManager, RepositoryServiceManager>();
     builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 
-
-    builder.Services.AddScoped<IWeatherService, OpenWeatherMapService>();
     builder.Services.AddScoped<IExternalServicesManager, ExternalServicesManager>();
     //register builder/ directors
     builder.Services.AddScoped<IClothesDirector, ClothesDirector>();
