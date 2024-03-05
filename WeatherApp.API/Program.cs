@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Data;
 using System.Text;
 using System.Text.Json.Serialization;
 using WeatherApp.API.Middleware;
@@ -14,7 +12,6 @@ using WeatherApp.Db.Repositories;
 using WeatherApp.Infrastructure.ApplicationServices.Configuration;
 using WeatherApp.Infrastructure.Builders;
 using WeatherApp.Infrastructure.ExternalServices;
-using WeatherApp.Infrastructure.ExternalServices.OpenWeatherMap;
 
 //var logger = NLog.LogManager.Setup().LoadConfigurationFromAppSettings().GetCurrentClassLogger();
 
