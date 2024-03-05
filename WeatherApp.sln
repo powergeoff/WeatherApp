@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.API", "WeatherApp.API\WeatherApp.API.csproj", "{913327CD-9EBC-4716-9EF9-8CB257E56FDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.Services.Tests", "WeatherApp.Services.Tests\WeatherApp.Services.Tests.csproj", "{6116CD34-BCB5-46AD-AAE0-82008274CE30}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.Tests", "WeatherApp.Tests\WeatherApp.Tests.csproj", "{6116CD34-BCB5-46AD-AAE0-82008274CE30}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherApp.Db", "WeatherApp.Db\WeatherApp.Db.csproj", "{1F79A31D-9AD9-4883-AC55-7D519CDF2427}"
 EndProject
