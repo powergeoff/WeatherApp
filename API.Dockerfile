@@ -4,13 +4,15 @@ WORKDIR /source
 
 # copy csproj files and restore as distinct layers
 COPY "WeatherApp.API/*.csproj" "WeatherApp.API/"
-COPY "WeatherApp.Services/*.csproj" "WeatherApp.Services/"
+COPY "WeatherApp.Core/*.csproj" "WeatherApp.Core/"
+COPY "WeatherApp.Infrastructure/*.csproj" "WeatherApp.Infrastructure/"
 COPY "WeatherApp.Db/*.csproj" "WeatherApp.Db/"
 RUN dotnet restore "WeatherApp.API/WeatherApp.API.csproj"
 
 # copy and build app and libraries
 COPY "WeatherApp.API/" "WeatherApp.API/"
-COPY "WeatherApp.Services/" "WeatherApp.Services/"
+COPY "WeatherApp.Core/" "WeatherApp.Core/"
+COPY "WeatherApp.Infrastructure/" "WeatherApp.Infrastructure/"
 COPY "WeatherApp.Db/" "WeatherApp.Db/"
 WORKDIR "/source/WeatherApp.API"
 RUN dotnet publish -o /app
