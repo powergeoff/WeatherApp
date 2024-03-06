@@ -79,6 +79,8 @@ try
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
+    builder.Services.AddMemoryCache();//in-memory cache
+
     var app = builder.Build();
 
     //configure pipeline

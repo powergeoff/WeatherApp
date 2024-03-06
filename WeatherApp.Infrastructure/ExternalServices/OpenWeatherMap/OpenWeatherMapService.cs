@@ -44,6 +44,7 @@ public class OpenWeatherMapService : IWeatherService
             ret.IsSnowing = poco.snow?.nextHourTotal > 0;
             ret.WindSpeed = poco.wind.speed;
             ret.WindDirection = WeatherModel.ConvertWindDirection(poco.wind.deg);
+            ret.CreatedTime = DateTime.Now.ToLocalTime();
         }
         catch (Exception e)
         {
