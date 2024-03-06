@@ -79,7 +79,12 @@ try
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
-    builder.Services.AddMemoryCache();//in-memory cache
+    builder.Services.AddStackExchangeRedisCache(redisOptions =>
+    {
+        string connection = config.RedisConnectionString;
+        redisOptions.Configuration = connection;
+    });
+    //builder.Services.AddMemoryCache();//in-memory cache
 
     var app = builder.Build();
 

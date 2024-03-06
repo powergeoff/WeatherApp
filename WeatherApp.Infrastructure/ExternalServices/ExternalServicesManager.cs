@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Caching.Memory;
 using WeatherApp.Core.Domain.ExternalServices;
 using WeatherApp.Infrastructure.ApplicationServices.Configuration;
@@ -12,18 +13,18 @@ public class ExternalServicesManager : IExternalServicesManager
     private HttpClient _httpClient;
     private IConfigService _config;
 
-    private readonly IMemoryCache _memoryCache;
+    private readonly IDistributedCache _distributedCache;
     private readonly Lazy<IWeatherService> _lazyWeatherService;
 
-    public ExternalServicesManager(HttpClient httpClient, IConfigService config, IMemoryCache memoryCache)
+    public ExternalServicesManager(HttpClient httpClient, IConfigService config, IDistributedCache distributedCache)
     {
-        _memoryCache = memoryCache;
+        _distributedCache = distributedCache;
         _httpClient = httpClient;
         _config = config;
 
         _lazyWeatherService = new Lazy<IWeatherService>(() =>
             new CachedOpenWeatherMapService( //implemented with decorator pattern
-                new OpenWeatherMapService(_httpClient, _config), _memoryCache)
+                new OpenWeatherMapService(_httpClient, _config), _distributedCache)
             );
     }
 

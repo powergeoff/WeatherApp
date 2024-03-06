@@ -9,6 +9,7 @@ public interface IConfigService
     JsonSerializerOptions JsonSettings { get; set; }
     string AppVersion { get; set; }
     string ConnectionString { get; set; }
+    string RedisConnectionString { get; set; }
     string DbName { get; set; }
     string APIKey { get; set; }
     AuthConfigModel AuthConfig { get; set; }
@@ -36,6 +37,7 @@ public class ConfigService : IConfigService
         AppVersion = _config.GetValue<string>("AppVersion");
         AuthConfig = _config.GetSection("Auth").Get<AuthConfigModel>();
         ConnectionString = _config.GetSection("Connections").GetValue<string>("Default");
+        RedisConnectionString = _config.GetSection("Connections").GetValue<string>("Redis");
         DbName = _config.GetSection("Connections").GetValue<string>("DbName");
     }
 
@@ -49,5 +51,5 @@ public class ConfigService : IConfigService
     public string ConnectionString { get; set; }
 
     public string DbName { get; set; }
-
+    public string RedisConnectionString { get; set; }
 }
