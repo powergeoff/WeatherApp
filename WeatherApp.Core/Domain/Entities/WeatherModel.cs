@@ -12,9 +12,9 @@ public class WeatherModel
     public decimal Humidity { get; set; }
     public bool IsRaining { get; set; }
     public bool IsSnowing { get; set; }
-
     public double WindSpeed { get; set; }
     public OrdinalDirection WindDirection { get; set; }
+    public DateTime CreatedTime { get; set; }
 
     public static OrdinalDirection ConvertWindDirection(int degrees)
     {
