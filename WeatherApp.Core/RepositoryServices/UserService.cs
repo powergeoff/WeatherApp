@@ -12,6 +12,7 @@ public interface IUserService
 {
     Task<IEnumerable<UserDTO>> GetAllUsers(CancellationToken cancellationToken = default);
     Task<UserDTO> GetUserById(Guid id, CancellationToken cancellationToken = default);
+    Task<UserDTO> GetUserByUserName(string userName, CancellationToken cancellationToken = default);
     Task<UserDTO> CreateUser(UserForRegistrationDTO userDTO, CancellationToken cancellationToken = default);
     Task<bool> IsValidUser(UserForUpdateDTO userDTO, CancellationToken cancellationToken = default);
     Task UpdateUserName(Guid id, UpdateUserNameDTO userDTO, CancellationToken cancellationToken = default);
@@ -145,5 +146,17 @@ public class UserService : IUserService
             throw new InvalidUserException();
         }
         return true;
+    }
+
+    public async Task<UserDTO> GetUserByUserName(string userName, CancellationToken cancellationToken = default)
+    {
+        var user = await _repositoryManager.UserRepository.GetByUserNameAsync(userName);
+
+        if (user is null)
+        {
+            throw new UserNotFoundException(userName);
+        }
+
+        return user.Adapt<UserDTO>();
     }
 }

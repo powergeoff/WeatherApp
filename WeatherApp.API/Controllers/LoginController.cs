@@ -5,6 +5,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 using WeatherApp.Core.DTO;
 using WeatherApp.Core.RepositoryServices;
+using WeatherApp.Infrastructure.ApplicationServices;
 using WeatherApp.Infrastructure.ApplicationServices.Configuration;
 
 namespace WeatherApp.API.Controllers;
@@ -15,34 +16,18 @@ namespace WeatherApp.API.Controllers;
 [ApiController]
 public class LoginController : ControllerBase
 {
-    private IConfigService _config;
-    private readonly IRepositoryServiceManager _serviceManager;
+    private readonly IGenerateTokenService _generateTokenService;
     private ILogger<LoginController> _logger;
-    public LoginController(IConfigService config, ILogger<LoginController> logger, IRepositoryServiceManager serviceManager)
+    public LoginController(ILogger<LoginController> logger, IGenerateTokenService generateTokenService)
     {
-        _config = config;
-        _serviceManager = serviceManager;
+        _generateTokenService = generateTokenService;
         _logger = logger;
     }
 
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] UserForUpdateDTO loginRequest)
     {
-
-        await _serviceManager.UserService.IsValidUser(loginRequest); //error handling happens here
-        var authConfig = _config.AuthConfig;
-
-        var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authConfig.Key));
-        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-        var Sectoken = new JwtSecurityToken(authConfig.Issuer,
-          authConfig.Issuer,
-          null,
-          expires: DateTime.Now.AddMinutes(120),
-          signingCredentials: credentials);
-
-        var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
-
+        var token = await _generateTokenService.GenerateToken(loginRequest);
         return Ok(token);
 
     }

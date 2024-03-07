@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using System.Text;
 using System.Text.Json.Serialization;
 using WeatherApp.API.Middleware;
@@ -9,6 +10,7 @@ using WeatherApp.Core.Domain.Repositories;
 using WeatherApp.Core.RepositoryServices;
 using WeatherApp.Db;
 using WeatherApp.Db.Repositories;
+using WeatherApp.Infrastructure.ApplicationServices;
 using WeatherApp.Infrastructure.ApplicationServices.Configuration;
 using WeatherApp.Infrastructure.Builders;
 using WeatherApp.Infrastructure.ExternalServices;
@@ -43,31 +45,69 @@ try
 
     var authConfig = config.AuthConfig;
     builder.Services
-        .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+        //below is from CP app unsure if we need it
+        .AddAuthentication(o =>
+        {
+            o.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
         .AddJwtBearer(options =>
         {
-            options.TokenValidationParameters = new TokenValidationParameters
-            {
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ValidateLifetime = true,
-                ValidateIssuerSigningKey = true,
-                ValidIssuer = authConfig.Issuer,
-                ValidAudience = authConfig.Issuer,
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authConfig.Key)),
-            };
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authConfig.Key));
+            options.TokenValidationParameters.ValidIssuer = authConfig.Issuer;
+            options.TokenValidationParameters.ValidAudience = authConfig.Audience;
+            options.TokenValidationParameters.IssuerSigningKey = key;
+            options.TokenValidationParameters.ValidateIssuerSigningKey = true;
+            options.TokenValidationParameters.ValidateLifetime = true;
+            options.TokenValidationParameters.ClockSkew = TimeSpan.Zero;
         });
+
     //Jwt configuration ends here
+    builder.Services.AddAuthorization();
 
     builder.Services.AddControllers().AddJsonOptions(options =>
         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter())
     );
 
+    builder.Services.AddSwaggerGen(option =>
+    {
+        option.AddSecurityDefinition(
+            "Bearer",
+            new OpenApiSecurityScheme()
+            {
+                Name = "Authorization",
+                Type = SecuritySchemeType.ApiKey,
+                Scheme = "Bearer",
+                BearerFormat = "JWT",
+                In = ParameterLocation.Header,
+                Description =
+                    "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 1safsfsdfdfd\"",
+            }
+        );
+        option.AddSecurityRequirement(
+            new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    Array.Empty<string>()
+                }
+            }
+        );
+    });
+
     builder.Services.AddResponseCompression(options =>
     {
         options.EnableForHttps = true;
     });
-
+    builder.Services.AddScoped<IGenerateTokenService, GenerateTokenService>();
     builder.Services.AddScoped<IRepositoryServiceManager, RepositoryServiceManager>();
     builder.Services.AddScoped<IRepositoryManager, RepositoryManager>();
 
@@ -77,7 +117,6 @@ try
 
     builder.Services.AddHttpClient();
     builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen();
 
     builder.Services.AddMemoryCache();//in-memory cache
 
