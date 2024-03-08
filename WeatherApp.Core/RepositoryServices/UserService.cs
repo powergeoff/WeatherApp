@@ -27,6 +27,7 @@ public class UserService : IUserService
     private readonly IRepositoryManager _repositoryManager;
 
     public UserService(IRepositoryManager repositoryManager) => _repositoryManager = repositoryManager;
+    //to test, mock repositorymanager and hand it to this real User service and test that
 
     public async Task<UserDTO> CreateUser(UserForRegistrationDTO userDTO, CancellationToken cancellationToken = default)
     {

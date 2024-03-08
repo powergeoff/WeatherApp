@@ -35,18 +35,6 @@ public class GenerateTokenService : IGenerateTokenService
         var expires = DateTime.UtcNow.AddMinutes(authConfig.Expires);
         var isAdmin = validUser.Role.Equals(Roles.Admin);
 
-        /*var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(authConfig.Key));
-        var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-
-        var Sectoken = new JwtSecurityToken(authConfig.Issuer,
-          authConfig.Issuer,
-          null,
-          expires: DateTime.Now.AddMinutes(120),
-          signingCredentials: credentials);
-
-        var token = new JwtSecurityTokenHandler().WriteToken(Sectoken);
-        */
-
         var identity = GetClaimsIdentity(validUser.UserName, isAdmin, new List<string>());
 
         var token = GetToken(identity, expires, authConfig);
