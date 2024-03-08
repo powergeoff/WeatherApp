@@ -3,7 +3,7 @@ using WeatherApp.Core.Domain.ValueObjects;
 
 namespace WeatherApp.Core.DTO;
 
-public class UserForUpdateDTO
+public class UserForUpdateDTO //update and login - same type
 {
     [Required(ErrorMessage = "User Name is required")]
     [StringLength(10, ErrorMessage = "User Name cannot exceed 10 characters")]
