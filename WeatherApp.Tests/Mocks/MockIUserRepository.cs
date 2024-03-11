@@ -6,7 +6,7 @@ using WeatherApp.Core.Domain.ValueObjects;
 internal class MockIUserRepository
 {
 
-    //dummy data to skirt the real database
+    //dummy data to skirt the database
     public static Mock<IUserRepository> GetMock()
     {
         var mock = new Mock<IUserRepository>();

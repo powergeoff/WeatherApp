@@ -1,4 +1,5 @@
 
+using WeatherApp.Core.Domain.Exceptions;
 using WeatherApp.Core.DTO;
 using WeatherApp.Core.RepositoryServices;
 using WeatherApp.Infrastructure.ApplicationServices;
@@ -29,7 +30,7 @@ public class GenerateTokenServiceTest
     }
 
     [Fact]
-    public async void APIKey_ShouldBePopulated()
+    public async void ServiceShouldReturnToken()
     {
         var repoManagerMock = MockIRepositoryServiceManager.GetMock();
         var tokenService = new GenerateTokenService(_config, repoManagerMock.Object);
@@ -42,6 +43,31 @@ public class GenerateTokenServiceTest
         var token = await tokenService.GenerateToken(userDTO);
 
         Assert.NotEmpty(token);
+    }
+
+    [Fact]
+    public async void ServiceShouldFail_BadUser()
+    {
+        var repoManagerMock = MockIRepositoryServiceManager.GetMock();
+        var tokenService = new GenerateTokenService(_config, repoManagerMock.Object);
+
+        var userDTO = new UserForUpdateDTO()
+        {
+            UserName = "BadUser",
+            Password = "Password"
+        };
+
+        string token = "";
+        try
+        {
+            token = await tokenService.GenerateToken(userDTO);
+        }
+        catch (UserNotFoundException e)
+        {
+            Console.WriteLine(e.Message);
+        }
+
+        Assert.Equal("", token);
     }
 
 }

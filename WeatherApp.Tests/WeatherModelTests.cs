@@ -2,12 +2,31 @@
 
 using WeatherApp.Core.Domain.Entities;
 using WeatherApp.Core.Domain.ValueObjects;
+using WeatherApp.Core.DTO.Weather;
+using WeatherApp.Services.Tests.Models;
 
 namespace WeatherApp.Services.Tests;
 
-public class WeatherModelTest
+public class WeatherModelTests
 {
-    //OrdinalDirection result = WeatherModel.ConvertWindDirection(-1); //should wrap back around and not fail
+    [Fact]
+    public async void MockWeather_ShouldNotFail()
+    {
+        //Arrange
+        var weatherDTO = new WeatherForCreationDTO()
+        {
+            Latitude = TestConstants.BostonLatitude,
+            Longitude = TestConstants.BostonLongitude
+        };
+
+        //Act
+        var weatherServiceMock = MockIWeatherService.GetMock();
+        var weatherModel = await weatherServiceMock.Object.GetWeather(weatherDTO);
+
+        //Assert
+        Assert.NotEmpty(weatherModel.City);
+    }
+
     [Fact]
     public void ConvertWindDirection_ShouldReturnNorth()
     {
