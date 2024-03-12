@@ -11,7 +11,7 @@ namespace WeatherApp.Infrastructure.Builders;
 
 public interface IClothesBuilder
 {
-    void Initialize();
+    void Initialize(ILayerCustomizations layerCustomizations);
     void BuildGloves();
     void BuildHat();
     void BuildTopLayers();
@@ -23,25 +23,21 @@ public interface IClothesBuilder
 
 public abstract class ClothesBuilderBase : IClothesBuilder
 {
-    protected Clothes _clothes = new();
+    protected Clothes _clothes;
     protected ITopLayersFactory _topLayersFactory;
     protected IHatLayerFactory _hatLayerFactory;
     protected ILayerCustomizations _layerCustomizations;
     protected IHandsLayerFactory _handsLayerFactory;
     protected IBottomLayerFactory _bottomLayerFactory;
 
-    public ClothesBuilderBase(ILayerCustomizations layerCustomizations)
+    public ClothesBuilderBase()
     {
-        _layerCustomizations = layerCustomizations;
-
-        _topLayersFactory = new TopLayersFactory();
-        _hatLayerFactory = new HatLayerFactory();
-        _handsLayerFactory = new HandsLayerFactory();
-        _bottomLayerFactory = new BottomLayerFactory();
+        _clothes = new Clothes();
     }
 
-    public void Initialize()
+    public void Initialize(ILayerCustomizations layerCustomizations)
     {
+        _layerCustomizations = layerCustomizations;
         _hatLayerFactory.RegisterAllLayers(_layerCustomizations);
         _topLayersFactory.RegisterAllLayers(_layerCustomizations);
         _handsLayerFactory.RegisterAllLayers(_layerCustomizations);

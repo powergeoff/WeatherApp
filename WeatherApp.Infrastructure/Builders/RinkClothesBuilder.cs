@@ -7,9 +7,9 @@ namespace WeatherApp.Infrastructure.Builders;
 
 public class RinkClothesBuilder : ClothesBuilderBase
 {
-    public RinkClothesBuilder(ILayerCustomizations layerCustomizations) : base(layerCustomizations)
+    public RinkClothesBuilder() : base()
     {
-
+        //instatiate your clothes factories
     }
 
     public override void BuildBottomLayer() => throw new NotImplementedException();

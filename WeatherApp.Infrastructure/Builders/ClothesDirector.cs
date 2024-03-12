@@ -24,6 +24,10 @@ public class ClothesDirector : IClothesDirector
     }
     private void SetClothesBuilder(IClothesBuilder clothesBuilder) => _clothesBuilder = clothesBuilder;
 
+    private IClothesBuilder GetClothesBuilderByType(string type = "Standard")
+    {
+        return new StandardClothesBuilder();
+    }
 
     public async Task ConstructClothes(ClothesForCreationDTO clothesForCreationDTO)
     {
@@ -35,17 +39,19 @@ public class ClothesDirector : IClothesDirector
             Longitude = clothesForCreationDTO.Longitude
         };
         customizations.Weather = await _externalServicesManager.WeatherService.GetWeather(weatherDTO);
-        customizations.ActivityLevel = clothesForCreationDTO.ActivityLevel; //this should always be these values
+        customizations.ActivityLevel = clothesForCreationDTO.ActivityLevel;
         customizations.BodyTempLevel = clothesForCreationDTO.BodyTempLevel;
         //pass them to the clothesbuilder
-        SetClothesBuilder(new StandardClothesBuilder(customizations));
-        _clothesBuilder.Initialize();
+        SetClothesBuilder(GetClothesBuilderByType(clothesForCreationDTO.ClothesBuilderType));
+        _clothesBuilder.Initialize(customizations);
         _clothesBuilder.BuildGloves();
         _clothesBuilder.BuildHat();
         _clothesBuilder.BuildTopLayers();
         _clothesBuilder.BuildBottomLayer();
         _clothesBuilder.BuildOverview();
     }
+
+
 
     public Clothes GetClothes() => _clothesBuilder.GetClothes();
 }

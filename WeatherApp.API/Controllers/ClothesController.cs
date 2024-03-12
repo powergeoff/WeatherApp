@@ -20,7 +20,7 @@ public class ClothesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<Clothes> GetByCoords([FromQuery] ClothesForCreationDTO clothesForCreationDTO)
+    public async Task<Clothes> GetByCoords([FromQuery] ClothesForCreationDTO clothesForCreationDTO) //if user is logged in, their activityLevel and bodyTemps are passed in here
     {
         await _clothesDirector.ConstructClothes(clothesForCreationDTO);
         return _clothesDirector.GetClothes();

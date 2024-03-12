@@ -9,9 +9,9 @@ namespace WeatherApp.Infrastructure.Builders;
 
 public class BeachClothesBuilder : ClothesBuilderBase
 {
-    public BeachClothesBuilder(ILayerCustomizations layerCustomizations) : base(layerCustomizations)
+    public BeachClothesBuilder() : base()
     {
-
+        //instatiate your clothes factories
     }
 
     public override void BuildBottomLayer() => throw new NotImplementedException();
