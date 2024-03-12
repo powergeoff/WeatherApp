@@ -13,7 +13,7 @@ public class BottomLayerFactory : LayersFactory, IBottomLayerFactory
     private ILayerCustomizations _layerCustomizations;
 
     public BottomLayerFactory()
-    {//allow IOC container to grab an instance BUT only iterate register new Layers later when you actually have customizations
+    {
     }
 
     public override void RegisterAllLayers(ILayerCustomizations layerCustomizations)
