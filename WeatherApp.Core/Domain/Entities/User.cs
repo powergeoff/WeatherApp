@@ -1,5 +1,5 @@
 
-using WeatherApp.Core.Domain.ValueObjects;
+using WeatherApp.Core.Domain.Models;
 
 namespace WeatherApp.Core.Domain.Entities;
 

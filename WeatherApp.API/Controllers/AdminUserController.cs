@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using WeatherApp.Core.Domain.ValueObjects;
 
 namespace WeatherApp.API.Controllers;
 

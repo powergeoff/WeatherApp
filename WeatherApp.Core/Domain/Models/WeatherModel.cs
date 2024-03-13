@@ -1,6 +1,5 @@
-using WeatherApp.Core.Domain.ValueObjects;
 
-namespace WeatherApp.Core.Domain.Entities;
+namespace WeatherApp.Core.Domain.Models;
 
 public class WeatherModel
 {

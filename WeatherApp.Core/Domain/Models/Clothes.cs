@@ -1,5 +1,5 @@
 
-namespace WeatherApp.Core.Domain.Entities;
+namespace WeatherApp.Core.Domain.Models;
 
 public class Clothes
 {

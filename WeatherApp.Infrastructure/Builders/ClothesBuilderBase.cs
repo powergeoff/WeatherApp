@@ -1,4 +1,4 @@
-using WeatherApp.Core.Domain.Entities;
+using WeatherApp.Core.Domain.Models;
 using WeatherApp.Core.Domain.ExternalServices;
 using WeatherApp.Core.DTO;
 using WeatherApp.Core.Factories;

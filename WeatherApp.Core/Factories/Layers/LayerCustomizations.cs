@@ -1,4 +1,4 @@
-using WeatherApp.Core.Domain.Entities;
+using WeatherApp.Core.Domain.Models;
 
 namespace WeatherApp.Core.Factories.Layers;
 
