@@ -27,8 +27,8 @@ public class LoginController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] UserForUpdateDTO loginRequest)
     {
-        var token = await _generateTokenService.GenerateToken(loginRequest);
-        return Ok(token);
+        var authInfoModel = await _generateTokenService.GenerateToken(loginRequest);
+        return Ok(authInfoModel);
 
     }
 }

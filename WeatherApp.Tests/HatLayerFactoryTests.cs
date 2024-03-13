@@ -1,6 +1,6 @@
 
 
-using WeatherApp.Core.Domain.Entities;
+using WeatherApp.Core.Domain.Models;
 using WeatherApp.Core.Factories;
 using WeatherApp.Core.Factories.Layers;
 using WeatherApp.Core.Factories.Layers.HatLayers;

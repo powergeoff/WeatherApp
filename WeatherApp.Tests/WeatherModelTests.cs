@@ -1,7 +1,7 @@
 
 
-using WeatherApp.Core.Domain.Entities;
-using WeatherApp.Core.Domain.ValueObjects;
+
+using WeatherApp.Core.Domain.Models;
 using WeatherApp.Core.DTO.Weather;
 using WeatherApp.Services.Tests.Models;
 

@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using WeatherApp.Core.Domain.Entities;
 using WeatherApp.Core.Domain.Exceptions;
 using WeatherApp.Core.Domain.Repositories;
-using WeatherApp.Core.Domain.ValueObjects;
+using WeatherApp.Core.Domain.Models;
 using WeatherApp.Core.DTO;
 
 namespace WeatherApp.Core.RepositoryServices;

@@ -1,5 +1,5 @@
 using Moq;
-using WeatherApp.Core.Domain.Entities;
+using WeatherApp.Core.Domain.Models;
 using WeatherApp.Core.Domain.ExternalServices;
 using WeatherApp.Core.Domain.Repositories;
 using WeatherApp.Core.DTO.Weather;

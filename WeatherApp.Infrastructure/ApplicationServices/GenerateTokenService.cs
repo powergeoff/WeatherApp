@@ -1,9 +1,11 @@
+using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using WeatherApp.Core.Domain.ValueObjects;
+using WeatherApp.Core.Domain.Entities;
+using WeatherApp.Core.Domain.Models;
 using WeatherApp.Core.DTO;
 using WeatherApp.Core.RepositoryServices;
 using WeatherApp.Infrastructure.ApplicationServices.Configuration;
@@ -14,7 +16,7 @@ public interface IGenerateTokenService
 {
     //take in a userdto and see if it is valid
     //if the user is valid, assign roles and generate a token
-    Task<string> GenerateToken(UserForUpdateDTO user);
+    Task<AuthInfoModel> GenerateToken(UserForUpdateDTO user);
 }
 
 public class GenerateTokenService : IGenerateTokenService
@@ -26,20 +28,26 @@ public class GenerateTokenService : IGenerateTokenService
         _config = config;
         _repositoryServiceManager = repositoryServiceManager;
     }
-    public async Task<string> GenerateToken(UserForUpdateDTO user)
+    public async Task<AuthInfoModel> GenerateToken(UserForUpdateDTO user)
     {
         var isValidUser = await _repositoryServiceManager.UserService.IsValidUser(user); //error handling happens here
         var validUser = await _repositoryServiceManager.UserService.GetUserByUserName(user.UserName);
         var authConfig = _config.AuthConfig;
 
-        var expires = DateTime.UtcNow.AddMinutes(authConfig.Expires);
+        //var expires = DateTime.UtcNow.AddMinutes(1); //play with minutes after log in
+        var expires = DateTime.UtcNow.AddMinutes(authConfig.Expires); //currently an hour
         var isAdmin = validUser.Role.Equals(Roles.Admin);
 
         var identity = GetClaimsIdentity(validUser.UserName, isAdmin, new List<string>());
 
         var token = GetToken(identity, expires, authConfig);
 
-        return token;
+        return new AuthInfoModel
+        {
+            User = validUser,
+            Token = token,
+            Expires = expires
+        };
     }
 
     private static ClaimsIdentity GetClaimsIdentity(

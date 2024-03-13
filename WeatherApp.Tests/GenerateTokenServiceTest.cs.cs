@@ -1,5 +1,6 @@
 
 using WeatherApp.Core.Domain.Exceptions;
+using WeatherApp.Core.Domain.Models;
 using WeatherApp.Core.DTO;
 using WeatherApp.Core.RepositoryServices;
 using WeatherApp.Infrastructure.ApplicationServices;
@@ -40,9 +41,9 @@ public class GenerateTokenServiceTest
             UserName = "Admin",
             Password = "Password"
         };
-        var token = await tokenService.GenerateToken(userDTO);
+        var authInfoModel = await tokenService.GenerateToken(userDTO);
 
-        Assert.NotEmpty(token);
+        Assert.NotEmpty(authInfoModel.Token);
     }
 
     [Fact]
@@ -57,17 +58,17 @@ public class GenerateTokenServiceTest
             Password = "Password"
         };
 
-        string token = "";
+        AuthInfoModel authInfoModel = new AuthInfoModel();
         try
         {
-            token = await tokenService.GenerateToken(userDTO);
+            authInfoModel = await tokenService.GenerateToken(userDTO);
         }
         catch (UserNotFoundException e)
         {
             Console.WriteLine(e.Message);
         }
 
-        Assert.Equal("", token);
+        Assert.Null(authInfoModel.Token);
     }
 
 }

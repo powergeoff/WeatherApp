@@ -1,4 +1,4 @@
-namespace WeatherApp.Core.Domain.ValueObjects;
+namespace WeatherApp.Core.Domain.Models;
 
 public enum OrdinalDirection
 {

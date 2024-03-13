@@ -3,6 +3,7 @@ using Mapster;
 using System.Text.Json;
 using WeatherApp.Core.Domain.Entities;
 using WeatherApp.Core.Domain.ExternalServices;
+using WeatherApp.Core.Domain.Models;
 using WeatherApp.Core.DTO.Weather;
 using WeatherApp.Infrastructure.ApplicationServices.Configuration;
 
