@@ -1,10 +1,11 @@
-using WeatherApp.Core.Domain.Entities;
+
+using WeatherApp.Core.DTO;
 
 namespace WeatherApp.Core.Domain.Models;
 
 public class AuthInfoModel
 {
-    public User User { get; set; }
+    public UserDTO User { get; set; }
     public string Token { get; set; }
     public DateTime Expires { get; set; }
 }

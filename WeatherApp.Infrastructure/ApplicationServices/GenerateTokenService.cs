@@ -34,6 +34,7 @@ public class GenerateTokenService : IGenerateTokenService
         var validUser = await _repositoryServiceManager.UserService.GetUserByUserName(user.UserName);
         var authConfig = _config.AuthConfig;
 
+        //var expires = DateTime.UtcNow.AddMinutes(1); //play with minutes after log in
         var expires = DateTime.UtcNow.AddMinutes(authConfig.Expires); //currently an hour
         var isAdmin = validUser.Role.Equals(Roles.Admin);
 
@@ -43,7 +44,7 @@ public class GenerateTokenService : IGenerateTokenService
 
         return new AuthInfoModel
         {
-            User = validUser.Adapt<User>(),
+            User = validUser,
             Token = token,
             Expires = expires
         };
