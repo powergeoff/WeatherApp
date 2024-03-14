@@ -30,6 +30,7 @@ namespace WeatherApp.API.Middleware
                 context.Response.ContentType = "application/json";
                 var jsonString = JsonSerializer.Serialize(new CommonResponse
                 {
+                    Title = "Frontend version is outdated. You should reload the app. #frontend_outdated!",
                     IsError = true,
                     Message = "Frontend version is outdated. You should reload the app. #frontend_outdated!"
                 }, _config.JsonSettings);

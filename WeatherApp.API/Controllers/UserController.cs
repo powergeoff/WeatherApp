@@ -41,6 +41,7 @@ public class UserController : ControllerBase
         return Ok(userDTO);
     }
 
+    [Authorize]
     [HttpPut("{userId:guid}")]
     public async Task<IActionResult> UpdateUserName(Guid userId, [FromBody] UpdateUserNameDTO userForUpdateDto, CancellationToken cancellationToken)
     {
@@ -49,6 +50,8 @@ public class UserController : ControllerBase
         return NoContent();
     }
 
+
+    [Authorize]
     [HttpPut("{userId:guid}")]
     public async Task<IActionResult> UpdatePassword(Guid userId, [FromBody] UpdatePasswordDTO userForUpdateDto, CancellationToken cancellationToken)
     {
@@ -57,6 +60,8 @@ public class UserController : ControllerBase
         return NoContent();
     }
 
+
+    [Authorize]
     [HttpPut("{userId:guid}")]
     public async Task<IActionResult> UpdateBodyTemp(Guid userId, [FromBody] UpdateBodyTempLevelDTO userForUpdateDto, CancellationToken cancellationToken)
     {
@@ -65,6 +70,8 @@ public class UserController : ControllerBase
         return NoContent();
     }
 
+
+    [Authorize]
     [HttpPut("{userId:guid}")]
     public async Task<IActionResult> UpdateActivityLevel(Guid userId, [FromBody] UpdateActivityLevelDTO userForUpdateDto, CancellationToken cancellationToken)
     {

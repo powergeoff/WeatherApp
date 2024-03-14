@@ -1,5 +1,6 @@
 import { useState } from "react";
-//import { Login } from "../models/login";
+import { setLocalStorageItem, removeLocalStorageItem } from "../api/localStorage";
+import axios from "axios";
 
 export const LoginPage: React.FC = () => {
   const [userName, setUserName] = useState('');
@@ -8,41 +9,39 @@ export const LoginPage: React.FC = () => {
   const [error, setError] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
 
-  async function login() {
+  const logOut = () => {
+    removeLocalStorageItem('auth');
+  }
+
+  const login = async () => {
     setLoading(true);
-
-    try {
-      //localhost:5000
-
-      const response = await fetch(`${process.env.REACT_APP_API_HOST}/api/v1/Login`, {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({userName: userName, password: password})
+      await axios.post(`${process.env.REACT_APP_API_HOST}/api/v1/Login`,{
+        userName,
+        password
+      })
+      .then(function (response) {
+        setLocalStorageItem('auth', response.data);
+      })
+      .catch(function (error) {
+        const errorMessage = error.response.data.title ? error.response.data.title : error.message;
+        setError(errorMessage);
       });
-
-      const resData = await response.json();
-      console.log(resData)
-
-    } catch (err: any) {
-      setError("Failed to login!");
-      console.error(err);
-    }
     setLoading(false);
   }
 
   const handleClick = () => {
+    setError(undefined);
     login();
   }
 
   return (<>
     <h1>Log In Page</h1>
-    <input onChange={(e) => setUserName(e.target.value)} placeholder='Enter User Name' />
-    <input onChange={(e) => setPassword(e.target.value)} placeholder='Enter password' />
-    {loading ?? <>Loading...</>}
-    {error ?? <>{error}</>}
-    <button onClick={handleClick}>Log In</button>
+    <div><input onChange={(e) => setUserName(e.target.value)} placeholder='Enter User Name' /></div>
+    <div><input onChange={(e) => setPassword(e.target.value)} placeholder='Enter password' /></div>
+    
+    <div><button onClick={handleClick}>Log In</button></div>
+    <div><button onClick={() => logOut()}>Log Out</button></div>
+    {loading ? <div>Loading...</div>: ''}
+    {error ? <div>{error}</div> : ''}
   </>);
 }
