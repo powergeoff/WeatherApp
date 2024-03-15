@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthInfoModelContextType } from "./models/authInfoModel";
-import { AuthInfoContext } from "./state/authInfoContext";
+import { AuthInfoModelContextType } from "../models/authInfoModel";
+import { AuthInfoContext } from "../state/authInfoContext";
 
 
 export const Navigation: React.FC = () => {
