@@ -1,11 +1,5 @@
-
-import { removeLocalStorageItem } from "../api/localStorage";
-
-export const LogoutPage: React.FC = () => {
-
-  removeLocalStorageItem('auth');
-
-  return (<>
+export const LogoutPage: React.FC = () => (
+  <>
     <h1>You have successfully logged out</h1>
-  </>);
-}
+  </>
+);

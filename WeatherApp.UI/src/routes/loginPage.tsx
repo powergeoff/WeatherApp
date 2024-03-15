@@ -4,16 +4,12 @@ import { AuthInfoContext } from "../state/authInfoContext";
 import { AuthInfoModelContextType } from "../models/authInfoModel";
 
 export const LoginPage: React.FC = () => {
-  const { saveAuthInfo, removeAuthInfo } = useContext(AuthInfoContext) as AuthInfoModelContextType;
+  const { saveAuthInfo } = useContext(AuthInfoContext) as AuthInfoModelContextType;
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
   const [error, setError] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
-
-  const logOut = () => {
-    removeAuthInfo();
-  }
 
   const login = async () => {
     setLoading(true);
@@ -42,7 +38,6 @@ export const LoginPage: React.FC = () => {
     <div><input onChange={(e) => setPassword(e.target.value)} placeholder='Enter password' /></div>
     
     <div><button onClick={handleClick}>Log In</button></div>
-    <div><button onClick={() => logOut()}>Log Out</button></div>
     {loading ? <div>Loading...</div>: ''}
     {error ? <div>{error}</div> : ''}
   </>);
