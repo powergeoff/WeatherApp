@@ -1,61 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import AuthInfoProvider from './state/authInfoContext';
+import { Navigation } from './Navigation';
+
 import './App.css';
+import { LoginPage } from './routes/loginPage';
+import { HomePage } from './routes/homePage';
+import { LogoutPage } from './routes/logoutPage';
 
-interface Clothes {
-  gloves: string;
-  hat: string;
-  overview: string;
-  bottomLayer: string;
-  topLayers: string[];
-}
-
-function App() {
-  const [isLoading, setIsLoading] = useState(true);
-  const [clothes, setClothes] = useState<Clothes>();
-
-  useEffect(function () {
-    async function fetchData() {
-      setIsLoading(true);
-
-      try {
-        //localhost:5000
-        const response = await fetch(`${process.env.REACT_APP_API_HOST}/api/v1/Clothes/GetByCoords?latitude=42.36&longitude=-71.058884`);
-
-        const resData = await response.json();
-
-        if (!response.ok) {
-          throw new Error(resData.message || 'Fetching the goals failed.');
-        }
-        setClothes(resData);
-      } catch (err: any) {
-        console.error(err);
-      }
-      setIsLoading(false);
-    }
-
-    fetchData();
-  }, []);
-
-
+ export const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        {isLoading ? <p>Loading...</p>: <>
-          <h3>{clothes?.overview}</h3>
-          
-          <div>Hat: {clothes?.hat}</div>
-          <div>Top: {clothes?.topLayers.map(t => <>{t},</>)}</div>
-          <div>Gloves: {clothes?.gloves}</div>
-          <div>Pants: {clothes?.bottomLayer}</div>
-          
-          <div>Env: {process.env.NODE_ENV}</div>
-          <div>API Host: {process.env.REACT_APP_API_HOST}</div>
-        </>
-        }
+    <AuthInfoProvider>
+      <div className="App">
         
-      </header>
-    </div>
-  );
-}
+        <header className="App-header">
+          <h1>Clothes For Current Weather</h1>
+        </header>
 
-export default App;
+        <div className="App-main">
+        <Navigation />
+
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/logout" element={<LogoutPage />} />
+          <Route path="*" element={<p>There's nothing here: 404!</p>} />
+        </Routes>
+        </div>
+      </div>
+    </AuthInfoProvider>
+  );
+};
+

@@ -43,6 +43,7 @@ namespace WeatherApp.API.Middleware
                     context.Response.ContentType = "application/json";
                     var jsonString = JsonSerializer.Serialize(new CommonResponse
                     {
+                        Title = e.Message,
                         IsError = true,
                         Message = e.Message,
                         Description = e.ToString()
