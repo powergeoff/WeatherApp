@@ -1,7 +1,7 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { getLocalStorageItem } from '../api/localStorage';
-import { AuthInfoModel } from '../models/authInfoModel';
+import React, { useContext, useEffect, useState } from 'react';
+import { AuthInfoModelContextType } from '../models/authInfoModel';
+import { AuthInfoContext } from '../state/authInfoContext';
 
 interface Clothes {
   gloves: string;
@@ -16,10 +16,12 @@ export const HomePage: React.FC = () => {
   const [clothes, setClothes] = useState<Clothes | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const authConfigModel: AuthInfoModel | undefined= getLocalStorageItem('auth');
+  
+  const { authInfoModel } = useContext(AuthInfoContext) as AuthInfoModelContextType;
 
-  const activityLevel = authConfigModel?.user?.activityLevel ?? 0;
-  const bodyTempLevel = authConfigModel?.user?.bodyTemp ?? 0;
+
+  const activityLevel = authInfoModel.user?.activityLevel;
+  const bodyTempLevel = authInfoModel.user?.bodyTemp;
 
   useEffect(() => {
     const fetchData = async () => {

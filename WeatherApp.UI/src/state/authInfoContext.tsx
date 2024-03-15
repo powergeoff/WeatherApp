@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { AuthInfoModel, AuthInfoModelContextType } from '../models/authInfoModel';
-import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from "../api/localStorage";
+import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from "./localStorage";
 import { User } from '../models/user';
 
 const initialUser: User = {
