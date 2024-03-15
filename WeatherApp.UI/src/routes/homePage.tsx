@@ -39,17 +39,20 @@ export const HomePage: React.FC = () => {
 
   return (
     <div>
-      {loading ? <>Loading...</> : error ? <>Error: {error}</> : clothes ? <>
-        <h3 data-testid="overview">{clothes?.overview}</h3>
-        
-        {clothes.hat && <div>Hat: {clothes.hat}</div>}
-        <div>Top: {clothes?.topLayers.map(t => <span key={t}>{t},</span>)}</div>
-        {clothes.gloves && <div>Gloves: {clothes?.gloves}</div>}
-        <div>Pants: {clothes?.bottomLayer}</div>
-        
-        <div>Env: {process.env.NODE_ENV}</div>
-        <div>API Host: {process.env.REACT_APP_API_HOST}</div>
-      </> : <p>Loading...</p>
+      {loading ? <>Loading...</> 
+        : error ? <>Error: {error}</> 
+        : clothes ? <>
+          <h3 data-testid="overview">{clothes?.overview}</h3>
+          
+          {clothes.hat && <div>{clothes.hat}</div>}
+          <div>{clothes?.topLayers.map(t => <span key={t}>{t},</span>)}</div>
+          {clothes.gloves && <div>{clothes?.gloves}</div>}
+          <div>{clothes?.bottomLayer}</div>
+          
+          <div>Env: {process.env.NODE_ENV}</div>
+          <div>API Host: {process.env.REACT_APP_API_HOST}</div>
+        </> 
+        : ''
       }
       
     </div>

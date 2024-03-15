@@ -1,8 +1,10 @@
-import { useState } from "react";
-import { setLocalStorageItem, removeLocalStorageItem } from "../api/localStorage";
+import { useContext, useState } from "react";
 import axios from "axios";
+import { AuthInfoContext } from "../state/authInfoContext";
+import { AuthInfoModelContextType } from "../models/authInfoModel";
 
 export const LoginPage: React.FC = () => {
+  const { saveAuthInfo, removeAuthInfo } = useContext(AuthInfoContext) as AuthInfoModelContextType;
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
@@ -10,7 +12,7 @@ export const LoginPage: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const logOut = () => {
-    removeLocalStorageItem('auth');
+    removeAuthInfo();
   }
 
   const login = async () => {
@@ -19,10 +21,10 @@ export const LoginPage: React.FC = () => {
         userName,
         password
       })
-      .then(function (response) {
-        setLocalStorageItem('auth', response.data);
+      .then((response) => {
+        saveAuthInfo(response.data);
       })
-      .catch(function (error) {
+      .catch((error) => {
         const errorMessage = error.response.data.title ? error.response.data.title : error.message;
         setError(errorMessage);
       });
