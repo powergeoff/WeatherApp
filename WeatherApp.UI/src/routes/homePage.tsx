@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthInfoModelContextType } from '../models/authInfoModel';
 import { AuthInfoContext } from '../state/authInfoContext';
+import { RadioSlider } from '../shared/radioSlider';
 
 interface Clothes {
   gloves: string;
@@ -20,8 +21,8 @@ export const HomePage: React.FC = () => {
   const { authInfoModel } = useContext(AuthInfoContext) as AuthInfoModelContextType;
 
 
-  const activityLevel = authInfoModel.user?.activityLevel;
-  const bodyTempLevel = authInfoModel.user?.bodyTemp;
+  const [activityLevel, setActivityLevel] = useState<number>(authInfoModel.user?.activityLevel ?? 0);
+  const [bodyTempLevel, setBodyTempLevel] = useState<number>(authInfoModel.user?.bodyTemp ?? 0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,9 +51,10 @@ export const HomePage: React.FC = () => {
           <div>{clothes?.topLayers.map(t => <span key={t}>{t},</span>)}</div>
           {clothes.gloves && <div>{clothes?.gloves}</div>}
           <div>{clothes?.bottomLayer}</div>
-          
-          <div>Env: {process.env.NODE_ENV}</div>
-          <div>API Host: {process.env.REACT_APP_API_HOST}</div>
+
+          <br />
+          <RadioSlider name='Activity Level' value={activityLevel} setValue={setActivityLevel} />
+          <RadioSlider name='Body Temp Level' value={bodyTempLevel} setValue={setBodyTempLevel} />
         </> 
         : ''
       }

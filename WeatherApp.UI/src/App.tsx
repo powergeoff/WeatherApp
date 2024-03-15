@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import AuthInfoProvider from './state/authInfoContext';
-import { Navigation } from './Navigation';
+import { Navigation } from './shared/Navigation'; 
 
 import './App.css';
 import { LoginPage } from './routes/loginPage';
