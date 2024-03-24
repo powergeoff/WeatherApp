@@ -23,7 +23,7 @@ public class GenerateTokenServiceTest
             {
                 Expires = 10,
                 Key = "02092024_YourSecretKeyForAuthenticationOfApplication",
-                Audience = "http://localhost:5000/",
+                Audience = "http://localhost:5001/",
                 Issuer = "Vt Auth Server",
             }
         };
