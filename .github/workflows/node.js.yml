@@ -9,15 +9,12 @@ on:
   pull_request:
     branches: ["main"]
 
-env:
-  WORKING_DIR: '/home/runner/work/WeatherApp/WeatherApp/WeatherApp.UI'
-
 jobs:
   build:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: $WORKING_DIR
+        working-directory: /home/runner/work/WeatherApp/WeatherApp/WeatherApp.UI
     permissions:
       contents: read
       packages: write
