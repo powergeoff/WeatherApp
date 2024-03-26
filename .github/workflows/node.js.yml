@@ -26,15 +26,14 @@ jobs:
           node-version: 18.17.1
       - run: npm install
         working-directory: ./WeatherApp.UI
-      - run: npm test --logger "trx;LogFileName=test-results.trx" || true
+      - run: npm test
         working-directory: ./WeatherApp.UI
 
       - name: Test Report
         uses: dorny/test-reporter@v1
-
-        if: always()
+        if: success() || failure() # run this step even if previous step failed
         with:
           name: JEST Tests # Name of the check run which will be created
-          path: "**/test-results.trx" # Path to test results
+          path: ./WeatherApp.UI/reports/jest-*.xml # Path to test results
           reporter: jest-junit
           fail-on-error: true
