@@ -22,4 +22,6 @@ jobs:
           cache: 'npm'
           cache-dependency-path: "./WeatherApp.UI/package-lock.json"
       - run: npm install
+        working-directory: ./WeatherApp.UI
       - run: npm test
+        working-directory: ./WeatherApp.UI
