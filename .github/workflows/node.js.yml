@@ -33,8 +33,5 @@ jobs:
           cache: 'npm'
           cache-dependency-path: ./WeatherApp.UI/package-lock.json
       - run: npm ci
-        working-directory: $WORKING_DIR 
       - run: npm run build --if-present
-        working-directory: $WORKING_DIR 
       - run: npm test
-        working-directory: $WORKING_DIR
