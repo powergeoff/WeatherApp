@@ -12,9 +12,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    #defaults:
-     # run:
-      #  working-directory: ./WeatherApp/WeatherApp.UI
+    defaults:
+      run:
+        working-directory: /home/runner/work/WeatherApp/WeatherApp/WeatherApp.UI
     permissions:
       contents: read
       packages: write
@@ -31,7 +31,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-          cache-dependency-path: WeatherApp.UI
       - run: npm ci
       - run: npm run build --if-present
       - run: npm test
