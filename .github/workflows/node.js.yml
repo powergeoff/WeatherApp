@@ -19,8 +19,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 18.17.1
-          cache: 'npm'
-          cache-dependency-path: "./WeatherApp.UI/package-lock.json"
       - run: npm install
         working-directory: ./WeatherApp.UI
       - run: npm test
