@@ -23,3 +23,13 @@ jobs:
         working-directory: ./WeatherApp.UI
       - run: npm test
         working-directory: ./WeatherApp.UI
+
+      - name: Test Report
+        uses: dorny/test-reporter@v1
+
+        if: always()
+        with:
+          name: JEST Tests # Name of the check run which will be created
+          path: reports/jest-*.xml # Path to test results
+          reporter: jest-junit
+          fail-on-error: true
