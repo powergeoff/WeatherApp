@@ -13,7 +13,7 @@ export const LoginPage: React.FC = () => {
 
   const login = async () => {
     setLoading(true);
-    await axios.post(`${process.env.REACT_APP_API_HOST}/api/v1/Login`, {
+    await axios.post(`http://localhost:5000/api/v1/Login`, {
       userName,
       password
     })
@@ -44,7 +44,6 @@ export const LoginPage: React.FC = () => {
     </div>
 
     <div><button onClick={handleClick}>Log In</button></div>
-    {loading ? <div>Loading...</div> : ''}
-    {error ? <h2>{error}</h2> : ''}
+    {loading ? <div>Loading...</div> : error ? <h2>{error}</h2> : <h2>Login Success</h2>}
   </>);
 }

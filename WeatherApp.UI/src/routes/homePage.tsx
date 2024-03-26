@@ -51,23 +51,23 @@ export const HomePage: React.FC = () => {
 
   return (
     <div>
-      {loading ? <>Loading...</> 
-        : error ? <>Error: {error}</> 
-        : clothes ? <>
-          <h3 data-testid="overview">{clothes?.overview}</h3>
-          
-          {clothes.hat && <div>{clothes.hat}</div>}
-          <div>{clothes?.topLayers.map(t => <span key={t}>{t},</span>)}</div>
-          {clothes.gloves && <div>{clothes?.gloves}</div>}
-          <div>{clothes?.bottomLayer}</div>
+      {loading ? <>Loading...</>
+        : error ? <h2>Error: {error}</h2>
+          : clothes ? <>
+            <h3 data-testid="overview">{clothes?.overview}</h3>
 
-          <br />
-          <RadioSlider name='Activity Level' value={activityLevel} setValue={setActivityLevel} />
-          <RadioSlider name='Body Temp Level' value={bodyTempLevel} setValue={setBodyTempLevel} />
-        </> 
-        : ''
+            {clothes.hat && <div>{clothes.hat}</div>}
+            <div>{clothes?.topLayers.map(t => <span key={t}>{t},</span>)}</div>
+            {clothes.gloves && <div>{clothes?.gloves}</div>}
+            <div>{clothes?.bottomLayer}</div>
+
+            <br />
+            <RadioSlider name='Activity Level' value={activityLevel} setValue={setActivityLevel} />
+            <RadioSlider name='Body Temp Level' value={bodyTempLevel} setValue={setBodyTempLevel} />
+          </>
+            : ''
       }
-      
+
     </div>
   );
 }
