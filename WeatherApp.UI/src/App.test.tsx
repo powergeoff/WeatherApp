@@ -21,7 +21,7 @@ const mockNavigatorGeolocation = () => {
   return { clearWatchMock, getCurrentPositionMock, watchPositionMock };
 };
 
-test('renders clothes heading', async () => {
+test('renders clothes heading and HOme Page error failed to load clothes', async () => {
   const { getCurrentPositionMock } = mockNavigatorGeolocation();
   getCurrentPositionMock.mockImplementation((success) => {
     success({
@@ -38,12 +38,11 @@ test('renders clothes heading', async () => {
     </MemoryRouter>
   );
 
-  // /screen.logTestingPlaygroundURL();
   const header = screen.getByRole('heading', { name: /clothes for current weather/i })
 
   expect(header).toBeInTheDocument();
-});
 
-const pause = () => new Promise((resolve) => {
-  setTimeout(resolve, 100);
+  const error = await screen.findByRole('heading', { name: /Error: failed to load clothes/i })
+  expect(error).toBeInTheDocument();
+
 });

@@ -1,22 +1,23 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import user from '@testing-library/user-event';
 import { LoginPage } from './loginPage';
 import AuthInfoProvider from '../state/authInfoContext';
 
-const renderComponent = () => {
+const renderComponent = async () => {
     render(
         <AuthInfoProvider>
             <LoginPage />
         </AuthInfoProvider>);
+    await screen.findAllByRole('button');
 }
 
 describe("<LoginPage />", () => {
-    renderComponent();
-    const userName = screen.getByPlaceholderText("Enter User Name");
-    const password = screen.getByPlaceholderText("Enter password");
-    const button = screen.getByRole('button');
 
-    test('it shows two inputs and a button', () => {
+    test('it shows two inputs and a button', async () => {
+        await renderComponent();
+        const userName = screen.getByPlaceholderText("Enter User Name");
+        const password = screen.getByPlaceholderText("Enter password");
+        const button = screen.getByRole('button');
 
         //assert component is doing what we expect
         expect(userName).toBeInTheDocument();
@@ -25,13 +26,33 @@ describe("<LoginPage />", () => {
     });
 
     test('it displays an error if username or password is empty', async () => {
-        /*await user.type(userName, "Test");
+        await renderComponent();
+        const button = screen.getByRole('button');
         await user.click(button);
 
-        const error = await screen.findByRole('heading', { name: //i})*/
+        const error = await screen.findByRole('heading', { name: /Request failed with status code 400/i });
+
+        expect(error).toBeInTheDocument();
     })
 
-    test('it doesn\'t error when username and password are not empty', () => {
-        //rend
+    test('it doesn\'t error when username and password are not empty', async () => {
+        await renderComponent();
+        const userName = screen.getByPlaceholderText("Enter User Name");
+        const password = screen.getByPlaceholderText("Enter password");
+        const button = screen.getByRole('button');
+
+        await waitFor(async () => {
+            await user.click(userName);
+            await user.keyboard('jane');
+
+            await user.click(password);
+            await user.keyboard('pass');
+
+            await user.click(button);
+            //Login Success
+            const success = await screen.findByRole('heading', { name: /login success/i })
+            expect(success).toBeInTheDocument();
+        })
+
     })
 });
