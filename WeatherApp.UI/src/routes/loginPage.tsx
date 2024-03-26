@@ -13,10 +13,10 @@ export const LoginPage: React.FC = () => {
 
   const login = async () => {
     setLoading(true);
-      await axios.post(`${process.env.REACT_APP_API_HOST}/api/v1/Login`,{
-        userName,
-        password
-      })
+    await axios.post(`${process.env.REACT_APP_API_HOST}/api/v1/Login`, {
+      userName,
+      password
+    })
       .then((response) => {
         saveAuthInfo(response.data);
       })
@@ -34,11 +34,17 @@ export const LoginPage: React.FC = () => {
 
   return (<>
     <h1>Log In Page</h1>
-    <div><input onChange={(e) => setUserName(e.target.value)} placeholder='Enter User Name' /></div>
-    <div><input onChange={(e) => setPassword(e.target.value)} placeholder='Enter password' /></div>
-    
+    <div>
+      <label htmlFor="userName">User Name</label>
+      <input id="userName" onChange={(e) => setUserName(e.target.value)} placeholder='Enter User Name' />
+    </div>
+    <div>
+      <label htmlFor="password" >Password</label>
+      <input id="password" onChange={(e) => setPassword(e.target.value)} placeholder='Enter password' />
+    </div>
+
     <div><button onClick={handleClick}>Log In</button></div>
-    {loading ? <div>Loading...</div>: ''}
-    {error ? <div>{error}</div> : ''}
+    {loading ? <div>Loading...</div> : ''}
+    {error ? <h2>{error}</h2> : ''}
   </>);
 }
