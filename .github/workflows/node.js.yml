@@ -14,7 +14,9 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: /home/runner/work/WeatherApp/WeatherApp/WeatherApp.UI
+        with:
+          dot: true
+          working-directory: /home/runner/work/WeatherApp/WeatherApp/WeatherApp.UI
     permissions:
       contents: read
       packages: write
