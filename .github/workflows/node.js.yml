@@ -10,7 +10,7 @@ on:
     branches: ["main"]
 
 env:
-  WORKING_DIR: 'WeatherApp.UI'
+  WORKING_DIR: '/home/runner/work/WeatherApp/WeatherApp/WeatherApp.UI'
 
 jobs:
   build:
