@@ -34,6 +34,6 @@ jobs:
         if: success() || failure() # run this step even if previous step failed
         with:
           name: JEST Tests # Name of the check run which will be created
-          path: ./WeatherApp.UI/reports/jest-*.xml # Path to test results
+          path: reports/jest-*.xml # Path to test results
           reporter: jest-junit
           fail-on-error: true
