@@ -25,7 +25,7 @@ export const HomePage: React.FC = () => {
   const fetchData = useCallback(async () => {
     setLoading(true);
     try {
-      const url = `${process.env.REACT_APP_API_HOST}/api/v1/Clothes/GetByCoords?latitude=${latitude}&longitude=${longitude}&activityLevel=${activityLevel}&bodyTempLevel=${bodyTempLevel}`
+      const url = `http://localhost:5000/api/v1/Clothes/GetByCoords?latitude=${latitude}&longitude=${longitude}&activityLevel=${activityLevel}&bodyTempLevel=${bodyTempLevel}`
       const response = await axios.get(url);
       setClothes(response.data);
     } catch (error) {
