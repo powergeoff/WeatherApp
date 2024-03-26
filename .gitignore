@@ -34,6 +34,7 @@ Import
 .vs
 .config
 Publish
+*lock.json
 wwwroot
 
 appsettings.Development.json
