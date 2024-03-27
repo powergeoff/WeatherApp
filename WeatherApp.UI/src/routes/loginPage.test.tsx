@@ -13,16 +13,18 @@ const renderComponent = async () => {
 
 describe("<LoginPage />", () => {
 
-    test('it shows two inputs and a button', async () => {
+    test('it shows two inputs and a button - no success banner', async () => {
         await renderComponent();
         const userName = screen.getByPlaceholderText("Enter User Name");
         const password = screen.getByPlaceholderText("Enter password");
         const button = screen.getByRole('button');
+        const success = screen.queryByRole('heading', { name: /login success/i })
 
         //assert component is doing what we expect
         expect(userName).toBeInTheDocument();
         expect(password).toBeInTheDocument();
         expect(button).toBeInTheDocument();
+        expect(success).not.toBeInTheDocument();
     });
 
     test('it displays an error if username or password is empty', async () => {

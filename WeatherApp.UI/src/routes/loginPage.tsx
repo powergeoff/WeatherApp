@@ -9,7 +9,14 @@ export const LoginPage: React.FC = () => {
   const [password, setPassword] = useState('');
 
   const [error, setError] = useState<string | undefined>(undefined);
+  const [success, setSuccess] = useState<string | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const init = () => {
+    setError(undefined);
+    setSuccess(undefined);
+    setLoading(false);
+  }
 
   const login = async () => {
     setLoading(true);
@@ -19,6 +26,7 @@ export const LoginPage: React.FC = () => {
     })
       .then((response) => {
         saveAuthInfo(response.data);
+        setSuccess('Login Success');
       })
       .catch((error) => {
         const errorMessage = error.response.data.title ? error.response.data.title : error.message;
@@ -27,9 +35,9 @@ export const LoginPage: React.FC = () => {
     setLoading(false);
   }
 
-  const handleClick = () => {
-    setError(undefined);
-    login();
+  const handleClick = async () => {
+    init();
+    await login();
   }
 
   return (<>
@@ -44,6 +52,6 @@ export const LoginPage: React.FC = () => {
     </div>
 
     <div><button onClick={handleClick}>Log In</button></div>
-    {loading ? <div>Loading...</div> : error ? <h2>{error}</h2> : <h2>Login Success</h2>}
+    {loading ? <div>Loading...</div> : error ? <h2>{error}</h2> : <h2>{success}</h2>}
   </>);
 }
