@@ -21,4 +21,11 @@ public class ClothesController : ControllerBase
         await _clothesDirector.ConstructClothes(clothesForCreationDTO);
         return _clothesDirector.GetClothes();
     }
+
+    [HttpGet]
+    public async Task<Clothes> GetTopLayerByCoords([FromQuery] ClothesForCreationDTO clothesForCreationDTO)
+    {
+        await _clothesDirector.ConstructTopLayerOnly(clothesForCreationDTO);
+        return _clothesDirector.GetClothes();
+    }
 }
