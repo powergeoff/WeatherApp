@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import user from '@testing-library/user-event';
 import { HomePage } from './homePage';
 import AuthInfoProvider from '../state/authInfoContext';
@@ -12,33 +12,37 @@ const renderComponent = async () => {
   await screen.findAllByRole('heading', { name: 'Home Page' });
 }
 
+beforeEach(async () => {
+  await renderComponent();
+});
+afterEach(cleanup);
+
+
 describe('<HomePage />', () => {
 
-  test('renders clothes heading and Home Page error failed to load clothes', async () => {
+  test('clicking the button without coords gives error', async () => {
+
     const { getCurrentPositionMock } = mockNavigatorGeolocation();
+    getCurrentPositionMock.mockImplementationOnce((success, error) => Promise.resolve(error({
+      code: 1,
+      message: 'GeoLocation Error',
+    })));
 
-    getCurrentPositionMock.mockImplementation((success) => {
-      success({
-        coords: {
-          latitude: 51.1,
-          longitude: 45.3
-        }
-      })
-    });
+    const button = await screen.findByRole('button', { name: /get clothes for my location/i })
+    user.click(button);
 
-    await renderComponent();
+    screen.debug();
 
-
-    const error = await screen.findByRole('heading', { name: /error: failed to load clothes/i })
+    const error = await screen.findByRole('heading', { name: /error: You need to allow location for the app to work/i })
     expect(error).toBeInTheDocument();
 
   });
 
-  test('You need to allow location for the app to work', async () => {
+  test('renders a button to get clothes by location', async () => {
 
-    await renderComponent();
+    const button = await screen.findByRole('button', { name: /get clothes for my location/i })
+    expect(button).toBeInTheDocument();
 
-    const error = await screen.findByRole('heading', { name: /error: you need to allow location for the app to work/i });
-    expect(error).toBeInTheDocument();
-  })
+  });
+
 });

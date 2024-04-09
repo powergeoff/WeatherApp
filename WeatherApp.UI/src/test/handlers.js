@@ -25,18 +25,22 @@ const loginError = {
 }
 
 export const handlers = [
-  rest.get("http://localhost:5000/api/v1/Clothes/GetByCoords", (req,res, ctx) => {
+  rest.get("http://localhost:5000/api/v1/Clothes/GetByCoords", (req, res, ctx) => {
     return res(
-        ctx.status(400),
-        ctx.json({
-          loginError
-        }),
-      )
+      ctx.status(200),
+      ctx.json({
+        "gloves": null,
+        "hat": null,
+        "overview": "Fake City USA Looks Nice Today",
+        "bottomLayer": "Pants",
+        "topLayers": ["Long Sleeve T-Shirt", "T-Shirt"]
+      }),
+    )
   }),
-  rest.post("http://localhost:5000/api/v1/Login", async (req, res, ctx) => { 
+  rest.post("http://localhost:5000/api/v1/Login", async (req, res, ctx) => {
     const userName = req.body.userName;
     const password = req.body.password;
-    if(userName && password) {
+    if (userName && password) {
       return res(ctx.json({ loginSuccess }));
     }
     else {
