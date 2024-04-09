@@ -16,14 +16,17 @@ export const HomePage: React.FC = () => {
   const [error, setError] = useState<string | undefined>(undefined);
   const [clothes, setClothes] = useState<Clothes | undefined>(undefined);
   const [loading, setLoading] = useState<boolean>(false);
+
   const { authInfoModel } = useContext(AuthInfoContext) as AuthInfoModelContextType;
   const [activityLevel, setActivityLevel] = useState<number>(authInfoModel.user?.activityLevel ?? 0);
   const [bodyTempLevel, setBodyTempLevel] = useState<number>(authInfoModel.user?.bodyTemp ?? 0);
-  const [latitude, setLatitude] = useState(0);
-  const [longitude, setLongitude] = useState(0);
+
+  const [latitude, setLatitude] = useState<number | undefined>(undefined);
+  const [longitude, setLongitude] = useState<number | undefined>(undefined);
 
   const fetchData = useCallback(async () => {
     setLoading(true);
+    setClothes(undefined);
     try {
       const url = `http://localhost:5000/api/v1/Clothes/GetByCoords?latitude=${latitude}&longitude=${longitude}&activityLevel=${activityLevel}&bodyTempLevel=${bodyTempLevel}`
       const response = await axios.get(url);
@@ -35,39 +38,41 @@ export const HomePage: React.FC = () => {
   }, [activityLevel, bodyTempLevel, latitude, longitude]);
 
   useEffect(() => {
-    setError(undefined); //grab user's location
-    navigator.geolocation.getCurrentPosition((position) => {
-      setLatitude(position.coords.latitude);
-      setLongitude(position.coords.longitude);
-    });
-    //if they allow - go get the data
-    if (latitude !== 0 && longitude !== 0) {
-      fetchData();
-    } else {
-      setError("You need to allow location for the app to work")
-    }
-  }, [activityLevel, bodyTempLevel, fetchData, latitude, longitude]);
+    latitude && longitude && fetchData()
+  }, [latitude, longitude, fetchData]);
 
-
+  const getLocation = async () => {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setLatitude(position.coords.latitude);
+        setLongitude(position.coords.longitude);
+      },
+      (err) => {
+        setError("You need to allow location for the app to work")
+      }
+    );
+  };
   return (
     <div>
       <h1>Home Page</h1>
-      {loading ? <>Loading...</>
-        : error ? <h2>Error: {error}</h2>
-          : clothes ? <>
-            <h3 data-testid="overview">{clothes?.overview}</h3>
+      <button onClick={getLocation}>Get Clothes For My Location</button>
+      {loading && <h2>Loading...</h2>}
+      {error && <h2>Error: {error}</h2>}
+      {clothes &&
+        <>
+          <h3 data-testid="overview">{clothes?.overview}</h3>
 
-            {clothes.hat && <div>{clothes.hat}</div>}
-            <div>{clothes?.topLayers.map(t => <span key={t}>{t},</span>)}</div>
-            {clothes.gloves && <div>{clothes?.gloves}</div>}
-            <div>{clothes?.bottomLayer}</div>
+          {clothes.hat && <div>{clothes.hat}</div>}
+          <div>{clothes?.topLayers.map(t => <span key={t}>{t},</span>)}</div>
+          {clothes.gloves && <div>{clothes?.gloves}</div>}
+          <div>{clothes?.bottomLayer}</div>
 
-            <br />
-            <RadioSlider name='Activity Level' value={activityLevel} setValue={setActivityLevel} />
-            <RadioSlider name='Body Temp Level' value={bodyTempLevel} setValue={setBodyTempLevel} />
-          </>
-            : ''
+          <br />
+          <RadioSlider name='Activity Level' value={activityLevel} setValue={setActivityLevel} />
+          <RadioSlider name='Body Temp Level' value={bodyTempLevel} setValue={setBodyTempLevel} />
+        </>
       }
+
 
     </div>
   );

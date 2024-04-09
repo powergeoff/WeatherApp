@@ -1,3 +1,4 @@
+
 export const mockNavigatorGeolocation = () => {
   const clearWatchMock = jest.fn();
   const getCurrentPositionMock = jest.fn();
@@ -6,10 +7,10 @@ export const mockNavigatorGeolocation = () => {
   const geolocation = {
     clearWatch: clearWatchMock,
     getCurrentPosition: getCurrentPositionMock,
-    watchPosition: watchPositionMock,
+    watchPosition: watchPositionMock
   };
 
-  Object.defineProperty(global.navigator, 'geolocation', {
+  global.navigator.geolocation ?? Object.defineProperty(global.navigator, 'geolocation', {
     value: geolocation,
   });
 
