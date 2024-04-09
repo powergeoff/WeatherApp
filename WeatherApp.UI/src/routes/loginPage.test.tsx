@@ -43,18 +43,18 @@ describe("<LoginPage />", () => {
         const password = screen.getByPlaceholderText("Enter password");
         const button = screen.getByRole('button');
 
-        //await waitFor(async () => {
-        user.click(userName);
-        user.keyboard('jane');
+        await waitFor(async () => {
+            await user.click(userName);
+            await user.keyboard('jane');
 
-        user.click(password);
-        user.keyboard('pass');
+            await user.click(password);
+            await user.keyboard('pass');
 
-        user.click(button);
-        //Login Success
-        const success = await screen.findByRole('heading', { name: /login success/i })
-        expect(success).toBeInTheDocument();
-        //})
+            await user.click(button);
+            //Login Success
+            const success = await screen.findByRole('heading', { name: /login success/i })
+            expect(success).toBeInTheDocument();
+        })
 
     })
 });
