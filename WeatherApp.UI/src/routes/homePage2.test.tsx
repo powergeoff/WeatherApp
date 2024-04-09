@@ -31,11 +31,13 @@ describe('<HomePage />', () => {
     await renderComponent();
 
     const button = await screen.findByRole('button', { name: /get clothes for my location/i })
-    user.click(button)
-    //screen.debug();
+    await waitFor(async () => {
+      await user.click(button)
+      //screen.debug();
 
-    const overview = await screen.findByTestId('overview');
-    expect(overview).toBeInTheDocument();
+      const overview = await screen.findByTestId('overview');
+      expect(overview).toBeInTheDocument();
+    });
 
   })
 });

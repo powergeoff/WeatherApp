@@ -29,12 +29,14 @@ describe('<HomePage />', () => {
     })));
 
     const button = await screen.findByRole('button', { name: /get clothes for my location/i })
-    user.click(button);
+    await waitFor(async () => {
+      await user.click(button);
 
-    //screen.debug();
+      //screen.debug();
 
-    const error = await screen.findByRole('heading', { name: /error: You need to allow location for the app to work/i })
-    expect(error).toBeInTheDocument();
+      const error = await screen.findByRole('heading', { name: /error: You need to allow location for the app to work/i })
+      expect(error).toBeInTheDocument();
+    });
 
   });
 
