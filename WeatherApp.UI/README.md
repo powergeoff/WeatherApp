@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+## https://docs.cypress.io/guides/continuous-integration/github-actions?utm_source=Binary%3A+App&utm_medium=CI+Prompt+1&utm_campaign=GitHub&utm_content=Automatic
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
