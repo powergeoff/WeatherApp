@@ -41,17 +41,20 @@ export const LoginPage: React.FC = () => {
   }
 
   return (<>
-    <h1>Log In Page</h1>
+    <h1 data-test="header">Log In Page</h1>
     <div>
       <label htmlFor="userName">User Name</label>
-      <input id="userName" onChange={(e) => setUserName(e.target.value)} placeholder='Enter User Name' />
+      <input data-test="userName" id="userName" onChange={(e) => setUserName(e.target.value)} placeholder='Enter User Name' />
     </div>
     <div>
       <label htmlFor="password" >Password</label>
-      <input id="password" onChange={(e) => setPassword(e.target.value)} placeholder='Enter password' />
+      <input data-test="password" id="password" onChange={(e) => setPassword(e.target.value)} placeholder='Enter password' />
     </div>
 
-    <div><button onClick={handleClick}>Log In</button></div>
-    {loading ? <div>Loading...</div> : error ? <h2>{error}</h2> : <h2>{success}</h2>}
+    <div><button data-test="submit" onClick={handleClick}>Log In</button></div>
+
+    {loading && <h2>Loading...</h2>}
+    {error && <h2 data-test="errorMessage">{error}</h2>}
+    {success && <h2 data-test="successMessage">{success}</h2>}
   </>);
 }

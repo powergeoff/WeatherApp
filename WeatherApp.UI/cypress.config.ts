@@ -1,16 +1,20 @@
-import { defineConfig } from "cypress";
+import Cypress, { defineConfig } from "cypress";
 
-export default defineConfig({
+interface Config extends Cypress.UserConfigOptions<any> {
+  "cypress-watch-and-reload": {
+    watch: string | string[]
+  }
+}
+
+const config: Partial<Config> = {
+  "cypress-watch-and-reload": {
+    watch: ["src/**/*"],
+  },
   e2e: {
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      return require("cypress-watch-and-reload/plugins")(on, config);
     },
   },
+}
 
-  component: {
-    devServer: {
-      framework: "create-react-app",
-      bundler: "webpack",
-    },
-  },
-});
+export default defineConfig(config);
