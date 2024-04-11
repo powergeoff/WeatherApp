@@ -2,6 +2,8 @@
 
 ## https://docs.cypress.io/guides/continuous-integration/github-actions?utm_source=Binary%3A+App&utm_medium=CI+Prompt+1&utm_campaign=GitHub&utm_content=Automatic
 
+Hot Reload for Cypress stuff from here: https://www.anders.co/blog/e2e-series-setting-up-your-local-environment
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
