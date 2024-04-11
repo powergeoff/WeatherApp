@@ -30,11 +30,14 @@ describe("<LoginPage />", () => {
     test('it displays an error if username or password is empty', async () => {
         await renderComponent();
         const button = screen.getByRole('button');
-        await user.click(button);
 
-        const error = await screen.findByRole('heading', { name: /Request failed with status code 400/i });
+        await waitFor(async () => {
+            await user.click(button);
 
-        expect(error).toBeInTheDocument();
+            const error = await screen.findByRole('heading', { name: /Request failed with status code 400/i });
+
+            expect(error).toBeInTheDocument();
+        });
     })
 
     test('it doesn\'t error when username and password are not empty', async () => {

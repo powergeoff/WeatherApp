@@ -48,6 +48,6 @@ public abstract class ClothesBuilderBase : IClothesBuilder
     public abstract void BuildHat();
     public abstract void BuildTopLayers();
     public abstract void BuildBottomLayer();
-    public void BuildOverview() => _clothes.Overview = $"Weather Fetched At: {_layerCustomizations.Weather.CreatedTime}, {_layerCustomizations.Weather.City} Feels like: {_layerCustomizations.Weather.FeelsLikeTemp}, Actual Temp: {_layerCustomizations.Weather.Temperature}";
+    public void BuildOverview() => _clothes.Overview = $"Weather Fetched At: {_layerCustomizations.Weather.CreatedTime.ToString("MMMM dd, yyyy hh:mm:ss tt")}, {_layerCustomizations.Weather.City} Feels like: {_layerCustomizations.Weather.FeelsLikeTemp}, Actual Temp: {_layerCustomizations.Weather.Temperature}";
     public Clothes GetClothes() => _clothes;
 }
