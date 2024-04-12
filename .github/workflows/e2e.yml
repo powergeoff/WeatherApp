@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   cypress-run:
-    runs-on:  ubuntu-20.04 # see https://github.com/actions/virtual-environments for latest stable version
+    runs-on:  ubuntu-latest # see https://github.com/actions/virtual-environments for latest stable version
     steps:
       - name: Checkout
         uses: actions/checkout@v2
