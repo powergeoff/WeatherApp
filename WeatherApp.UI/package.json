@@ -12,14 +12,16 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "prestart": "react-scripts build",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "cypress:open": "cypress open",
     "cy:e2e": "cypress open --e2e --browser chrome --config baseUrl=http://localhost:3000",
     "dev:e2e": "start-test start 3000 cy:e2e",
-    "cypress:open": "cypress open",
     "test": "react-scripts test",
     "test:debug": "react-scripts --insepct-brk test --runInBand --no-cache",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cy:run": "cypress run --e2e --browser chrome --config baseUrl=http://localhost:3000",
+    "e2e": "start-test start 3000 cy:run"
   },
   "eslintConfig": {
     "extends": [
