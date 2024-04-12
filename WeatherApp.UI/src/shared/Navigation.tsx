@@ -9,9 +9,9 @@ export const Navigation: React.FC = () => {
   const user = authInfoModel.user;
   return (
     <nav>
-      <Link to="/">Home</Link>{ ' | '}
-      <Link to="/login">Log In</Link>{ ' | '}
-      { user?.userName !== '' ? <Link to="/logout" onClick={removeAuthInfo}>Log Out</Link> : ''}
+      <Link data-test="home-nav" to="/">Home</Link>{' | '}
+      <Link data-test="login-nav" to="/login">Log In</Link>{' | '}
+      {user?.userName !== '' ? <Link data-test="logout-nav" to="/logout" onClick={removeAuthInfo}>Log Out</Link> : ''}
     </nav>
   );
 }

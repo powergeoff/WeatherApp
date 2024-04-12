@@ -54,8 +54,8 @@ export const HomePage: React.FC = () => {
   };
   return (
     <div>
-      <h1>Home Page</h1>
-      <button onClick={getLocation}>Get Clothes For My Location</button>
+      <h1 data-test="header">Home Page</h1>
+      <button data-test="fetch-data" onClick={getLocation}>Get Clothes For My Location</button>
       {loading && <h2>Loading...</h2>}
       {error && <h2>Error: {error}</h2>}
       {clothes &&
