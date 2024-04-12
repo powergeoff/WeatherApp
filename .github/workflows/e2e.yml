@@ -13,12 +13,16 @@ permissions:
 
 jobs:
   cypress-run:
-    runs-on:  ubuntu-latest # see https://github.com/actions/virtual-environments for latest stable version
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Cypress run
-        uses: cypress-io/github-action@v2
+      - uses: actions/checkout@v2
+      - name: Use Node.js 18.17.1
+        uses: actions/setup-node@v2
         with:
-          command: npm run e2e
-          working-directory: ./WeatherApp.UI
+          node-version: 18.17.1
+      - run: npm install
+        working-directory: ./WeatherApp.UI
+      - run: npm run e2e
+        working-directory: ./WeatherApp.UI
+
