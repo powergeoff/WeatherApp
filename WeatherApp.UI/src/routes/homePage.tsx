@@ -33,8 +33,9 @@ export const HomePage: React.FC = () => {
       setClothes(response.data);
     } catch (error) {
       setError("Failed to load clothes!");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   }, [activityLevel, bodyTempLevel, latitude, longitude]);
 
   useEffect(() => {
@@ -42,12 +43,15 @@ export const HomePage: React.FC = () => {
   }, [latitude, longitude, fetchData]);
 
   const getLocation = async () => {
+    setLoading(true);
     navigator.geolocation.getCurrentPosition(
       (position) => {
         setLatitude(position.coords.latitude);
         setLongitude(position.coords.longitude);
+        setLoading(false);
       },
       (err) => {
+        setLoading(false);
         setError("You need to allow location for the app to work")
       }
     );
