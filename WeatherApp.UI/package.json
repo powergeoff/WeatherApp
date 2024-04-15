@@ -14,6 +14,7 @@
   "scripts": {
     "prestart": "react-scripts build",
     "start": "react-scripts start",
+    "dev": "react-scripts start",
     "cypress:open": "cypress open",
     "cy:e2e": "cypress open --e2e --browser chrome --config baseUrl=http://localhost:3000",
     "dev:e2e": "start-test start 3000 cy:e2e",
