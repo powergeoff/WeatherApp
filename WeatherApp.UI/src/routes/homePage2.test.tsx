@@ -30,7 +30,7 @@ describe('<HomePage />', () => {
 
     await renderComponent();
 
-    const button = await screen.findByRole('button', { name: /get clothes for my location/i })
+    const button = await screen.findByRole('button', { name: /refresh/i })
     await waitFor(async () => {
       await user.click(button)
       //screen.debug();

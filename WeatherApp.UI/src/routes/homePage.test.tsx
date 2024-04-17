@@ -13,6 +13,11 @@ const renderComponent = async () => {
 }
 
 beforeEach(async () => {
+  const { getCurrentPositionMock } = mockNavigatorGeolocation();
+  getCurrentPositionMock.mockImplementationOnce((success, error) => Promise.resolve(error({
+    code: 1,
+    message: 'GeoLocation Error',
+  })));
   await renderComponent();
 });
 afterEach(cleanup);
@@ -22,13 +27,9 @@ describe('<HomePage />', () => {
 
   test('clicking the button without coords gives error', async () => {
 
-    const { getCurrentPositionMock } = mockNavigatorGeolocation();
-    getCurrentPositionMock.mockImplementationOnce((success, error) => Promise.resolve(error({
-      code: 1,
-      message: 'GeoLocation Error',
-    })));
 
-    const button = await screen.findByRole('button', { name: /get clothes for my location/i })
+
+    const button = await screen.findByRole('button', { name: /refresh/i })
     await waitFor(async () => {
       await user.click(button);
 
@@ -42,7 +43,7 @@ describe('<HomePage />', () => {
 
   test('renders a button to get clothes by location', async () => {
 
-    const button = await screen.findByRole('button', { name: /get clothes for my location/i })
+    const button = await screen.findByRole('button', { name: /refresh/i })
     expect(button).toBeInTheDocument();
 
   });

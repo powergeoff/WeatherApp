@@ -25,6 +25,7 @@ export const HomePage: React.FC = () => {
   const [longitude, setLongitude] = useState<number | undefined>(undefined);
 
   const fetchData = useCallback(async () => {
+    setError(undefined);
     setLoading(true);
     setClothes(undefined);
     try {
@@ -38,24 +39,25 @@ export const HomePage: React.FC = () => {
   }, [activityLevel, bodyTempLevel, latitude, longitude]);
 
   useEffect(() => {
-    latitude && longitude && fetchData()
-  }, [latitude, longitude, fetchData]);
-
-  const getLocation = async () => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         setLatitude(position.coords.latitude);
         setLongitude(position.coords.longitude);
       },
       (err) => {
-        setError("You need to allow location for the app to work")
+        console.error(err.message);
+        setError("You need to allow location for the app to work");
       }
     );
-  };
+  }, []);
+
+  useEffect(() => {
+    latitude && longitude && fetchData()
+  }, [latitude, longitude, fetchData]);
+
   return (
     <div>
       <h1 data-test="header">Home Page</h1>
-      <button data-test="fetch-data" onClick={getLocation}>Get Clothes For My Location</button>
       {loading && <h2>Loading...</h2>}
       {error && <h2>Error: {error}</h2>}
       {clothes &&
@@ -72,6 +74,7 @@ export const HomePage: React.FC = () => {
           <RadioSlider name='Body Temp Level' value={bodyTempLevel} setValue={setBodyTempLevel} />
         </>
       }
+      <button disabled={latitude === undefined} data-test="fetch-data" onClick={fetchData}>Refresh</button>
 
 
     </div>
