@@ -27,17 +27,10 @@ describe("<LoginPage />", () => {
         expect(success).not.toBeInTheDocument();
     });
 
-    test('it displays an error if username or password is empty', async () => {
+    test('button disabled if username or password is empty', async () => {
         await renderComponent();
         const button = screen.getByRole('button');
-
-        await waitFor(async () => {
-            await user.click(button);
-
-            const error = await screen.findByRole('heading', { name: /Request failed with status code 400/i });
-
-            expect(error).toBeInTheDocument();
-        });
+        expect(button).toHaveAttribute('disabled');
     })
 
     test('it doesn\'t error when username and password are not empty', async () => {

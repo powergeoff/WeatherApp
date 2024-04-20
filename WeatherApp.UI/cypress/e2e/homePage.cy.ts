@@ -31,7 +31,7 @@ describe("Home Page", () => {
                 "Jacket"
             ],
             bottomLayer: "Pants",
-            overview: "Weather Fetched At: April 11, 2024 04:14:21 PM, Jamaica Plain Feels like: 47.3, Actual Temp: 49.59"
+            overview: "Weather Fetched At: April 11, 2024 04:14:21 PM, Fake City Feels like: 47.3, Actual Temp: 49.59"
           }
       });
     });

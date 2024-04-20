@@ -6,17 +6,8 @@ describe("Login Page", () => {
 
   it('displays Log In Page', () => {
     cy.get('[data-test="header"]').contains('Log In Page');
+    cy.get('[data-test="submit"]').should("exist"); 
   });
-
-  it('fails sign in and displays error message', () => {
-    cy.intercept("POST", "http://localhost:5000/api/v1/Login",
-      { statusCode: 400,  body: { title: 'One or More Validation blah blah'}}  
-    ).as('getValidationErrors')
-
-    cy.get('[data-test="submit"]').click();
-    cy.wait('@getValidationErrors')
-    cy.get('[data-test="errorMessage"]').should("exist"); 
-  })
   
   it('allows sign in and log out nav is visible', () => {
     const userName = "test user";

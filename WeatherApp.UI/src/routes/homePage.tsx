@@ -3,6 +3,8 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { AuthInfoModelContextType } from '../models/authInfoModel';
 import { AuthInfoContext } from '../state/authInfoContext';
 import { RadioSlider } from '../shared/radioSlider';
+import { Card } from '../shared/Card';
+import { Button } from '../shared/Button';
 
 interface Clothes {
   gloves: string;
@@ -58,23 +60,24 @@ export const HomePage: React.FC = () => {
   return (
     <div>
       <h1 data-test="header">Home Page</h1>
-      {loading && <h2>Loading...</h2>}
-      {error && <h2>Error: {error}</h2>}
-      {clothes &&
-        <>
-          <h3 data-testid="overview">{clothes?.overview}</h3>
+      <Card reverse>
+        {loading && <h2>Loading...</h2>}
+        {error && <h2>Error: {error}</h2>}
+        {clothes &&
+          <>
+            <h3 data-testid="overview">{clothes?.overview}</h3>
 
-          {clothes.hat && <div>{clothes.hat}</div>}
-          <div>{clothes?.topLayers.map(t => <span key={t}>{t},</span>)}</div>
-          {clothes.gloves && <div>{clothes?.gloves}</div>}
-          <div>{clothes?.bottomLayer}</div>
+            {clothes.hat && <div>{clothes.hat}</div>}
+            <div>{clothes?.topLayers.map(t => <span key={t}>{t},</span>)}</div>
+            {clothes.gloves && <div>{clothes?.gloves}</div>}
+            <div>{clothes?.bottomLayer}</div>
 
-          <br />
-          <RadioSlider name='Activity Level' value={activityLevel} setValue={setActivityLevel} />
-          <RadioSlider name='Body Temp Level' value={bodyTempLevel} setValue={setBodyTempLevel} />
-        </>
-      }
-      <button disabled={latitude === undefined} data-test="fetch-data" onClick={fetchData}>Refresh</button>
+            <br />
+            <RadioSlider name='Activity Level' value={activityLevel} setValue={setActivityLevel} />
+            <RadioSlider name='Body Temp Level' value={bodyTempLevel} setValue={setBodyTempLevel} />
+          </>
+        }</Card>
+      <Button name="fetch-data" version='secondary' onClick={fetchData} isDisabled={latitude === undefined}>Refresh</Button>
 
 
     </div>
