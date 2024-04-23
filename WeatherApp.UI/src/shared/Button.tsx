@@ -1,4 +1,4 @@
-interface Props extends React.PropsWithChildren {
+interface Props {
   version: string;
   children: React.ReactNode;
   isDisabled: boolean;
@@ -6,7 +6,7 @@ interface Props extends React.PropsWithChildren {
   name: string;
 }
 
-export const Button: React.FC<Props> = ({ children, version, isDisabled, onClick, name }) => {
+export const Button = ({ children, version, isDisabled, onClick, name }: Props) => {
   return (
     <button data-test={name} disabled={isDisabled} onClick={onClick} className={`btn btn-${version}`}>
       {children}
