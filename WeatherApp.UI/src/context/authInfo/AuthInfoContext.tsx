@@ -2,9 +2,12 @@ import React, { useContext } from "react";
 import { authInfoInitialState, IAuthInfoAction, IAuthInfoState } from "./AuthInfoState";
 import { LoadingContext, ILoadingContext } from "../loading/LoadingContext";
 import axios from "axios";
-import { getLocalStorageItem, removeLocalStorageItem, setLocalStorageItem } from "../../state/localStorage";
+import { getLocalStorageItem, removeLocalStorageItem, setLocalStorageItem } from "../../localStorage";
 import { AlertContext, IAlertContext } from "../alert/AlertContext";
 import { authInfoReducer } from "./AuthInfoReducer";
+
+//https://dev.to/manuartero/testing-a-react-context-provider-5cfg
+//https://medium.com/@jan.hesters/unit-testing-reducers-2df09bb6ba61
 
 export interface IAuthInfoContext {
   authInfo: IAuthInfoState | undefined;

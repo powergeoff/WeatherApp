@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { RadioSlider } from '../shared/radioSlider';
+import { RadioSlider } from '../components/layout/radioSlider';
 import { AuthInfoContext, IAuthInfoContext } from '../context/authInfo/AuthInfoContext';
 
 interface Clothes {
