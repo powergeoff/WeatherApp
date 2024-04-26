@@ -1,17 +1,16 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AuthInfoModelContextType } from "../models/authInfoModel";
-import { AuthInfoContext } from "../state/authInfoContext";
+import { AuthInfoContext, IAuthInfoContext } from "../context/authInfo/AuthInfoContext";
 
 
 export const Navigation: React.FC = () => {
-  const { authInfoModel, removeAuthInfo } = useContext(AuthInfoContext) as AuthInfoModelContextType;
-  const user = authInfoModel.user;
+  const { logout, authInfo } = useContext(AuthInfoContext) as IAuthInfoContext;
+  const user = authInfo?.user;
   return (
     <nav>
       <Link data-test="home-nav" to="/">Home</Link>{' | '}
       <Link data-test="login-nav" to="/login">Log In</Link>{' | '}
-      {user?.userName !== '' ? <Link data-test="logout-nav" to="/logout" onClick={removeAuthInfo}>Log Out</Link> : ''}
+      {user?.userName !== '' ? <Link data-test="logout-nav" to="/logout" onClick={logout}>Log Out</Link> : ''}
     </nav>
   );
 }
