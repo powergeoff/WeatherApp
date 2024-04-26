@@ -1,38 +1,38 @@
 import { Routes, Route } from 'react-router-dom';
-import { Navigation } from './shared/Navigation';
-
-import './App.css';
 import { LoginPage } from './routes/loginPage';
 import { HomePage } from './routes/homePage';
 import { LogoutPage } from './routes/logoutPage';
 import LoadingProvider from './context/loading/LoadingContext';
 import AlertProvider from './context/alert/AlertContext';
 import AuthInfoProvider from './context/authInfo/AuthInfoContext';
+import Navbar from './components/layout/Navbar';
+import Alert from './components/layout/Alert';
+import NotFound from './routes/notFound';
+import Footer from './components/layout/Footer';
 
 export const App: React.FC = () => {
   return (
-    <div className="App">
-
-      <header className="App-header">
-        <h1>Clothes For Current Weather</h1>
-      </header>
-      <LoadingProvider>
-        <AlertProvider>
-          <AuthInfoProvider>
-            <div className="App-main">
-              <Navigation />
-
+    <LoadingProvider>
+      <AlertProvider>
+        <AuthInfoProvider>
+          <div className="flex flex-col justify-between h-screen">
+            <Navbar title="Weather Clothing App" />
+            <main className="container mx-auto px-3 pb-12">
+              <Alert />
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/logout" element={<LogoutPage />} />
-                <Route path="*" element={<p>There's nothing here: 404!</p>} />
+                <Route path='/notfound' element={<NotFound />} />
+                <Route path='/*' element={<NotFound />} />
               </Routes>
-            </div>
-          </AuthInfoProvider>
-        </AlertProvider>
-      </LoadingProvider>
-    </div>
+            </main>
+
+            <Footer />
+          </div>
+        </AuthInfoProvider>
+      </AlertProvider>
+    </LoadingProvider>
   );
 };
 
