@@ -1,4 +1,4 @@
-export type IAlertType = "error" | "warning" | "info" | undefined;
+export type IAlertType = 'error' | 'warning' | 'info' | 'success' | undefined;
 
 export interface IAlertState {
   alert: string | undefined;
@@ -6,7 +6,7 @@ export interface IAlertState {
 }
 
 export interface IAlertAction {
-  type: "CLEAR" | "SET";
+  type: 'CLEAR' | 'SET';
   payload: IAlertState;
 }
 

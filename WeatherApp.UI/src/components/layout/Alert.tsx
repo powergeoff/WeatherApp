@@ -9,7 +9,6 @@ const Alert = () => {
             style={{ visibility: alert.alert ? 'visible' : 'hidden' }}>
             <div className={`flex-none alert alert-${alert.type}`}>
                 <strong>{alert?.alert}</strong>
-
             </div>
 
         </button>

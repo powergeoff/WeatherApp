@@ -45,7 +45,7 @@ const AuthInfoProvider: React.FC<{ children: React.ReactNode }> = ({ children })
       .then((response) => {
         dispatch({ type: 'LOGIN', payload: response.data });
         saveAuthInfo(response.data);
-        setAlert('Login Success', 'info');
+        setAlert('Login Success', 'success');
       })
       .catch((error) => {
         const errorMessage = error.response.data.title ? error.response.data.title : error.message;

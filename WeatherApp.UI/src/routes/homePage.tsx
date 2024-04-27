@@ -73,7 +73,7 @@ export const HomePage: React.FC = () => {
           <RadioSlider name='Body Temp Level' value={bodyTempLevel} setValue={setBodyTempLevel} />
         </>
       }
-      <button disabled={latitude === undefined} data-test="fetch-data" onClick={fetchData}>Refresh</button>
+      <button className='btn btn-primary btn-sm rounded-btn' disabled={latitude === undefined} data-test="fetch-data" onClick={fetchData}>Refresh</button>
 
 
     </div>

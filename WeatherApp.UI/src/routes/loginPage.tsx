@@ -24,7 +24,7 @@ export const LoginPage: React.FC = () => {
       <input data-test="password" id="password" onChange={(e) => setPassword(e.target.value)} placeholder='Enter password' />
     </div>
 
-    <div><button data-test="submit" onClick={handleClick}>Log In</button></div>
+    <div><button className='btn btn-primary btn-sm rounded-btn' data-test="submit" onClick={handleClick}>Log In</button></div>
     {success && <h2 data-test="successMessage">{success}</h2>}
   </>);
 }
