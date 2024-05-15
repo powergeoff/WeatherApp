@@ -2,14 +2,13 @@ import axios from 'axios';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { RadioSlider } from '../components/layout/radioSlider';
 import { AuthInfoContext, IAuthInfoContext } from '../context/authInfo/AuthInfoContext';
-
-interface Clothes {
-  gloves: string;
-  hat: string;
-  overview: string;
-  bottomLayer: string;
-  topLayers: string[];
-}
+import { GiWinterHat } from "react-icons/gi";
+import { GiWinterGloves } from "react-icons/gi";
+import { GiMonclerJacket } from "react-icons/gi";
+import { PiTShirtThin } from "react-icons/pi";
+import { GiBilledCap } from "react-icons/gi";
+import { Clothes } from '../models/clothes';
+import Sweatshirt from '../components/Sweatshirt';
 
 export const HomePage: React.FC = () => {
   const [error, setError] = useState<string | undefined>(undefined);
@@ -55,18 +54,29 @@ export const HomePage: React.FC = () => {
   }, [latitude, longitude, fetchData]);
 
   return (
-    <div>
-      <h1 data-test="header">Home Page</h1>
+    <div className='flex flex-col items-center'>
       {loading && <h2>Loading...</h2>}
       {error && <h2>Error: {error}</h2>}
       {clothes &&
         <>
-          <h3 data-testid="overview">{clothes?.overview}</h3>
+          {clothes.hat && <div>{
+            clothes.hat === "Winter Hat" ? <GiWinterHat className='inline pr-2 text-6xl' /> :
+              clothes.hat === "Baseball Hat" ? <GiBilledCap className='inline pr-2 text-6xl' /> :
+                clothes.hat === "Heavy Duty Hat" ? <GiWinterHat className='inline pr-2 text-6xl' /> : ''}
+            {clothes.gloves && <GiWinterGloves className='inline pr-2 text-6xl' />}
+          </div>}
 
-          {clothes.hat && <div>{clothes.hat}</div>}
+          <div>{
+            clothes.outermostTopLayer === "Jacket" ? <GiMonclerJacket className='inline pr-2 text-9xl' /> :
+              clothes.outermostTopLayer === "T-Shirt" ? <PiTShirtThin className='inline pr-2 text-9xl' /> :
+                clothes.outermostTopLayer === "Heavy Coat" ? <PiTShirtThin className='inline pr-2 text-9xl' /> :
+                  clothes.outermostTopLayer === "Long Sleeve T-Shirt" ? <PiTShirtThin className='inline pr-2 text-9xl' /> :
+                    clothes.outermostTopLayer === "Rain Coat" ? <PiTShirtThin className='inline pr-2 text-9xl' /> :
+                      clothes.outermostTopLayer === "Sweat Shirt" ? <Sweatshirt /> : ''}
+          </div>
+
           <div>{clothes?.topLayers.map(t => <span key={t}>{t},</span>)}</div>
           {clothes.gloves && <div>{clothes?.gloves}</div>}
-          <div>{clothes?.bottomLayer}</div>
 
           <br />
           <RadioSlider name='Activity Level' value={activityLevel} setValue={setActivityLevel} />
@@ -74,6 +84,7 @@ export const HomePage: React.FC = () => {
         </>
       }
       <button className='btn btn-primary btn-sm rounded-btn' disabled={latitude === undefined} data-test="fetch-data" onClick={fetchData}>Refresh</button>
+      <h3 data-testid="overview">{clothes?.overview}</h3>
 
 
     </div>

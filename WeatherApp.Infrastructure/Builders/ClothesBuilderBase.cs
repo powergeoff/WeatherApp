@@ -15,6 +15,7 @@ public interface IClothesBuilder
     void BuildGloves();
     void BuildHat();
     void BuildTopLayers();
+    void BuildOutermostTopLayer();
     void BuildBottomLayer();
     void BuildOverview();
     Clothes GetClothes();
@@ -48,6 +49,7 @@ public abstract class ClothesBuilderBase : IClothesBuilder
     public abstract void BuildHat();
     public abstract void BuildTopLayers();
     public abstract void BuildBottomLayer();
+    public virtual void BuildOutermostTopLayer() => _clothes.OutermostTopLayer = _topLayersFactory.GetLayer().ToString(); //this can be overridden
     public void BuildOverview() => _clothes.Overview = $"Weather Fetched At: {_layerCustomizations.Weather.CreatedTime.ToString("MMMM dd, yyyy hh:mm:ss tt")}, {_layerCustomizations.Weather.City} Feels like: {_layerCustomizations.Weather.FeelsLikeTemp}, Actual Temp: {_layerCustomizations.Weather.Temperature}";
     public Clothes GetClothes() => _clothes;
 }
