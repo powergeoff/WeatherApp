@@ -12,6 +12,8 @@ using WeatherApp.Infrastructure.ApplicationServices.Configuration;
 
 namespace WeatherApp.Infrastructure.ApplicationServices;
 
+//jwt bearer token over https - prevents man-in-the-middle interception and attacks
+
 public interface IGenerateTokenService
 {
     //take in a userdto and see if it is valid
