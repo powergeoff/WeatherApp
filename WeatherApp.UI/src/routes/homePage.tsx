@@ -27,7 +27,7 @@ export const HomePage: React.FC = () => {
     setLoading(true);
     setClothes(undefined);
     try {
-      const url = `http://localhost:5000/api/v1/Clothes/GetByCoords?latitude=${latitude}&longitude=${longitude}&activityLevel=${activityLevel}&bodyTempLevel=${bodyTempLevel}`
+      const url = `https://api-weather-app-dev-001.azurewebsites.net/api/v1/Clothes/GetByCoords?latitude=${latitude}&longitude=${longitude}&activityLevel=${activityLevel}&bodyTempLevel=${bodyTempLevel}`
       const response = await axios.get(url);
       setClothes(response.data);
     } catch (error) {

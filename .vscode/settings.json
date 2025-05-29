@@ -28,5 +28,6 @@
     "source.fixAll": "explicit"
   },
   "omnisharp.enableEditorConfigSupport": true,
-  "dotnet.defaultSolution": "WeatherApp.sln"
+  "dotnet.defaultSolution": "WeatherApp.sln",
+  "appService.zipIgnorePattern": ["node_modules{,/**}", ".vscode{,/**}"]
 }

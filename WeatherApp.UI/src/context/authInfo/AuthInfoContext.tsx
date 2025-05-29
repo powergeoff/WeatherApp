@@ -38,7 +38,7 @@ const AuthInfoProvider: React.FC<{ children: React.ReactNode }> = ({ children })
 
   const login = async (userName: string, password: string) => {
     setLoadingTrue();
-    await axios.post(`http://localhost:5000/api/v1/Login`, {
+    await axios.post(`https://api-weather-app-dev-001.azurewebsites.net/api/v1/Login`, {
       userName,
       password
     })
