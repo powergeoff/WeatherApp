@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { IconBaseProps } from 'react-icons';
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { RadioSlider } from '../components/layout/radioSlider';
 import { AuthInfoContext, IAuthInfoContext } from '../context/authInfo/AuthInfoContext';
@@ -9,6 +10,13 @@ import { PiTShirtThin } from "react-icons/pi";
 import { GiBilledCap } from "react-icons/gi";
 import { Clothes } from '../models/clothes';
 import Sweatshirt from '../components/Sweatshirt';
+
+
+const GiWinterHatIcon = GiWinterHat as React.FC<IconBaseProps>;
+const GiWinterGlovesIcon = GiWinterGloves as React.FC<IconBaseProps>;
+const GiMonclerJacketIcon = GiMonclerJacket as React.FC<IconBaseProps>;
+const PiTShirtThinIcon = PiTShirtThin as React.FC<IconBaseProps>;
+const GiBilledCapIcon = GiBilledCap as React.FC<IconBaseProps>;
 
 export const HomePage: React.FC = () => {
   const [error, setError] = useState<string | undefined>(undefined);
@@ -60,18 +68,18 @@ export const HomePage: React.FC = () => {
       {clothes &&
         <>
           {clothes.hat && <div>{
-            clothes.hat === "Winter Hat" ? <GiWinterHat className='inline pr-2 text-6xl' /> :
-              clothes.hat === "Baseball Hat" ? <GiBilledCap className='inline pr-2 text-6xl' /> :
-                clothes.hat === "Heavy Duty Hat" ? <GiWinterHat className='inline pr-2 text-6xl' /> : ''}
-            {clothes.gloves && <GiWinterGloves className='inline pr-2 text-6xl' />}
+            clothes.hat === "Winter Hat" ? <GiWinterHatIcon className='inline pr-2 text-6xl' /> :
+              clothes.hat === "Baseball Hat" ? <GiBilledCapIcon className='inline pr-2 text-6xl' /> :
+                clothes.hat === "Heavy Duty Hat" ? <GiWinterHatIcon className='inline pr-2 text-6xl' /> : ''}
+            {clothes.gloves && <GiWinterGlovesIcon className='inline pr-2 text-6xl' />}
           </div>}
 
           <div>{
-            clothes.outermostTopLayer === "Jacket" ? <GiMonclerJacket className='inline pr-2 text-9xl' /> :
-              clothes.outermostTopLayer === "T-Shirt" ? <PiTShirtThin className='inline pr-2 text-9xl' /> :
-                clothes.outermostTopLayer === "Heavy Coat" ? <PiTShirtThin className='inline pr-2 text-9xl' /> :
-                  clothes.outermostTopLayer === "Long Sleeve T-Shirt" ? <PiTShirtThin className='inline pr-2 text-9xl' /> :
-                    clothes.outermostTopLayer === "Rain Coat" ? <PiTShirtThin className='inline pr-2 text-9xl' /> :
+            clothes.outermostTopLayer === "Jacket" ? <GiMonclerJacketIcon className='inline pr-2 text-9xl' /> :
+              clothes.outermostTopLayer === "T-Shirt" ? <PiTShirtThinIcon className='inline pr-2 text-9xl' /> :
+                clothes.outermostTopLayer === "Heavy Coat" ? <PiTShirtThinIcon className='inline pr-2 text-9xl' /> :
+                  clothes.outermostTopLayer === "Long Sleeve T-Shirt" ? <PiTShirtThinIcon className='inline pr-2 text-9xl' /> :
+                    clothes.outermostTopLayer === "Rain Coat" ? <PiTShirtThinIcon className='inline pr-2 text-9xl' /> :
                       clothes.outermostTopLayer === "Sweat Shirt" ? <Sweatshirt /> : ''}
           </div>
 

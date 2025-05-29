@@ -38,7 +38,7 @@ const Navbar: React.FC<Props> = ({ title }: Props) => {
                 <div className='flex-none px-2 mx-2'>
 
                     <Link to='/' className='text-lg font-bold align-middle'>
-                        <WiDayStormShowers className='inline pr-2 text-6xl' />
+                        {WiDayStormShowers({ className: 'inline pr-2 text-6xl' } as any)}
                         <span className='hidden lg:inline '>{title}</span>
                     </Link>
                 </div>
