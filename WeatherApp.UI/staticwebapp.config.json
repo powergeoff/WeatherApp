@@ -1,0 +1,6 @@
+{
+  "globalHeaders": {
+    "Access-Control-Allow-Origin": "https://api-weather-app-dev-001.azurewebsites.net",
+    "Access-Control-Allow-Methods": "POST, GET, OPTIONS"
+  }
+}
