@@ -3,11 +3,11 @@ name: Azure Static Web Apps CI/CD
 on:
   push:
     branches:
-      - refactor/azure-quick
+      - main
   pull_request:
     types: [opened, synchronize, reopened, closed]
     branches:
-      - refactor/azure-quick
+      - main
 
 jobs:
   build_and_deploy_job:
