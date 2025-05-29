@@ -5,7 +5,7 @@ using WeatherApp.Core.Factories.Layers.TopLayers;
 
 namespace WeatherApp.Core.Factories;
 
-public interface ITopLayersFactory : IGetLayers, IUpdateCustomizations
+public interface ITopLayersFactory : IGetLayer, IGetLayers, IUpdateCustomizations
 {
     void RegisterAllLayers(ILayerCustomizations layerCustomizations);
 }
@@ -28,6 +28,8 @@ public class TopLayersFactory : LayersFactory, ITopLayersFactory
     {
         _layerCustomizations = customizations;
         //register all available layers with base factory
+        //this relies on the order - lightest first to heaviest or outermost
+        //c# guarantees ordering
         Register(new TShirt(_layerCustomizations));
         Register(new LongSleeveTShirt(_layerCustomizations));
         Register(new SweatShirt(_layerCustomizations));
@@ -55,5 +57,11 @@ public class TopLayersFactory : LayersFactory, ITopLayersFactory
                 topLayers.Add(layer);
         }
         return topLayers;
+    }
+
+    public Layer GetLayer()//returns outermost layer
+    {
+        var layers = GetLayers();
+        return layers[^1];
     }
 }
