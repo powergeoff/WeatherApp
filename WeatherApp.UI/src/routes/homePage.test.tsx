@@ -1,7 +1,7 @@
 import { cleanup, render, screen, waitFor } from '@testing-library/react';
 import user from '@testing-library/user-event';
 import { HomePage } from './homePage';
-import AuthInfoProvider from '../state/authInfoContext';
+import AuthInfoProvider from '../context/authInfo/AuthInfoContext';
 import { mockNavigatorGeolocation } from '../test/mocks/mockNavigatorGeolocation';
 
 const renderComponent = async () => {

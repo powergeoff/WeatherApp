@@ -52,6 +52,7 @@ public class ClothesDirector : IClothesDirector
         _clothesBuilder.BuildGloves();
         _clothesBuilder.BuildHat();
         _clothesBuilder.BuildTopLayers();
+        _clothesBuilder.BuildOutermostTopLayer();
         _clothesBuilder.BuildBottomLayer();
         _clothesBuilder.BuildOverview();
     }

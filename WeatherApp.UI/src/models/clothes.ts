@@ -4,4 +4,5 @@ export interface Clothes {
   overview: string;
   bottomLayer: string;
   topLayers: string[];
+  outermostTopLayer: string;
 }

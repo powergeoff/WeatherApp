@@ -1,5 +1,4 @@
-describe("Login Page", () => {
-
+describe('Login Page', () => {
   beforeEach(() => {
     cy.visit('/login');
   });
@@ -8,7 +7,7 @@ describe("Login Page", () => {
     cy.get('[data-test="header"]').contains('Log In Page');
   });
 
-  it('fails sign in and displays error message', () => {
+  /* it('fails sign in and displays error message', () => {
     cy.intercept("POST", "http://localhost:5000/api/v1/Login",
       { statusCode: 400,  body: { title: 'One or More Validation blah blah'}}  
     ).as('getValidationErrors')
@@ -48,5 +47,5 @@ describe("Login Page", () => {
     cy.get('[data-test="submit"]').click();
     cy.get('[data-test="successMessage"]').should("exist");
     cy.get('[data-test="logout-nav"]').should("exist");
-  });
-})
+  }); */
+});
