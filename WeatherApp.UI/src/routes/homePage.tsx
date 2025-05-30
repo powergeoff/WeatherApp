@@ -44,7 +44,8 @@ export const HomePage: React.FC = () => {
     setLoading(false);
   }, [activityLevel, bodyTempLevel, latitude, longitude]);
 
-  useEffect(() => {
+  const setPosition = useCallback(async () => {
+    console.log("Setting position...");
     navigator.geolocation.getCurrentPosition(
       (position) => {
         setLatitude(position.coords.latitude);
@@ -58,8 +59,17 @@ export const HomePage: React.FC = () => {
   }, []);
 
   useEffect(() => {
+    setPosition();
+  }, [setPosition]);
+
+  useEffect(() => {
     latitude && longitude && fetchData()
   }, [latitude, longitude, fetchData]);
+
+  const refreshClickHandler = async () => {
+    await setPosition();
+    await fetchData();
+  }
 
   return (
     <div className='flex flex-col items-center'>
@@ -91,7 +101,7 @@ export const HomePage: React.FC = () => {
           <RadioSlider name='Body Temp Level' value={bodyTempLevel} setValue={setBodyTempLevel} />
         </>
       }
-      <button className='btn btn-primary btn-sm rounded-btn' disabled={latitude === undefined} data-test="fetch-data" onClick={fetchData}>Refresh</button>
+      <button className='btn btn-primary btn-sm rounded-btn' disabled={latitude === undefined} data-test="fetch-data" onClick={async () => await refreshClickHandler()}>Refresh</button>
       <h3 data-testid="overview">{clothes?.overview}</h3>
 
 

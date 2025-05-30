@@ -30,7 +30,7 @@ try
                             {
                                 policy.WithOrigins("http://localhost:3000",
                                                     "https://localhost:3000",
-                                                    "https://purple-river-06091300f.6.azurestaticapps.net/")
+                                                    "https://purple-river-06091300f.6.azurestaticapps.net")
                                                     .AllowAnyHeader()
                                                     .AllowAnyMethod();
                             });
